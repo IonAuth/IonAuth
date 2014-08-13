@@ -807,7 +807,7 @@ class AuthModel {
 		}
 
 		// IP Address
-		$ipAddress  = $this->_prepareIp($_SERVER['REMOTE_ADDR']);
+		$ipAddress  = $_SERVER['REMOTE_ADDR'];
 		$salt       = $this->storeSalt ? $this->salt() : false;
 		$password   = $this->hashPassword($password, $salt);
 
@@ -967,7 +967,7 @@ class AuthModel {
 	function getAttemptsNum($identity)
 	{
 		if ($this->config['trackLoginAttempts']) {
-			$ipAddress = $this->_prepareIp($_SERVER['REMOTE_ADDR']);
+			$ipAddress = $_SERVER['REMOTE_ADDR'];
 
 			$this->db->select('1', false);
 			$this->db->where('ip_address', $ipAddress);
@@ -998,7 +998,7 @@ class AuthModel {
 	 */
 	public function getLastAttemptTime($identity) {
 		if ($this->config['trackLoginAttempts']) {
-			$ipAddress = $this->_prepareIp($_SERVER['REMOTE_ADDR']);
+			$ipAddress = $_SERVER['REMOTE_ADDR'];
 
 			$this->db->select_max('time');
 			$this->db->where('ip_address', $ipAddress);
@@ -1021,7 +1021,7 @@ class AuthModel {
 	 **/
 	public function increaseLoginAttempts($identity) {
 		if ($this->config['trackLoginAttempts']) {
-			$ipAddress = $this->_prepareIp($_SERVER['REMOTE_ADDR']);
+			$ipAddress = $_SERVER['REMOTE_ADDR'];
 			return $this->db->insert($this->tables['loginAttempts'], array('ip_address' => $ipAddress, 'login' => $identity, 'time' => time()));
 		}
 		return false;
@@ -1035,7 +1035,7 @@ class AuthModel {
 	 **/
 	public function clearLoginAttempts($identity, $expire_period = 86400) {
 		if ($this->config['trackLoginAttempts']) {
-			$ipAddress = $this->_prepareIp($_SERVER['REMOTE_ADDR']);
+			$ipAddress = $_SERVER['REMOTE_ADDR'];
 
 			$this->db->where(array('ip_address' => $ipAddress, 'login' => $identity));
 			// Purge obsolete login attempts
@@ -2034,16 +2034,6 @@ class AuthModel {
 		}
 
 		return $filteredData;
-	}
-
-	protected function _prepareIp($ipAddress)
-	{
-		if ($this->config['database']['driver'] === 'postgre' || $this->config['database']['driver'] === 'sqlsrv' || $this->config['database']['driver'] === 'mssql') {
-			return $ipAddress;
-		}
-		else {
-			return inet_pton($ipAddress);
-		}
 	}
 
 	public function getCookie($name)
