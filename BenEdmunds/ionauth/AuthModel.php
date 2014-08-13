@@ -175,10 +175,10 @@ class AuthModel {
 	protected $_bcryptCost = 4;
 
 
-	public function __construct($config)
+	public function __construct($config, $pdoHandler)
 	{
 		$this->config = $config;
-		$this->initDb();
+		$this->db     = $pdoHandler;
 
 		//initialize our hooks object
 		$this->_ionHooks = new \stdClass;
@@ -199,15 +199,6 @@ class AuthModel {
 
 		$this->triggerEvents('constructor');
 		$this->triggerEvents('modelConstructor');
-	}
-
-	public function initDb()
-	{
-		$this->db = new \Illuminate\Database\Capsule\Manager;
-
-		$this->db->addConnection($this->config['database']);
-		$this->db->setAsGlobal();
-		$this->db->setFetchMode(\PDO::FETCH_CLASS);
 	}
 
 	/**
@@ -1434,49 +1425,54 @@ class AuthModel {
 
 		$user = $this->user($id)->first();
 
-		$this->db->trans_begin();
+		try {
 
-		if (array_key_exists($this->identityColumn, $data) && $this->identityCheck($data[$this->identityColumn]) && $user->{$this->identityColumn} !== $data[$this->identityColumn]) {
-			$this->db->trans_rollback();
-			$this->setError('accountCreationDuplicate'.ucwords($this->identityColumn));
+			$this->db->beginTransaction();
 
-			$this->triggerEvents(array('postUpdateUser', 'postUpdateUserUnsuccessful'));
-			$this->setError('updateUnsuccessful');
+			if (array_key_exists($this->identityColumn, $data) && $this->identityCheck($data[$this->identityColumn]) && $user->{$this->identityColumn} !== $data[$this->identityColumn]) {
+				$this->db->rollBack();
+				$this->setError('accountCreationDuplicate'.ucwords($this->identityColumn));
 
-			return false;
-		}
+				$this->triggerEvents(array('postUpdateUser', 'postUpdateUserUnsuccessful'));
+				$this->setError('updateUnsuccessful');
 
-		// Filter the data passed
-		$data = $this->_filterData($this->tables['users'], $data);
+				return false;
+			}
 
-		if (array_key_exists('username', $data) || array_key_exists('password', $data) || array_key_exists('email', $data)) {
-			if (array_key_exists('password', $data)) {
-				if( ! empty($data['password'])) {
-					$data['password'] = $this->hash_password($data['password'], $user->salt);
-				}
-				else {
-					// unset password so it doesn't effect database entry if no password passed
-					unset($data['password']);
+			// Filter the data passed
+			$data = $this->_filterData($this->tables['users'], $data);
+
+			if (array_key_exists('username', $data) || array_key_exists('password', $data) || array_key_exists('email', $data)) {
+				if (array_key_exists('password', $data)) {
+					if( ! empty($data['password'])) {
+						$data['password'] = $this->hash_password($data['password'], $user->salt);
+					}
+					else {
+						// unset password so it doesn't effect database entry if no password passed
+						unset($data['password']);
+					}
 				}
 			}
-		}
 
-		$this->triggerEvents('extraWhere');
-		$this->db->update($this->tables['users'], $data, array('id' => $user->id));
+			$this->triggerEvents('extraWhere');
+			$this->db->update($this->tables['users'], $data, array('id' => $user->id));
 
-		if ($this->db->trans_status() === false) {
-			$this->db->trans_rollback();
+
+			$this->db->commit();
+
+			$this->triggerEvents(array('postUpdateUser', 'postUpdateUserSuccessful'));
+			$this->setMessage('updateSuccessful');
+			return true;
+
+		} catch (Exception $e) {
+
+			$this->db->rollBack();
 
 			$this->triggerEvents(array('postUpdateUser', 'postUpdateUserUnsuccessful'));
 			$this->setError('updateUnsuccessful');
 			return false;
+
 		}
-
-		$this->db->trans_commit();
-
-		$this->triggerEvents(array('postUpdateUser', 'postUpdateUserSuccessful'));
-		$this->setMessage('updateSuccessful');
-		return true;
 	}
 
 	/**
@@ -1489,31 +1485,36 @@ class AuthModel {
 	{
 		$this->triggerEvents('preDeleteUser');
 
-		//$this->db->trans_begin();
+		try {
 
-		// remove user from groups
-		$this->removeFromGroup(NULL, $id);
+			$this->db->beginTransaction();
 
-		// delete user from users table should be placed after remove from group
-		$affectedRows = $this->db->delete($this->tables['users'], array('id' => $id));
+			// remove user from groups
+			$this->removeFromGroup(NULL, $id);
 
-		// if user does not exist in database then it returns false else removes the user from groups
-		if ($affectedRows == 0) {
-		    return false;
-		}
+			// delete user from users table should be placed after remove from group
+			$affectedRows = $this->db->delete($this->tables['users'], array('id' => $id));
 
-		if ($this->db->trans_status() === false) {
-			$this->db->trans_rollback();
+			// if user does not exist in database then it returns false else removes the user from groups
+			if ($affectedRows == 0) {
+			    return false;
+			}
+
+			$this->db->commit();
+
+			$this->triggerEvents(array('postDeleteUser', 'postDeleteUserSuccessful'));
+			$this->setMessage('deleteSuccessful');
+			return true;
+
+		} catch (Exception $e) {
+
+			$this->db->rollBack();
+
 			$this->triggerEvents(array('postDeleteUser', 'postDeleteUserUnsuccessful'));
 			$this->setError('deleteUnsuccessful');
 			return false;
+
 		}
-
-		$this->db->trans_commit();
-
-		$this->triggerEvents(array('postDeleteUser', 'postDeleteUserSuccessful'));
-		$this->setMessage('deleteSuccessful');
-		return true;
 	}
 
 	/**
@@ -1789,6 +1790,7 @@ class AuthModel {
 	**/
 	public function deleteGroup($groupId = false)
 	{
+
 		// bail if mandatory param not set
 		if (!$groupId || empty($groupId)) {
 			return false;
@@ -1796,26 +1798,31 @@ class AuthModel {
 
 		$this->triggerEvents('preDeleteGroup');
 
-		$this->db->trans_begin();
+		try {
 
-		// remove all users from this group
-		$this->db->delete($this->tables['usersGroups'], array($this->join['groups'] => $groupId));
-		// remove the group itself
-		$this->db->delete($this->tables['groups'], array('id' => $groupId));
+			$this->db->beginTransaction();
 
-		if ($this->db->trans_status() === false)
-		{
-			$this->db->trans_rollback();
+			// remove all users from this group
+			$this->db->delete($this->tables['usersGroups'], array($this->join['groups'] => $groupId));
+			// remove the group itself
+			$this->db->delete($this->tables['groups'], array('id' => $groupId));
+
+			$this->db->commit();
+
+			$this->triggerEvents(array('postDeleteGroup', 'postDeleteGroupSuccessful'));
+			$this->setMessage('groupDeleteSuccessful');
+			return true;
+
+		} catch (Exception $e) {
+
+			$this->db->rollBack();
+
 			$this->triggerEvents(array('postDeleteGroup', 'postDeleteGroupUnsuccessful'));
 			$this->setError('groupDeleteUnsuccessful');
 			return false;
+
 		}
 
-		$this->db->trans_commit();
-
-		$this->triggerEvents(array('postDeleteGroup', 'postDeleteGroupSuccessful'));
-		$this->setMessage('groupDeleteSuccessful');
-		return true;
 	}
 
 	public function setHook($event, $name, $class, $method, $arguments)
