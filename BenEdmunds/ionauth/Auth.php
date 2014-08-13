@@ -140,23 +140,23 @@ class Auth
 
 					if ($this->email->send()) {
 						$this->setMessage('forgotPasswordSuccessful');
-						return TRUE;
+						return true;
 					}
 					else {
 						$this->setError('forgotPasswordUnsuccessful');
-						return FALSE;
+						return false;
 					}
 				}
 			}
 			else {
 				$this->setError('forgotPasswordUnsuccessful');
-				return FALSE;
+				return false;
 			}
 		}
 		else
 		{
 			$this->setError('forgotPasswordUnsuccessful');
-			return FALSE;
+			return false;
 		}
 	}
 
@@ -177,7 +177,7 @@ class Auth
 		{
 			$this->ionAuthModel->triggerEvents(array('postPasswordChange', 'passwordChangeUnsuccessful'));
 			$this->setError('passwordChangeUnsuccessful');
-			return FALSE;
+			return false;
 		}
 
 		$newPassword = $this->ionAuthModel->forgottenPasswordComplete($code, $profile->salt);
@@ -205,19 +205,19 @@ class Auth
 				if ($this->email->send()) {
 					$this->setMessage('passwordChangeSuccessful');
 					$this->ionAuthModel->triggerEvents(array('postPasswordChange', 'passwordChangeSuccessful'));
-					return TRUE;
+					return true;
 				}
 				else {
 					$this->setError('passwordChangeUnsuccessful');
 					$this->ionAuthModel->triggerEvents(array('postPasswordChange', 'passwordChangeUnsuccessful'));
-					return FALSE;
+					return false;
 				}
 
 			}
 		}
 
 		$this->ionAuthModel->triggerEvents(array('postPasswordChange', 'passwordChangeUnsuccessful'));
-		return FALSE;
+		return false;
 	}
 
 	/**
@@ -232,7 +232,7 @@ class Auth
 
 		if (!is_object($profile)) {
 			$this->setError('passwordChangeUnsuccessful');
-			return FALSE;
+			return false;
 		}
 		else {
 			if ($this->config['forgotPasswordExpiration'] > 0) {
@@ -242,7 +242,7 @@ class Auth
 					//it has expired
 					$this->clearForgottenPasswordCode($code);
 					$this->setError('passwordChangeUnsuccessful');
-					return FALSE;
+					return false;
 				}
 			}
 
@@ -264,7 +264,7 @@ class Auth
 
 		if (!$emailActivation) {
 			$id = $this->ionAuthModel->register($username, $password, $email, $additionalData, $groupIds);
-			if ($id !== FALSE) {
+			if ($id !== false) {
 				$this->setMessage('accountCreationSuccessful');
 				$this->ionAuthModel->triggerEvents(array('postAccountCreation', 'postAccountCreationSuccessful'));
 				return $id;
@@ -272,7 +272,7 @@ class Auth
 			else {
 				$this->setError('accountCreationUnsuccessful');
 				$this->ionAuthModel->triggerEvents(array('postAccountCreation', 'postAccountCreationUnsuccessful'));
-				return FALSE;
+				return false;
 			}
 		}
 		else {
@@ -280,7 +280,7 @@ class Auth
 
 			if (!$id) {
 				$this->setError('accountCreationUnsuccessful');
-				return FALSE;
+				return false;
 			}
 
 			$deactivate = $this->ionAuthModel->deactivate($id);
@@ -288,7 +288,7 @@ class Auth
 			if (!$deactivate) {
 				$this->setError('deactivateUnsuccessful');
 				$this->ionAuthModel->triggerEvents(array('postAccountCreation', 'postAccountCreationUnsuccessful'));
-				return FALSE;
+				return false;
 			}
 
 			$activationCode = $this->ionAuthModel->activation_code;
@@ -316,7 +316,7 @@ class Auth
 				$this->email->subject($this->config['siteTitle'] . ' - ' . $this->lang->line('emailActivationSubject'));
 				$this->email->message($message);
 
-				if ($this->email->send() == TRUE) {
+				if ($this->email->send() == true) {
 					$this->ionAuthModel->triggerEvents(array('postAccountCreation', 'postAccountCreationSuccessful', 'activationEmailSuccessful'));
 					$this->setMessage('activationEmailSuccessful');
 					return $id;
@@ -325,7 +325,7 @@ class Auth
 
 			$this->ionAuthModel->triggerEvents(array('postAccountCreation', 'postAccountCreationUnsuccessful', 'activationEmailUnsuccessful'));
 			$this->setError('activationEmailUnsuccessful');
-			return FALSE;
+			return false;
 		}
 	}
 
@@ -360,7 +360,7 @@ class Auth
 
 		$this->setMessage('logoutSuccessful');
 
-		return TRUE;
+		return true;
 	}
 
 	/**
@@ -373,7 +373,7 @@ class Auth
 	{
 		$this->ionAuthModel->triggerEvents('loggedIn');
 
-		return (bool) isset($_SESSION['identity']) ? TRUE : FALSE;
+		return (bool) isset($_SESSION['identity']) ? true : false;
 	}
 
 	/**
@@ -400,7 +400,7 @@ class Auth
 	 * @return bool
 	 * @author Ben Edmunds
 	 **/
-	public function isAdmin($id=FALSE)
+	public function isAdmin($id=false)
 	{
 		$this->ionAuthModel->triggerEvents('isAdmin');
 
@@ -419,7 +419,7 @@ class Auth
 	 * @return bool
 	 * @author Phil Sturgeon
 	 **/
-	public function inGroup($checkGroup, $id=FALSE, $checkAll = FALSE)
+	public function inGroup($checkGroup, $id=false, $checkAll = false)
 	{
 		$this->ionAuthModel->triggerEvents('inGroup');
 

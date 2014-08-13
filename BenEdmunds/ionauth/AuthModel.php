@@ -227,10 +227,11 @@ class AuthModel {
 	 * @return void
 	 * @author Matthew
 	 **/
-	public function hashPassword($password, $salt=FALSE, $useSha1Override=FALSE)
+	public function hashPassword($password, $salt=false, $useSha1Override=false)
 	{
+
 		if (empty($password)) {
-			return FALSE;
+			return false;
 		}
 
 		//bcrypt
@@ -240,11 +241,8 @@ class AuthModel {
 			}
 			else {
 				$salt = $this->salt();
-				return  $salt . substr(sha1($salt . $password), 0, -$this->salt_length);
+				return  $salt . substr(sha1($salt . $password), 0, -$this->config['saltLength']);
 			}
-		}
-		else if ($useSha1Override === FALSE && $this->config['hashMethod'] == 'oldBcrypt') {
-			return $this->bcrypt->hash($password);
 		}
 		else {
 			return password_hash($password, PASSWORD_BCRYPT, array("cost" => $this->_bcryptCost));
@@ -261,7 +259,7 @@ class AuthModel {
 	public function hashPasswordDb($id, $password)
 	{
 		if (empty($id) || empty($password)) {
-			return FALSE;
+			return false;
 		}
 
 		$this->triggerEvents('extraWhere');
@@ -273,8 +271,9 @@ class AuthModel {
 
 		$hashPasswordDb = $query->first();
 
-		if (count($query) !== 1) {
-			return FALSE;
+
+		if (isset($hashPasswordDb) === false) {
+			return false;
 		}
 
 
@@ -288,51 +287,94 @@ class AuthModel {
 				$dbPassword =  $salt . substr(sha1($salt . $password), 0, -$this->config['saltLength']);
 			}
 
+
 			if ($dbPassword == $hashPasswordDb->password) {
-				return TRUE;
+				return true;
 			}
 			else {
-				return FALSE;
+				return false;
 			}
-		}
-		else if ($this->config['hashMethod'] == 'oldBcrypt') {
-			if ($this->bcrypt->verify($password, $hashPasswordDb->password)) {
-				return TRUE;
-			}
-
-			return FALSE;
 		}
 		else {
-			$dbPassword = $this->hashPassword($password);
 
-			if ($password === $hashPasswordDb->password) {
-				return TRUE;
+			if (password_verify($password, $hashPasswordDb->password) === true) {
+				return true;
+			}
+			else {
+				return false;
 			}
 
-			return FALSE;
+			return false;
 		}
-	}
-
-	/**
-	 * Generates a random salt value for forgotten passwords or any other keys. Uses SHA1.
-	 *
-	 * @return void
-	 * @author Mathew
-	 **/
-	public function hashCode($password)
-	{
-		return $this->hashPassword($password, FALSE, TRUE);
 	}
 
 	/**
 	 * Generates a random salt value.
 	 *
+	 * Salt generation code taken from https://github.com/ircmaxell/password_compat/blob/master/lib/password.php
+	 *
 	 * @return void
-	 * @author Mathew
+	 * @author Anthony Ferrera
 	 **/
 	public function salt()
 	{
-		return substr(md5(uniqid(rand(), TRUE)), 0, $this->saltLength);
+
+		$raw_salt_len = 16;
+
+ 		$buffer = '';
+        $buffer_valid = false;
+
+        if (function_exists('mcrypt_create_iv') && !defined('PHALANGER')) {
+            $buffer = mcrypt_create_iv($raw_salt_len, MCRYPT_DEV_URANDOM);
+            if ($buffer) {
+                $buffer_valid = true;
+            }
+        }
+
+        if (!$buffer_valid && function_exists('openssl_random_pseudo_bytes')) {
+            $buffer = openssl_random_pseudo_bytes($raw_salt_len);
+            if ($buffer) {
+                $buffer_valid = true;
+            }
+        }
+
+        if (!$buffer_valid && @is_readable('/dev/urandom')) {
+            $f = fopen('/dev/urandom', 'r');
+            $read = strlen($buffer);
+            while ($read < $raw_salt_len) {
+                $buffer .= fread($f, $raw_salt_len - $read);
+                $read = strlen($buffer);
+            }
+            fclose($f);
+            if ($read >= $raw_salt_len) {
+                $buffer_valid = true;
+            }
+        }
+
+        if (!$buffer_valid || strlen($buffer) < $raw_salt_len) {
+            $bl = strlen($buffer);
+            for ($i = 0; $i < $raw_salt_len; $i++) {
+                if ($i < $bl) {
+                    $buffer[$i] = $buffer[$i] ^ chr(mt_rand(0, 255));
+                } else {
+                    $buffer .= chr(mt_rand(0, 255));
+                }
+            }
+        }
+
+        $salt = $buffer;
+
+        // encode string with the Base64 variant used by crypt
+        $base64_digits   = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+        $bcrypt64_digits = './ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        $base64_string   = base64_encode($salt);
+        $salt = strtr(rtrim($base64_string, '='), $base64_digits, $bcrypt64_digits);
+
+	    $salt = substr($salt, 0, $this->config['saltLength']);
+
+
+		return $salt;
+
 	}
 
 	/**
@@ -350,11 +392,11 @@ class AuthModel {
 	 * @return void
 	 * @author Mathew
 	 **/
-	public function activate($id, $code = FALSE)
+	public function activate($id, $code = false)
 	{
 		$this->triggerEvents('pre_activate');
 
-		if ($code !== FALSE) {
+		if ($code !== false) {
 			$query = $this->db->select($this->identityColumn)
 			                  ->where('activation_code', $code)
 			                  ->take(1)
@@ -365,7 +407,7 @@ class AuthModel {
 			if (count($query) !== 1) {
 				$this->triggerEvents(array('postActivate', 'postActivateUnsuccessful'));
 				$this->setError('activateUnsuccessful');
-				return FALSE;
+				return false;
 			}
 
 			$identity = $result->{$this->identityColumn};
@@ -416,10 +458,10 @@ class AuthModel {
 
 		if (!isset($id)) {
 			$this->setError('deactivateUnsuccessful');
-			return FALSE;
+			return false;
 		}
 
-		$activationCode       = sha1(md5(microtime()));
+		$activationCode       = $this->salt();
 		$this->activationCode = $activationCode;
 
 		$data = array(
@@ -444,7 +486,7 @@ class AuthModel {
 	public function clearForgottenPasswordCode($code) {
 
 		if (empty($code)) {
-			return FALSE;
+			return false;
 		}
 
 		$this->db->where('forgottenPasswordCode', $code);
@@ -457,10 +499,10 @@ class AuthModel {
 
 			$this->db->update($this->tables['users'], $data, array('forgottenPasswordCode' => $code));
 
-			return TRUE;
+			return true;
 		}
 
-		return FALSE;
+		return false;
 	}
 
 	/**
@@ -470,11 +512,12 @@ class AuthModel {
 	 * @author Mathew
 	 **/
 	public function resetPassword($identity, $new) {
+
 		$this->triggerEvents('preChangePassword');
 
 		if (!$this->identityCheck($identity)) {
 			$this->triggerEvents(array('postChangePassword', 'postChangePasswordUnsuccessful'));
-			return FALSE;
+			return false;
 		}
 
 		$this->triggerEvents('extraWhere');
@@ -484,11 +527,10 @@ class AuthModel {
 		                  ->take(1)
 		                  ->get($this->tables['users']);
 
-		if (count($query) !== 1)
-		{
+		if (count($query) !== 1) {
 			$this->triggerEvents(array('postChangePassword', 'postChangePasswordUnsuccessful'));
 			$this->setError('passwordChangeUnsuccessful');
-			return FALSE;
+			return false;
 		}
 
 		$result = $query->first();
@@ -517,7 +559,9 @@ class AuthModel {
 			$this->setError('passwordChangeUnsuccessful');
 		}
 
+
 		return $return;
+
 	}
 
 	/**
@@ -540,14 +584,14 @@ class AuthModel {
 		if (count($query) !== 1) {
 			$this->triggerEvents(array('postChangePassword', 'postChangePasswordUnsuccessful'));
 			$this->setError('passwordChangeUnsuccessful');
-			return FALSE;
+			return false;
 		}
 
 		$user = $query->first();
 
 		$oldPasswordMatches = $this->hashPasswordDb($user->id, $old);
 
-		if ($oldPasswordMatches === TRUE) {
+		if ($oldPasswordMatches === true) {
 			//store the new password and reset the remember code so all remembered instances have to re-login
 			$hashedNewPassword  = $this->hashPassword($new, $user->salt);
 			$data = array(
@@ -571,7 +615,7 @@ class AuthModel {
 		}
 
 		$this->setError('passwordChangeUnsuccessful');
-		return FALSE;
+		return false;
 	}
 
 	/**
@@ -585,7 +629,7 @@ class AuthModel {
 		$this->triggerEvents('usernameCheck');
 
 		if (empty($username)) {
-			return FALSE;
+			return false;
 		}
 
 		$this->triggerEvents('extra_where');
@@ -606,7 +650,7 @@ class AuthModel {
 
 		if (empty($email))
 		{
-			return FALSE;
+			return false;
 		}
 
 		$this->triggerEvents('extra_where');
@@ -626,7 +670,7 @@ class AuthModel {
 		$this->triggerEvents('identity_check');
 
 		if (empty($identity)) {
-			return FALSE;
+			return false;
 		}
 
 		return $this->db->where($this->identityColumn, $identity)
@@ -645,7 +689,7 @@ class AuthModel {
 	{
 		if (empty($identity)) {
 			$this->triggerEvents(array('postForgottenPassword', 'postForgottenPasswordUnsuccessful'));
-			return FALSE;
+			return false;
 		}
 
 		//All some more randomness
@@ -689,13 +733,13 @@ class AuthModel {
 	 * @return string
 	 * @author Mathew
 	 **/
-	public function forgottenPasswordComplete($code, $salt=FALSE)
+	public function forgottenPasswordComplete($code, $salt=false)
 	{
 		$this->triggerEvents('preForgottenPasswordComplete');
 
 		if (empty($code)) {
 			$this->triggerEvents(array('postForgottenPasswordComplete', 'postForgottenPasswordCompleteUnsuccessful'));
-			return FALSE;
+			return false;
 		}
 
 		$profile = $this->where('forgottenPasswordCode', $code)->users()->first(); //pass the code to profile
@@ -709,7 +753,7 @@ class AuthModel {
 					//it has expired
 					$this->setError('forgotPasswordExpired');
 					$this->triggerEvents(array('postForgottenPasswordComplete', 'postForgottenPasswordCompleteUnsuccessful'));
-					return FALSE;
+					return false;
 				}
 			}
 
@@ -728,7 +772,7 @@ class AuthModel {
 		}
 
 		$this->triggerEvents(array('postForgottenPasswordComplete', 'postForgottenPasswordCompleteUnsuccessful'));
-		return FALSE;
+		return false;
 	}
 
 	/**
@@ -745,11 +789,11 @@ class AuthModel {
 
 		if ($this->identityColumn == 'email' && $this->emailCheck($email)) {
 			$this->setError('accountCreationDuplicate_email');
-			return FALSE;
+			return false;
 		}
 		elseif ($this->identityColumn == 'username' && $this->usernameCheck($username)) {
 			$this->setError('accountCreationDuplicateUsername');
-			return FALSE;
+			return false;
 		}
 
 		// If username is taken, use username1 or username2, etc.
@@ -763,8 +807,8 @@ class AuthModel {
 		}
 
 		// IP Address
-		$ipAddress = $this->_prepareIp($_SERVER['REMOTE_ADDR']);
-		$salt       = $this->storeSalt ? $this->salt() : FALSE;
+		$ipAddress  = $this->_prepareIp($_SERVER['REMOTE_ADDR']);
+		$salt       = $this->storeSalt ? $this->salt() : false;
 		$password   = $this->hashPassword($password, $salt);
 
 		// Users table.
@@ -810,7 +854,7 @@ class AuthModel {
 
 		$this->triggerEvents('postRegister');
 
-		return (isset($id)) ? $id : FALSE;
+		return (isset($id)) ? $id : false;
 	}
 
 	/**
@@ -819,13 +863,13 @@ class AuthModel {
 	 * @return bool
 	 * @author Mathew
 	 **/
-	public function login($identity, $password, $remember=FALSE)
+	public function login($identity, $password, $remember=false)
 	{
 		$this->triggerEvents('preLogin');
 
 		if (empty($identity) || empty($password)) {
 			$this->setError('loginUnsuccessful');
-			return FALSE;
+			return false;
 		}
 
 		$this->triggerEvents('extraWhere');
@@ -835,6 +879,7 @@ class AuthModel {
 		                  ->where($this->config['identity'], $identity)
 		                  ->take(1);
 
+
 		if($this->isTimeLockedOut($identity))
 		{
 			//Hash something anyway, just to take up time
@@ -843,20 +888,26 @@ class AuthModel {
 			$this->triggerEvents('postLoginUnsuccessful');
 			$this->setError('loginTimeout');
 
-			return FALSE;
+			return false;
 		}
 
-		if (count($query) === 1) {
-			$user = $query->first();
 
+
+		$user = $query->first();
+
+		if (isset($user) === true) {
+
+			echo 'here:';
+			var_dump($user->id, $password);
 			$password = $this->hashPasswordDb($user->id, $password);
 
-			if ($password === TRUE) {
+			echo '------';
+			if ($password === true) {
 				if ($user->active == 0) {
 					$this->triggerEvents('post_login_unsuccessful');
 					$this->setError('login_unsuccessful_not_active');
 
-					return FALSE;
+					return false;
 				}
 
 				$this->setSession($user);
@@ -873,7 +924,7 @@ class AuthModel {
 				$this->triggerEvents(array('postLogin', 'postLoginSuccessful'));
 				$this->setMessage('loginSuccessful');
 
-				return TRUE;
+				return true;
 			}
 		}
 
@@ -885,7 +936,7 @@ class AuthModel {
 		$this->triggerEvents('postLoginUnsuccessful');
 		$this->setError('loginUnsuccessful');
 
-		return FALSE;
+		return false;
 	}
 
 	/**
@@ -903,7 +954,7 @@ class AuthModel {
 				return $attempts >= $maxAttempts;
 			}
 		}
-		return FALSE;
+		return false;
 	}
 
 	/**
@@ -918,7 +969,7 @@ class AuthModel {
 		if ($this->config['trackLoginAttempts']) {
 			$ipAddress = $this->_prepareIp($_SERVER['REMOTE_ADDR']);
 
-			$this->db->select('1', FALSE);
+			$this->db->select('1', false);
 			$this->db->where('ip_address', $ipAddress);
 			if (strlen($identity) > 0) $this->db->or_where('login', $identity);
 
@@ -973,7 +1024,7 @@ class AuthModel {
 			$ipAddress = $this->_prepareIp($_SERVER['REMOTE_ADDR']);
 			return $this->db->insert($this->tables['loginAttempts'], array('ip_address' => $ipAddress, 'login' => $identity, 'time' => time()));
 		}
-		return FALSE;
+		return false;
 	}
 
 	/**
@@ -988,11 +1039,11 @@ class AuthModel {
 
 			$this->db->where(array('ip_address' => $ipAddress, 'login' => $identity));
 			// Purge obsolete login attempts
-			$this->db->or_where('time <', time() - $expirePeriod, FALSE);
+			$this->db->or_where('time <', time() - $expirePeriod, false);
 
 			return $this->db->delete($this->tables['loginAttempts']);
 		}
-		return FALSE;
+		return false;
 	}
 
 	public function limit($limit)
@@ -1223,7 +1274,7 @@ class AuthModel {
 	 * @return array
 	 * @author Ben Edmunds
 	 **/
-	public function getUsersGroups($id=FALSE)
+	public function getUsersGroups($id=false)
 	{
 		$this->triggerEvents('getUsersGroup');
 
@@ -1251,7 +1302,7 @@ class AuthModel {
 
 		//check if unique - num_rows() > 0 means row found
 		if (count($this->db->where(array( $this->join['groups'] => (int)$groupId, $this->join['users'] => (int)$userId))->get($this->tables['usersGroups']))) {
-			return FALSE;
+			return false;
 		}
 
 		if ($return = $this->db->insert($this->tables['usersGroups'], array( $this->join['groups'] => (int)$groupId, $this->join['users'] => (int)$userId)))
@@ -1281,7 +1332,7 @@ class AuthModel {
 
 		// user id is required
 		if(empty($userId)) {
-			return FALSE;
+			return false;
 		}
 
 		// if group id(s) are passed remove user from the group(s)
@@ -1299,7 +1350,7 @@ class AuthModel {
 				}
 			}
 
-			$return = TRUE;
+			$return = true;
 		}
 		// otherwise remove user from all groups
 		else {
@@ -1392,7 +1443,7 @@ class AuthModel {
 			$this->triggerEvents(array('postUpdateUser', 'postUpdateUserUnsuccessful'));
 			$this->setError('updateUnsuccessful');
 
-			return FALSE;
+			return false;
 		}
 
 		// Filter the data passed
@@ -1413,19 +1464,19 @@ class AuthModel {
 		$this->triggerEvents('extraWhere');
 		$this->db->update($this->tables['users'], $data, array('id' => $user->id));
 
-		if ($this->db->trans_status() === FALSE) {
+		if ($this->db->trans_status() === false) {
 			$this->db->trans_rollback();
 
 			$this->triggerEvents(array('postUpdateUser', 'postUpdateUserUnsuccessful'));
 			$this->setError('updateUnsuccessful');
-			return FALSE;
+			return false;
 		}
 
 		$this->db->trans_commit();
 
 		$this->triggerEvents(array('postUpdateUser', 'postUpdateUserSuccessful'));
 		$this->setMessage('updateSuccessful');
-		return TRUE;
+		return true;
 	}
 
 	/**
@@ -1446,23 +1497,23 @@ class AuthModel {
 		// delete user from users table should be placed after remove from group
 		$affectedRows = $this->db->delete($this->tables['users'], array('id' => $id));
 
-		// if user does not exist in database then it returns FALSE else removes the user from groups
+		// if user does not exist in database then it returns false else removes the user from groups
 		if ($affectedRows == 0) {
-		    return FALSE;
+		    return false;
 		}
 
-		if ($this->db->trans_status() === FALSE) {
+		if ($this->db->trans_status() === false) {
 			$this->db->trans_rollback();
 			$this->triggerEvents(array('postDeleteUser', 'postDeleteUserUnsuccessful'));
 			$this->setError('deleteUnsuccessful');
-			return FALSE;
+			return false;
 		}
 
 		$this->db->trans_commit();
 
 		$this->triggerEvents(array('postDeleteUser', 'postDeleteUserSuccessful'));
 		$this->setMessage('deleteSuccessful');
-		return TRUE;
+		return true;
 	}
 
 	/**
@@ -1511,7 +1562,7 @@ class AuthModel {
 			'expire' => $expire
 		));
 
-		return TRUE;
+		return true;
 	}
 
 	/**
@@ -1537,7 +1588,7 @@ class AuthModel {
 
 		$this->triggerEvents('postSetSession');
 
-		return TRUE;
+		return true;
 	}
 
 	/**
@@ -1551,7 +1602,7 @@ class AuthModel {
 		$this->triggerEvents('preRememberUser');
 
 		if (!$id) {
-			return FALSE;
+			return false;
 		}
 
 		$user = $this->user($id)->first();
@@ -1584,11 +1635,11 @@ class AuthModel {
 			));
 
 			$this->triggerEvents(array('postRememberUser', 'rememberUserSuccessful'));
-			return TRUE;
+			return true;
 		}
 
 		$this->triggerEvents(array('postRememberUser', 'rememberUserUnsuccessful'));
-		return FALSE;
+		return false;
 	}
 
 	/**
@@ -1604,7 +1655,7 @@ class AuthModel {
 		//check for valid data
 		if (!$this->getCookie('identity') || !$this->getCookie('rememberCode') || !$this->identityCheck($this->getCookie('identity'))) {
 			$this->triggerEvents(array('postLoginRememberedUser', 'postLoginRememberedUserUnsuccessful'));
-			return FALSE;
+			return false;
 		}
 
 		//get the user
@@ -1629,11 +1680,11 @@ class AuthModel {
 			}
 
 			$this->triggerEvents(array('postLoginRememberedUser', 'postLoginRememberedUserSuccessful'));
-			return TRUE;
+			return true;
 		}
 
 		$this->triggerEvents(array('postLoginRememberedUser', 'postLoginRememberedUserUnsuccessful'));
-		return FALSE;
+		return false;
 	}
 
 
@@ -1642,19 +1693,19 @@ class AuthModel {
 	 *
 	 * @author aditya menon
 	*/
-	public function createGroup($groupName = FALSE, $groupDescription = '', $additionalData = array())
+	public function createGroup($groupName = false, $groupDescription = '', $additionalData = array())
 	{
 		// bail if the group name was not passed
 		if (!$groupName) {
 			$this->setError('groupNameRequired');
-			return FALSE;
+			return false;
 		}
 
 		// bail if the group name already exists
 		$existing_group = count($this->db->get_where($this->tables['groups'], array('name' => $groupName)));
 		if ($existingGroup !== 0) {
 			$this->setError('groupAlreadyExists');
-			return FALSE;
+			return false;
 		}
 
 		$data = array(
@@ -1687,9 +1738,9 @@ class AuthModel {
 	 * @return bool
 	 * @author aditya menon
 	 **/
-	public function updateGroup($groupId = FALSE, $groupName = FALSE, $additionalData = array())
+	public function updateGroup($groupId = false, $groupName = false, $additionalData = array())
 	{
-		if (empty($groupId)) return FALSE;
+		if (empty($groupId)) return false;
 
 		$data = array();
 
@@ -1702,7 +1753,7 @@ class AuthModel {
 			if(isset($existingGroup->id) && $existingGroup->id != $group_id)
 			{
 				$this->setError('groupAlreadyExists');
-				return FALSE;
+				return false;
 			}
 
 			$data['name'] = $groupName;
@@ -1727,7 +1778,7 @@ class AuthModel {
 
 		$this->setMessage('groupUpdateSuccessful');
 
-		return TRUE;
+		return true;
 	}
 
 	/**
@@ -1736,11 +1787,11 @@ class AuthModel {
 	* @return bool
 	* @author aditya menon
 	**/
-	public function deleteGroup($groupId = FALSE)
+	public function deleteGroup($groupId = false)
 	{
 		// bail if mandatory param not set
 		if (!$groupId || empty($groupId)) {
-			return FALSE;
+			return false;
 		}
 
 		$this->triggerEvents('preDeleteGroup');
@@ -1752,19 +1803,19 @@ class AuthModel {
 		// remove the group itself
 		$this->db->delete($this->tables['groups'], array('id' => $groupId));
 
-		if ($this->db->trans_status() === FALSE)
+		if ($this->db->trans_status() === false)
 		{
 			$this->db->trans_rollback();
 			$this->triggerEvents(array('postDeleteGroup', 'postDeleteGroupUnsuccessful'));
 			$this->setError('groupDeleteUnsuccessful');
-			return FALSE;
+			return false;
 		}
 
 		$this->db->trans_commit();
 
 		$this->triggerEvents(array('postDeleteGroup', 'postDeleteGroupSuccessful'));
 		$this->setMessage('groupDeleteSuccessful');
-		return TRUE;
+		return true;
 	}
 
 	public function setHook($event, $name, $class, $method, $arguments)
@@ -1797,7 +1848,7 @@ class AuthModel {
 			return call_user_func_array(array($hook->class, $hook->method), $hook->arguments);
 		}
 
-		return FALSE;
+		return false;
 	}
 
 	public function triggerEvents($events)
@@ -1829,7 +1880,7 @@ class AuthModel {
 		$this->messageStartDelimiter = $startDelimiter;
 		$this->messageEndDelimiter   = $endDelimiter;
 
-		return TRUE;
+		return true;
 	}
 
 	/**
@@ -1845,7 +1896,7 @@ class AuthModel {
 		$this->errorStartDelimiter = $startDelimiter;
 		$this->errorEndDelimiter   = $endDelimiter;
 
-		return TRUE;
+		return true;
 	}
 
 	/**
@@ -1891,7 +1942,7 @@ class AuthModel {
 	 * @return array
 	 * @author Raul Baldner Junior
 	 **/
-	public function messagesArray($langify = TRUE)
+	public function messagesArray($langify = true)
 	{
 		if ($langify) {
 			$_output = array();
@@ -1952,7 +2003,7 @@ class AuthModel {
 	 * @return array
 	 * @author Raul Baldner Junior
 	 **/
-	public function errorsArray($langify = TRUE)
+	public function errorsArray($langify = true)
 	{
 		if ($langify) {
 			$_output = array();
@@ -2001,7 +2052,7 @@ class AuthModel {
 			return $_COOKIE[$name];
 		}
 		else {
-			return FALSE;
+			return false;
 		}
 	}
 
@@ -2023,7 +2074,7 @@ class AuthModel {
 			return setcookie($name, '', time() - 3600);
 		}
 		else {
-			return FALSE;
+			return false;
 		}
 	}
 

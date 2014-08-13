@@ -57,23 +57,22 @@ return array(
 	 |
 	 | If you need backwards compatibility set hashMethod to "oldBcrypt"
 	 |
-	 | Below there is "default_rounds" (cost) setting.  This defines how strong the encryption will be,
+	 | Below there is "defaultRounds" (cost) setting.  This defines how strong the encryption will be,
 	 | but remember the more rounds you set the longer it will take to hash (CPU usage) So adjust
 	 | this based on your server hardware.
 	 |
-	 | If you are using sha1 the Admin password field also needs to be changed in order login as admin:
-	 | $2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36
+	 | If you are using sha1 the Admin password field needs to be changed in order login as admin:
+	 | 1283592850bc9a3e833d3f93ba181a1a8b3af67a
 	 |
-	 | If you are using oldBcrypt the Admin password field also needs to be changed in order login as admin:
+	 | If you are using bcrypt the Admin password field needs to be changed in order login as admin:
 	 | $2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36
 	 |
 	 | Be careful how high you set max_rounds, I would do your own testing on how long it takes
 	 | to encrypt with x rounds.
 	 */
-	//'hashMethod'    => 'bcrypt',	// IMPORTANT: Make sure this is set to either sha1 or bcrypt or oldBcrypt
-	'hashMethod'    => 'sha1',
-	'defaultRounds' => 8,		// This does not apply if random_rounds is set to true
-	'randomRounds'  => FALSE,
+	'hashMethod'    => 'bcrypt',  // IMPORTANT: Make sure this is set to either sha1 or bcrypt (preferably bcrypt)
+	'defaultRounds' => 8,         // This does not apply if random_rounds is set to true
+	'randomRounds'  => false,
 	'minRounds'     => 5,
 	'maxRounds'     => 9,
 
@@ -93,12 +92,12 @@ return array(
 	'identity'                 => 'email',             // A database column which is used to login with
 	'minPasswordLength'        => 8,                   // Minimum Required Length of Password
 	'maxPasswordLength'        => 20,                  // Maximum Allowed Length of Password
-	'emailActivation'          => FALSE,               // Email Activation for registration
-	'manualActivation'         => FALSE,               // Manual Activation for registration
-	'rememberUsers'            => TRUE,                // Allow users to be remembered and enable auto-login
+	'emailActivation'          => false,               // Email Activation for registration
+	'manualActivation'         => false,               // Manual Activation for registration
+	'rememberUsers'            => true,                // Allow users to be remembered and enable auto-login
 	'userExpire'               => 86500,               // How long to remember the user (seconds). Set to zero for no expiration
-	'userExtendOnLogin'        => FALSE,               // Extend the users cookies everytime they auto-login
-	'trackLoginAttempts'       => FALSE,               // Track the number of failed login attempts for each user or ip.
+	'userExtendOnLogin'        => false,               // Extend the users cookies everytime they auto-login
+	'trackLoginAttempts'       => false,               // Track the number of failed login attempts for each user or ip.
 	'maximumLoginAttempts'     => 3,                   // The maximum number of failed login attempts.
 	'lockoutTime'              => 600,                 // The number of seconds to lockout an account due to exceeded attempts
 	'forgotPasswordExpiration' => 0,                   // The number of miliseconds after which a forgot password request will expire. If set to 0, forgot password requests will not expire.
@@ -112,7 +111,7 @@ return array(
 	 | 	  'file' = Use the default CI config or use from a config file
 	 | 	  array  = Manually set your email config settings
 	 */
-	'useDefaultEmail' => FALSE, // Send Email using the builtin email functionality, if false it will return the code and the identity
+	'useDefaultEmail' => false, // Send Email using the builtin email functionality, if false it will return the code and the identity
 	'emailConfig' => array(
 		'mailtype' => 'html',
 	),
@@ -162,7 +161,7 @@ return array(
 	 | fbaa5e216d163a02ae630ab1a43372635dd374c0 with default salt.
 	 */
 	'saltLength' => 10,
-	'storeSalt'  => FALSE,
+	'storeSalt'  => false,
 
 	/*
 	 | -------------------------------------------------------------------------
