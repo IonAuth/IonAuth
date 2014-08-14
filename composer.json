@@ -1,7 +1,29 @@
 {
+    "name": "benedmunds/ionauth",
+    "description": "A simple, lightweight authentication package.",
+    "authors": [
+        {
+            "name": "Ben Edmunds",
+            "homepage": "http://benedmunds.com/"
+        }
+    ],
     "require": {
-        "slim/slim": "2.*",
         "illuminate/database": "4.*@dev",
         "ircmaxell/password-compat": "dev-master"
+    },
+    "require-dev": {
+        "slim/slim": "2.*",
+        "phpspec/phpspec": "~2.0"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": {
+            "": "src"
+        },
+        "psr-4":{
+            "BenEdmunds\\IonAuth\\": "BenEdmunds/ionauth"
+        }
     }
 }
