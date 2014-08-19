@@ -1,12 +1,12 @@
 <?php
 require 'vendor/autoload.php';
-require 'BenEdmunds/ionauth/Auth.php';
+
+use BenEdmunds\IonAuth\Auth;
+use BenEdmunds\IonAuth\Config\Config;
 
 $app = new \Slim\Slim();
 
-//init
-$authConfig = require_once 'config/IonAuth.php';
-$auth = new \BenEdmunds\IonAuth\Auth($authConfig);
+$auth = new Auth(new Config());
 
 
 $app->get('/', function() use ($auth) {
@@ -783,6 +783,6 @@ $app->post('/reset_password/{code?}', function() use ($auth) {
 
 }
 
-*/
+*/});
 
 $app->run();
