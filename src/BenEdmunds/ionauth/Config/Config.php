@@ -13,7 +13,7 @@ class Config
 {
 
 
-    private $database = array(
+    protected $database = array(
         'driver' => 'mysql',
         'host' => 'localhost',
         'database' => 'ion_auth',
@@ -50,11 +50,11 @@ class Config
 	 | Be careful how high you set max_rounds, I would do your own testing on how long it takes
 	 | to encrypt with x rounds.
 	 */
-    private $hashMethod = 'bcrypt'; // IMPORTANT: Make sure this is set to either sha1 or bcrypt (preferably bcrypt)
-    private $defaultRounds = 8; // This does not apply if random_rounds is set to true
-    private $randomRounds = false;
-    private $minRounds = 5;
-    private $maxRounds = 9;
+    protected $hashMethod = 'bcrypt'; // IMPORTANT: Make sure this is set to either sha1 or bcrypt (preferably bcrypt)
+    protected $defaultRounds = 8; // This does not apply if random_rounds is set to true
+    protected $randomRounds = false;
+    protected $minRounds = 5;
+    protected $maxRounds = 9;
 
     /*
 	| -------------------------------------------------------------------------
@@ -62,7 +62,7 @@ class Config
 	| -------------------------------------------------------------------------
 	| Database table names.
 	*/
-    private $tables = array(
+    protected $tables = array(
         'users' => 'users',
         'groups' => 'groups',
         'users_groups' => 'users_groups',
@@ -75,7 +75,7 @@ class Config
      | Joins from users.id
      | Joins from groups.id
      */
-    private $join = array(
+    protected $join = array(
         'users' => 'user_id',
         'groups' => 'group_id',
     );
@@ -90,22 +90,22 @@ class Config
 	 | The controller should check this function and act
 	 | appropriately. If this variable set to 0, there is no maximum.
 	 */
-    private $siteTitle = "Example.com"; // Site Title, example.com
-    private $adminEmail = "admin@example.com"; // Admin Email, admin@example.com
-    private $defaultGroup = 'members'; // Default group, use name
-    private $adminGroup = 'admin'; // Default administrators group, use name
-    private $identity = 'email'; // A database column which is used to login with
-    private $minPasswordLength = 8; // Minimum Required Length of Password
-    private $maxPasswordLength = 20; // Maximum Allowed Length of Password
-    private $emailActivation = false; // Email Activation for registration
-    private $manualActivation = false; // Manual Activation for registration
-    private $rememberUsers = true; // Allow users to be remembered and enable auto-login
-    private $userExpire = 86500; // How long to remember the user (seconds). Set to zero for no expiration
-    private $userExtendOnLogin = false; // Extend the users cookies everytime they auto-login
-    private $trackLoginAttempts = false; // Track the number of failed login attempts for each user or ip.
-    private $maximumLoginAttempts = 3; // The maximum number of failed login attempts.
-    private $lockoutTime = 600; // The number of seconds to lockout an account due to exceeded attempts
-    private $forgotPasswordExpiration = 0; // The number of miliseconds after which a forgot password request will expire. If set to 0, forgot password requests will not expire.
+    protected $siteTitle = "Example.com"; // Site Title, example.com
+    protected $adminEmail = "admin@example.com"; // Admin Email, admin@example.com
+    protected $defaultGroup = 'members'; // Default group, use name
+    protected $adminGroup = 'admin'; // Default administrators group, use name
+    protected $identity = 'email'; // A database column which is used to login with
+    protected $minPasswordLength = 8; // Minimum Required Length of Password
+    protected $maxPasswordLength = 20; // Maximum Allowed Length of Password
+    protected $emailActivation = false; // Email Activation for registration
+    protected $manualActivation = false; // Manual Activation for registration
+    protected $rememberUsers = true; // Allow users to be remembered and enable auto-login
+    protected $userExpire = 86500; // How long to remember the user (seconds). Set to zero for no expiration
+    protected $userExtendOnLogin = false; // Extend the users cookies everytime they auto-login
+    protected $trackLoginAttempts = false; // Track the number of failed login attempts for each user or ip.
+    protected $maximumLoginAttempts = 3; // The maximum number of failed login attempts.
+    protected $lockoutTime = 600; // The number of seconds to lockout an account due to exceeded attempts
+    protected $forgotPasswordExpiration = 0; // The number of miliseconds after which a forgot password request will expire. If set to 0, forgot password requests will not expire.
 
     /*
      | -------------------------------------------------------------------------
@@ -115,8 +115,8 @@ class Config
      | 	  'file' = Use the default CI config or use from a config file
      | 	  array  = Manually set your email config settings
      */
-    private $useDefaultEmail = false; // Send Email using the builtin email functionality, if false it will return the code and the identity
-    private $emailConfig = array('mailtype' => 'html');
+    protected $useDefaultEmail = false; // Send Email using the builtin email functionality, if false it will return the code and the identity
+    protected $emailConfig = array('mailtype' => 'html');
 
     /*
      | -------------------------------------------------------------------------
@@ -125,7 +125,7 @@ class Config
      | Folder where email templates are stored.
      | Default: auth/
      */
-    private $emailTemplates = 'auth/email/';
+    protected $emailTemplates = 'auth/email/';
 
     /*
 	 | -------------------------------------------------------------------------
@@ -133,7 +133,7 @@ class Config
 	 | -------------------------------------------------------------------------
 	 | Default: activate.tpl.php
 	 */
-    private $emailActivate = 'activate.tpl.php';
+    protected $emailActivate = 'activate.tpl.php';
 
     /*
      | -------------------------------------------------------------------------
@@ -141,7 +141,7 @@ class Config
      | -------------------------------------------------------------------------
      | Default: forgotPassword.tpl.php
      */
-    private $emailForgotPassword = 'forgotPassword.tpl.php';
+    protected $emailForgotPassword = 'forgotPassword.tpl.php';
 
     /*
      | -------------------------------------------------------------------------
@@ -149,7 +149,7 @@ class Config
      | -------------------------------------------------------------------------
      | Default: newPassword.tpl.php
      */
-    private $emailForgotPasswordComplete = 'newPassword.tpl.php';
+    protected $emailForgotPasswordComplete = 'newPassword.tpl.php';
 
     /*
 	 | -------------------------------------------------------------------------
@@ -162,18 +162,18 @@ class Config
 	 | default password, 'password', changes to
 	 | fbaa5e216d163a02ae630ab1a43372635dd374c0 with default salt.
 	 */
-    private $saltLength = 10;
-    private $storeSalt = false;
+    protected $saltLength = 10;
+    protected $storeSalt = false;
 
     /*
      | -------------------------------------------------------------------------
      | Message Delimiters.
      | -------------------------------------------------------------------------
      */
-    private $messageStartDelimiter = '<p>'; // Message start delimiter
-    private $messageEndDelimiter = '</p>'; // Message end delimiter
-    private $errorStartDelimiter = '<p>'; // Error message start delimiter
-    private $errorEndDelimiter = '</p>'; // Error message end delimiter
+    protected $messageStartDelimiter = '<p>'; // Message start delimiter
+    protected $messageEndDelimiter = '</p>'; // Message end delimiter
+    protected $errorStartDelimiter = '<p>'; // Error message start delimiter
+    protected $errorEndDelimiter = '</p>'; // Error message end delimiter
 
     public function get($key)
     {
