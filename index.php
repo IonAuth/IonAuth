@@ -1,14 +1,18 @@
 <?php
 require 'vendor/autoload.php';
-require 'BenEdmunds/ionauth/Auth.php';
 
-$app = new \Slim\Slim();
+use BenEdmunds\IonAuth\Auth;
+use BenEdmunds\IonAuth\Config\Config;
+use BenEdmunds\IonAuth\Db\Db;
 
-//init
-$authConfig = require_once 'config/IonAuth.php';
-$auth = new \BenEdmunds\IonAuth\Auth($authConfig);
+//$app = new \Slim\Slim();
 
+$config = new Config();
+$db = new Db('mysql:host=localhost;dbname=ci_template', 'root', 'root');
 
+$auth = new Auth($config, $db);
+
+exit;
 $app->get('/', function() use ($auth) {
 
 	var_dump($auth->login('admin@admin.com', 'password'));
@@ -783,6 +787,6 @@ $app->post('/reset_password/{code?}', function() use ($auth) {
 
 }
 
-*/
+*/});
 
 $app->run();
