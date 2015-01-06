@@ -11,6 +11,26 @@ namespace BenEdmunds\IonAuth\Config;
 class Config
 {
 
+  /**
+   * -------------------------------------------------------------------------
+   * Database configuration
+   * -------------------------------------------------------------------------
+   * The configuration options of the database connection.
+   *
+   * -------------------------------------------------------------------------
+   * Explanation of the variables.
+   * -------------------------------------------------------------------------
+   *
+   * $database['driver']      = The driver of the database.
+   * $database['host']        = The host of the database.
+   * $database['database']    = The database name.
+   * $database['username']    = The database user.
+   * $database['password']    = The database users password.
+   * $database['charset']     = The character set used in communicating with the database.
+   * $database['collation']   = The character collation used in communicating with the database.
+   * $database['prefix']      = The table prefix; e.g MY_table.
+   * $database['fetch']       = The fetch driver of the database.
+   */
 
     protected $database = array(
         'driver' => 'mysql',
