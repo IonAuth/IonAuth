@@ -109,24 +109,45 @@ class Config
 	  * used by $this->ion_auth->is_max_login_attempts_exceeded().
 	  * The controller should check this function and act
 	  * appropriately. If this variable set to 0, there is no maximum.
-	  */
+    *
+    * -------------------------------------------------------------------------
+    * Explanation of the variables.
+    * -------------------------------------------------------------------------
+    *
+    * $siteTitle:                      Site Tutke, example.com
+    * $adminMail:                      Admin email, admin@example.com
+    * $defaultGroup:                   Default group, use name.
+    * $dminGroup:                      Default administrators group, use name.
+    * $identity:                       A database column which is used to login with.
+    * $minPasswordLength:              Minimum required length of password.
+    * $maxPasswordLength:              Maximum allowed length of password.
+    * $emailActivation:                Email activation for registration.
+    * $manualActivation:               Manual activation for registration.
+    * $rememberusers:                  Allow users to be remembered and enable auto-login.
+    * $userExpire:                     How long to remember the user (seconds). Set to zero for no expiration.
+    * $userExtendOnLogin:              Extends the users cookies everytime they auto-login.
+    * $trackLoginAttempts:             Track the number of failed login attempts for each user or ip.
+    * $maximumLoginAttempts:           The maximum of failed login attempts.
+    * $lockoutTime:                    The number of seconds to lockout an account due to exceeded attampts.
+    * $forgotPasswordExpiration:       The number of miliseconds after which a forgot password request will expire. If set to 0, forgot password requests will not expire.
+    */
 
-    protected $siteTitle = "Example.com"; // Site Title, example.com
-    protected $adminEmail = "admin@example.com"; // Admin Email, admin@example.com
-    protected $defaultGroup = 'members'; // Default group, use name
-    protected $adminGroup = 'admin'; // Default administrators group, use name
-    protected $identity = 'email'; // A database column which is used to login with
-    protected $minPasswordLength = 8; // Minimum Required Length of Password
-    protected $maxPasswordLength = 20; // Maximum Allowed Length of Password
-    protected $emailActivation = false; // Email Activation for registration
-    protected $manualActivation = false; // Manual Activation for registration
-    protected $rememberUsers = true; // Allow users to be remembered and enable auto-login
-    protected $userExpire = 86500; // How long to remember the user (seconds). Set to zero for no expiration
-    protected $userExtendOnLogin = false; // Extend the users cookies everytime they auto-login
-    protected $trackLoginAttempts = false; // Track the number of failed login attempts for each user or ip.
-    protected $maximumLoginAttempts = 3; // The maximum number of failed login attempts.
-    protected $lockoutTime = 600; // The number of seconds to lockout an account due to exceeded attempts
-    protected $forgotPasswordExpiration = 0; // The number of miliseconds after which a forgot password request will expire. If set to 0, forgot password requests will not expire.
+    protected $siteTitle = "Example.com";
+    protected $adminEmail = "admin@example.com";
+    protected $defaultGroup = 'members';
+    protected $adminGroup = 'admin';
+    protected $identity = 'email';
+    protected $minPasswordLength = 8;
+    protected $maxPasswordLength = 20;
+    protected $emailActivation = false;
+    protected $manualActivation = false;
+    protected $rememberUsers = true;
+    protected $userExpire = 86500;
+    protected $userExtendOnLogin = false;
+    protected $trackLoginAttempts = false
+    protected $maximumLoginAttempts = 3;
+    protected $lockoutTime = 600;
+    protected $forgotPasswordExpiration = 0;
 
     /*
      * -------------------------------------------------------------------------
