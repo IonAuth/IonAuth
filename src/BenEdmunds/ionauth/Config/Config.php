@@ -521,5 +521,4 @@ class Config
         $this->userExtendOnLogin = $userExtendOnLogin;
     }
 
-
 }
