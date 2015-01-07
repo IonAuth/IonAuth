@@ -117,9 +117,9 @@ class Auth
      * @return mixed  boolean / array
      * @author Mathew
      */
-    public function forgottenPassword($identity) //changed $email to $identity
+    public function forgottenPassword($identity) // changed $email to $identity
     {
-        if ($this->ionAuthModel->forgottenPassword($identity)) //changed
+        if ($this->ionAuthModel->forgottenPassword($identity)) // changed
         {
             // Get user information
             $user = $this->where($this->config->get('identity'), $identity)->users()->row(
@@ -167,8 +167,8 @@ class Auth
     }
 
     /**
-     * forgotten_password_complete
-     *
+     * forgotten_password_complete()
+     * ------------------------------
      * @param $code
      * @return void
      * @author Mathew
@@ -231,8 +231,8 @@ class Auth
     }
 
     /**
-     * forgotten_password_check
-     *
+     * forgotten_password_check()
+     * --------------------------
      * @param $code
      * @return void
      * @author Michael
@@ -261,11 +261,11 @@ class Auth
     }
 
     /**
-     * register
-     *
-     * @param $username
-     * @param $password
-     * @param $email
+     * register()
+     * -----------------------------
+     * @param $username, string
+     * @param $password, string
+     * @param $email, string
      * @param array $additionalData
      * @param array $groupIds
      * @return void
@@ -277,7 +277,7 @@ class Auth
         $email,
         $additionalData = array(),
         $groupIds = array()
-    ) //need to test email activation
+    ) // need to test email activation
     {
         $this->ionAuthModel->triggerEvents('preAccountCreation');
 
@@ -360,8 +360,8 @@ class Auth
     }
 
     /**
-     * logout
-     *
+     * logout()
+     * --------------------
      * @return void
      * @author Mathew
      **/
@@ -378,7 +378,7 @@ class Auth
             )
         );
 
-        //delete the remember me cookies if they exist
+        // delete the remember me cookies if they exist
         if ($this->ionAuthModel->getCookie('identity')) {
             $this->ionAuthModel->deleteCookie('identity');
         }
@@ -387,7 +387,7 @@ class Auth
             $this->ionAuthModel->deleteCookie('remember_code');
         }
 
-        //Destroy the session
+        // Destroy the session
         $this->session->sess_destroy();
 
         $this->setMessage('logoutSuccessful');
@@ -397,7 +397,7 @@ class Auth
 
     /**
      * logged_in
-     *
+     * -----------------
      * @return bool
      * @author Mathew
      **/
@@ -409,7 +409,7 @@ class Auth
 
     /**
      * logged in
-     *
+     * --------------------
      * @return integer
      * @author jrmadsen67
      **/
@@ -427,7 +427,7 @@ class Auth
 
     /**
      * is admin
-     *
+     * ---------------------
      * @param bool $id
      * @return bool
      * @author Ben Edmunds
@@ -443,7 +443,7 @@ class Auth
 
     /**
      * in group
-     *
+     * --------------------------
      * @param mixed group(s) to check
      * @param bool user id
      * @param bool check if all groups is present, or any of the groups
