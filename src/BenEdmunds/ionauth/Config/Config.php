@@ -213,14 +213,24 @@ class Config
     protected $storeSalt = false;
 
     /*
-     | -------------------------------------------------------------------------
-     | Message Delimiters.
-     | -------------------------------------------------------------------------
+     * -------------------------------------------------------------------------
+     * Message Delimiters.
+     * -------------------------------------------------------------------------
+     * Message delimiters of ion auth.
+     *
+     * -------------------------------------------------------------------------
+     * Eplanation of the variables
+     * -------------------------------------------------------------------------
+     * $messageStartDelimiter  = Message start delimiter
+     * $messageEndDelimiter    = Message end delimiter
+     * $errorStartDelimiter    = Error message start delimiter
+     * $errorEndDelimitter     = Error message end delimiter
+     *
      */
-    protected $messageStartDelimiter = '<p>'; // Message start delimiter
-    protected $messageEndDelimiter = '</p>'; // Message end delimiter
-    protected $errorStartDelimiter = '<p>'; // Error message start delimiter
-    protected $errorEndDelimiter = '</p>'; // Error message end delimiter
+    protected $messageStartDelimiter = '<p>';
+    protected $messageEndDelimiter = '</p>';
+    protected $errorStartDelimiter = '<p>';
+    protected $errorEndDelimiter = '</p>';
 
     public function get($key)
     {
