@@ -10,6 +10,14 @@ The issue tracker is the preferred channel for bug reports, features requests an
 - Please do not use the issue tracker for personal support requests.
 - Please do not derail or troll issues. Keep the discussion on topic and respect the opinions of others.
 
+### Labels
+
+- `shiplist` - The shiplist of a version **do not use this label for issues**.
+- `duplicate` - Label a duplicate issue report.
+- `docs` - For issues in the docs.
+- `feature` -  For a enchantment in Ion Auth.
+- `wontfix` - For issies that will not be fixed in the next version.
+
 ### Requirements
 - Make sure your `PHP`Code is following the Codeigniter standards.
 - Add spacings between the php begin and end tag.
