@@ -2,32 +2,37 @@
 ###The next future of authentication
 by [Ben Edmunds](http://benedmunds.com)
 
-Introducing the new, framework agnostic, PSR compliant Ion Auth. 
+Introducing the new, framework agnostic, PSR compliant Ion Auth.
 
-This version attempts to maintain Backwards Compatibility whenever possible, while also adding flexibility and new features. 
+This version attempts to maintain Backwards Compatibility whenever possible, while also adding flexibility and new features.
 
-##Documentation
+## Documentation
 Will be thorough and awesome.
- 
-##Installation
+
+## Installation
 Will be done via composer
 
-###Relational DB Setup
-We'll provide sql files, and also migrations. 
+## Versioning
+For transparency into our release cycle in striving to maintain backward compatibility, Ion-Auth is
+maintained under [the Semantic Versioning guidelines](http://www.semver.org). Sometimes we screw up. but we'll adhere to
+those rules whenever possible.
 
-##Usage
-We'll include a nice example app. 
+### Relational DB Setup
+We'll provide sql files, and also migrations.
 
-###Default Login
+## Usage
+We'll include a nice example app.
+
+### Default Login
 Username: admin@admin.com
 Password: password
 
 
-###Important
+### Important
 It is highly recommended that you use encrypted database sessions for security!
 
 
-###Optimization
+### Optimization
 It is recommended that you add your identity column as a unique index.
 
 
