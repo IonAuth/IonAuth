@@ -70,6 +70,7 @@ class Config
 	 * Be careful how high you set max_rounds, I would do your own testing on how long it takes
 	 * to encrypt with x rounds.
 	 */
+
     protected $hashMethod = 'bcrypt'; // IMPORTANT: Make sure this is set to either sha1 or bcrypt (preferably bcrypt)
     protected $defaultRounds = 8; // This does not apply if random_rounds is set to true
     protected $randomRounds = false;
@@ -81,7 +82,22 @@ class Config
 	 * Tables.
 	 * -------------------------------------------------------------------------
 	 * Database table names.
+   *
+   * -------------------------------------------------------------------------
+   * Explanation of the variables.
+   * -------------------------------------------------------------------------
+   * $tables['users']          = The table where the users are stored.
+   * $tables['groups']         = The table where the group names are stored.
+   * $tables['users_groups']   = The tables where the users groups are stored.
+   * $tables['login_attempts'] = The tables where the login attempts will be stored.
+   *
+   * Users table column and Group table column you want to join WITH.
+   * -------------------------------------------------------------------------
+   * $join['users']  = Joins from user.id
+   * $join['groups'] = Joins fromm groups.id
+   *
 	 */
+
     protected $tables = array(
         'users' => 'users',
         'groups' => 'groups',
@@ -89,12 +105,6 @@ class Config
         'login_attempts' => 'login_attempts',
     );
 
-    /*
-     * Users table column and Group table column you want to join WITH.
-     *
-     * Joins from users.id
-     * Joins from groups.id
-     */
     protected $join = array(
         'users' => 'user_id',
         'groups' => 'group_id',

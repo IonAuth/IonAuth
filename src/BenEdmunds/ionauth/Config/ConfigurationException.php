@@ -12,4 +12,4 @@ namespace BenEdmunds\IonAuth\Config;
 class ConfigurationException extends \Exception
 {
 
-} 
+}

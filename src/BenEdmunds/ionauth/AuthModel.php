@@ -249,6 +249,8 @@ class AuthModel
     }
 
     /**
+     * Function: hashPasswordDb()
+     * -----------------------------
      * This function takes a password and validates it
      * against an entry in the users table.
      *
@@ -963,6 +965,8 @@ class AuthModel
     }
 
     /**
+     * Function: getAttemptsNum()
+     * ------------------------------------------------------------------------------------
      * Get number of attempts to login occured from given IP-address or identity
      * Based on code from Tank Auth, by Ilya Konyukhov (https://github.com/ilkon/Tank-Auth)
      *
@@ -987,9 +991,12 @@ class AuthModel
     }
 
     /**
+     * Function is TimeLockedOut()
+     * ---------------------------------------------------------------------
      * Get a boolean to determine if an account should be locked out due to
      * exceeded login attempts within a given period
      *
+     * @param     string, $identity
      * @return    boolean
      */
     public function isTimeLockedOut($identity)
@@ -1000,6 +1007,8 @@ class AuthModel
     }
 
     /**
+     * Function: getLastAttemptTime()
+     * --------------------------------------
      * Get the time of the last time a login attempt occured from given IP-address or identity
      *
      * @param    string $identity
@@ -1026,6 +1035,8 @@ class AuthModel
     }
 
     /**
+     * Function: increaseLoginAttempts()
+     * ------------------------------------------------
      * increase_login_attempts
      * Based on code from Tank Auth, by Ilya Konyukhov (https://github.com/ilkon/Tank-Auth)
      *
@@ -1288,8 +1299,8 @@ class AuthModel
     }
 
     /**
-     * get_users_groups
-     *
+     * Function:  get_users_groups
+     * ------------------------------
      * @param bool $id
      * @return array
      * @author Ben Edmunds
@@ -1310,8 +1321,8 @@ class AuthModel
     }
 
     /**
-     * add_to_group
-     *
+     * Function: add_to_group
+     * -----------------------------
      * @param $groupId
      * @param bool $userId
      * @return bool
