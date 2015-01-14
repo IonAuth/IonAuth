@@ -11,62 +11,66 @@
    * ----------------------------------------------------
   */
 
-   // Account creation
-   $accountCreationSuccesful           = '';
-   $accountCreationUnsuccesful         = '';
-   $accountCreationDuplicateEmail      = '';
-   $accountCreationDuplicateUsername   = '';
-   $accountCreationMissingDefaultGroup = '';
-   $accountCreationInvalidDefaultGroup = '';
+  $language = [
 
-   // Password
-   $passwordChangeSuccessful           = 'Lozinka uspješno promjenjena';
-   $passwordChangeUnsuccessful         = 'Lozinka nije promjenjena';
-   $forgotPasswordSuccessful           = 'Email za poništenje lozinke je poslan';
-   $forgotPasswordUnsuccessful         = 'lozinka nije poništena';
+    // Account creation
+    'accountCreationSuccesful'           => '',
+    'accountCreationUnsuccesful'         => '',
+    'accountCreationDuplicateEmail'      => '',
+    'accountCreationDuplicateUsername'   => '',
+    'accountCreationMissingDefaultGroup' => '',
+    'accountCreationInvalidDefaultGroup' => '',
 
-   // Activation
-   $activateSuccessful                 = 'Račun je aktiviran';
-   $activateUnsuccessful               = 'Aktiviranje računa nije uspjelo';
-   $deactivateSuccessful               = 'Račun je deaktiviran';
-   $deactivateUnsuccessful             = 'De-aktivacija računa noje uspjela';
-   $activationEmailSuccessful          = 'Email za aktivaciju je poslan';
-   $activationEmailUnsuccessful        = 'Slanje mail za aktivaciju nije uspjelo';
+    // Password
+    'passwordChangeSuccessful'           => 'Lozinka uspješno promjenjena',
+    'passwordChangeUnsuccessful'         => 'Lozinka nije promjenjena',
+    'forgotPasswordSuccessful'           => 'Email za poništenje lozinke je poslan',
+    'forgotPasswordUnsuccessful'         => 'lozinka nije poništena',
 
-   // Login / Logout
-   $loginSuccessful                    = 'Uspješno prijavljeni';
-   $loginUnsuccessful                  = 'Prijava nije uspjela';
-   $loginUnsuccessfulNotActive         = 'Račun nije aktivan';
-   $loginTimeout                       = '';
-   $logoutSuccessful                   = 'Uspješno ste odjavljeni';
+    // Activation
+    'activateSuccessful'                 => 'Račun je aktiviran',
+    'activateUnsuccessful'               => 'Aktiviranje računa nije uspjelo',
+    'deactivateSuccessful'               => 'Račun je deaktiviran',
+    'deactivateUnsuccessful'             => 'De-aktivacija računa noje uspjela',
+    'activationEmailSuccessful'          => 'Email za aktivaciju je poslan',
+    'activationEmailUnsuccessful'        => 'Slanje mail za aktivaciju nije uspjelo',
 
-   // Account changes
-   $updateSuccessful                   = 'Podaci o računu uspješno su a≈æurirani';
-   $updateUnsuccessful                 = 'Podaci o računu nisu ažurirani';
-   $deleteSuccessful                   = 'Korisnik je obrisan';
-   $deleteUnsuccessful                 = 'Brisanje korisnika nije uspjelo';
+    // Login / Logout
+    'loginSuccessful'                    => 'Uspješno prijavljeni',
+    'loginUnsuccessful'                  => 'Prijava nije uspjela',
+    'loginUnsuccessfulNotActive'         => 'Račun nije aktivan',
+    'loginTimeout'                       => '',
+    'logoutSuccessful'                   => 'Uspješno ste odjavljeni',
 
-   // Groups
-   $groupCreationSuccessful            = '';
-   $groupAlreadyExists                 = '';
-   $groupUpdateSuccessful              = '';
-   $groupDeleteSuccessful              = '';
-   $groupDeleteUnsccessful             = '';
-   $groupNameRequired                  = '';
+    // Account changes
+    'updateSuccessful'                   => 'Podaci o računu uspješno su a≈æurirani',
+    'updateUnsuccessful'                 => 'Podaci o računu nisu ažurirani',
+    'deleteSuccessful'                   => 'Korisnik je obrisan',
+    'deleteUnsuccessful'                 => 'Brisanje korisnika nije uspjelo',
 
-   // Activation Email
-   $emailActivationSubject             = 'Aktivacija računa';
-   $emailActivateHeading               = '';
-   $emailActivateSubheading            = '';
-   $emailActivateLink                  = '';
+    // Groups
+    'groupCreationSuccessful'            => '',
+    'groupAlreadyExists'                 => '',
+    'groupUpdateSuccessful'              => '',
+    'groupDeleteSuccessful'              => '',
+    'groupDeleteUnsccessful'             => '',
+    'groupNameRequired'                  => '',
 
-   // Forgot Password Email
-   $emailForgottenPasswordSubject      = 'Potvrda o zaboravljenoj lozinci';
-   $emailForgotPasswordHeading         = '';
-   $emailForgotPasswordSubheading      = '';
-   $emailForgotPasswordLink            = '';
+    // Activation Email
+    'emailActivationSubject'             => 'Aktivacija računa',
+    'emailActivateHeading'               => '',
+    'emailActivateSubheading'            => '',
+    'emailActivateLink'                  => '',
 
-   // New Password Email
-   $emailNewPasswordSubject            = 'Nova lozinka';
-   $emailNewPasswordHeading            = '';
-   $emailNewPasswordSubheading         = '';
+    // Forgot Password Email
+    'emailForgottenPasswordSubject'      => 'Potvrda o zaboravljenoj lozinci',
+    'emailForgotPasswordHeading'         => '',
+    'emailForgotPasswordSubheading'      => '',
+    'emailForgotPasswordLink'            => '',
+
+    // New Password Email
+    'emailNewPasswordSubject'            => 'Nova lozinka',
+    'emailNewPasswordHeading'            => '',
+    'emailNewPasswordSubheading'         => '',
+
+  ];

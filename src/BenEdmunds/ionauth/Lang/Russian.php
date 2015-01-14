@@ -11,62 +11,67 @@
    * ----------------------------------------------------
   */
 
-   // Account creation
-   $accountCreationSuccesful           = 'Учетная запись успешно создана';
-   $accountCreationUnsuccesful         = 'Невозможно создать учетную запись';
-   $accountCreationDuplicateEmail      = 'Электронная почта используется или некорректна';
-   $accountCreationDuplicateUsername   = 'Имя пользователя существует или некорректно';
-   $accountCreationMissingDefaultGroup = 'Группа по умолчанию не установлена';
-   $accountCreationInvalidDefaultGroup = 'Группа по умолчанию задана некорректно';
+   'language = [
 
-   // Password
-   $passwordChangeSuccessful           = 'Пароль успешно изменен';
-   $passwordChangeUnsuccessful         = 'Пароль невозможно изменить';
-   $forgotPasswordSuccessful           = 'Пароль сброшен. На электронную почту отправлено сообщение';
-   $forgotPasswordUnsuccessful         = 'Невозможен сброс пароля';
+     // Account creation'
+     'accountCreationSuccesful'           => 'Учетная запись успешно создана',
+     'accountCreationUnsuccesful'         => 'Невозможно создать учетную запись',
+     'accountCreationDuplicateEmail'      => 'Электронная почта используется или некорректна',
+     'accountCreationDuplicateUsername'   => 'Имя пользователя существует или некорректно',
+     'accountCreationMissingDefaultGroup' => 'Группа по умолчанию не установлена',
+     'accountCreationInvalidDefaultGroup' => 'Группа по умолчанию задана некорректно',
 
-   // Activation
-   $activateSuccessful                 = 'Учетная запись активирована';
-   $activateUnsuccessful               = 'Не удалось активировать учетную запись';
-   $deactivateSuccessful               = 'Учетная запись деактивирована';
-   $deactivateUnsuccessful             = 'Невозможно деактивировать учетную запись';
-   $activationEmailSuccessful          = 'Сообщение об активации отправлено';
-   $activationEmailUnsuccessful        = 'Сообщение об активации невозможно отправить';
+     // Password
+     'passwordChangeSuccessful'           => 'Пароль успешно изменен',
+     'passwordChangeUnsuccessful'         => 'Пароль невозможно изменить',
+     'forgotPasswordSuccessful'           => 'Пароль сброшен. На электронную почту отправлено сообщение',
+     'forgotPasswordUnsuccessful'         => 'Невозможен сброс пароля',
 
-   // Login / Logout
-   $loginSuccessful                    = 'Авторизация прошла успешно';
-   $loginUnsuccessful                  = 'Логин/пароль не верен';
-   $loginUnsuccessfulNotActive         = '';
-   $loginTimeout                       = '';
-   $logoutSuccessful                   = 'Выход успешный';
+     // Activation
+     'activateSuccessful'                 => 'Учетная запись активирована',
+     'activateUnsuccessful'               => 'Не удалось активировать учетную запись',
+     'deactivateSuccessful'               => 'Учетная запись деактивирована',
+     'deactivateUnsuccessful'             => 'Невозможно деактивировать учетную запись',
+     'activationEmailSuccessful'          => 'Сообщение об активации отправлено',
+     'activationEmailUnsuccessful'        => 'Сообщение об активации невозможно отправить',
 
-   // Account changes
-   $updateSuccessful                   = 'Учетная запись успешно обновлена';
-   $updateUnsuccessful                 = 'Невозможно обновить учетную запись';
-   $deleteSuccessful                   = 'Учетная запись удалена';
-   $deleteUnsuccessful                 = 'Невозможно удалить учетную запись';
+     // Login / Logout
+     'loginSuccessful'                    => 'Авторизация прошла успешно',
+     'loginUnsuccessful'                  => 'Логин/пароль не верен',
+     'loginUnsuccessfulNotActive'         => '',
+     'loginTimeout'                       => '',
+     'logoutSuccessful'                   => 'Выход успешный',
 
-   // Groups
-   $groupCreationSuccessful            = '';
-   $groupAlreadyExists                 = '';
-   $groupUpdateSuccessful              = '';
-   $groupDeleteSuccessful              = '';
-   $groupDeleteUnsccessful             = '';
-   $groupNameRequired                  = '';
+     // Account changes
+     'updateSuccessful'                   => 'Учетная запись успешно обновлена',
+     'updateUnsuccessful'                 => 'Невозможно обновить учетную запись',
+     'deleteSuccessful'                   => 'Учетная запись удалена',
+     'deleteUnsuccessful'                 => 'Невозможно удалить учетную запись',
 
-   // Activation Email
-   $emailActivationSubject             = 'Активация учетной записи';
-   $emailActivateHeading               = '';
-   $emailActivateSubheading            = '';
-   $emailActivateLink                  = '';
+     // Groups
+     'groupCreationSuccessful'            => '',
+     'groupAlreadyExists'                 => '',
+     'groupUpdateSuccessful'              => '',
+     'groupDeleteSuccessful'              => '',
+     'groupDeleteUnsccessful'             => '',
+     'groupNameRequired'                  => '',
 
-   // Forgot Password Email
-   $emailForgottenPasswordSubject      = 'Проверка забытого пароля';
-   $emailForgotPasswordHeading         = '';
-   $emailForgotPasswordSubheading      = '';
-   $emailForgotPasswordLink            = '';
+     // Activation Email
+     'emailActivationSubject'             => 'Активация учетной записи',
+     'emailActivateHeading'               => '',
+     'emailActivateSubheading'            => '',
+     'emailActivateLink'                  => '',
 
-   // New Password Email
-   $emailNewPasswordSubject            = 'Новый пароль';
-   $emailNewPasswordHeading            = '';
-   $emailNewPasswordSubheading         = '';
+     // Forgot Password Email
+     'emailForgottenPasswordSubject'      => 'Проверка забытого пароля',
+     'emailForgotPasswordHeading'         => '',
+     'emailForgotPasswordSubheading'      => '',
+     'emailForgotPasswordLink'            => '',
+
+     // New Password Email
+     'emailNewPasswordSubject'            => 'Новый пароль',
+     'emailNewPasswordHeading'            => '',
+     'emailNewPasswordSubheading'         => '',
+
+
+   ];
