@@ -11,7 +11,7 @@
    * ----------------------------------------------------
   */
 
-   'language = [
+   return array(
 
      // Account creation'
      'accountCreationSuccesful'           => 'Учетная запись успешно создана',
@@ -74,4 +74,4 @@
      'emailNewPasswordSubheading'         => '',
 
 
-   ];
+   );

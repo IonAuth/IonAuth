@@ -11,7 +11,7 @@
    * ----------------------------------------------------
   */
 
-   $language = [
+   return array(
 
      // Account creation
      'accountCreationSuccesful'           => 'アカウントを作成しました',
@@ -73,4 +73,4 @@
      'emailNewPasswordHeading'            => '',
      'emailNewPasswordSubheading'         => '',
 
-   ];
+   );

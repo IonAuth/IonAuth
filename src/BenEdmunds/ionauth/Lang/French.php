@@ -11,7 +11,7 @@
    * ----------------------------------------------------
    */
 
-   $language = [
+   return array(
 
      // Account creation
      'accountCreationSuccesful'           => 'Compte créé avec succés',
@@ -73,4 +73,4 @@
      'emailNewPasswordHeading'            => 'Nouveau Mot de Passe pour %s',
      'emailNewPasswordSubheading'         => 'Votre mot de passe a été réinitialisé à : %s',
 
-   ];
+   );
