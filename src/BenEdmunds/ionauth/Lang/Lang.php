@@ -1,5 +1,36 @@
 <?php
 
+/**
+ * TODO:
+ * -------------
+ * - Add Danish language file.
+ * - Add Arabic language file.
+ * - Add Bulgarian language file.
+ * - Add Catalan language file
+ * - Add Czech language file.
+ * - Add Estonian language file.
+ * - Add Finnish language file.
+ * - Add German language file.
+ * - Add Greek language file.
+ * - Add Indonesion language file.
+ * - Add Italian language file.
+ * - Add Korean language file.
+ * - Add Lithuanian language file.
+ * - Add Norwegian language file.
+ * - Add Persian language file.
+ * - Add Polish language file.
+ * - Add Portugese language file.
+ * - Add Romanian language file.
+ * - Add Slovak language file
+ * - Add Slovenian language file.
+ * - Add Spanish language file.
+ * - Add Swedisch language file.
+ * - Add Thai language file.
+ * - Add Ukrainian language file.
+ * - Add Zh_cn language file.
+ * - Add Zh_tw language file.
+ */
+
 namespace BenEdmunds\IonAuth\Lang;
 
 class Lang
