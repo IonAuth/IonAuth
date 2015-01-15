@@ -154,7 +154,7 @@ class Config
     protected $rememberUsers = true;
     protected $userExpire = 86500;
     protected $userExtendOnLogin = false;
-    protected $trackLoginAttempts = false
+    protected $trackLoginAttempts = false;
     protected $maximumLoginAttempts = 3;
     protected $lockoutTime = 600;
     protected $forgotPasswordExpiration = 0;
