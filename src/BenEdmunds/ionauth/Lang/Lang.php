@@ -12,6 +12,7 @@ class Lang
         'JAPANESE'=> [__DIR__],
         'RUSSIAN' => [__DIR__],
         'PIRATE'  => [__DIR––],
+        'TURKISH' => [__DIR__]
     ];
 
     protected $active_language;

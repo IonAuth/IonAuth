@@ -9,3 +9,4 @@ Here are the uncomplete language files are listed:
 - Croatian
 - Japanese
 - Russian
+- Turkish
