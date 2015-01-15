@@ -10,7 +10,8 @@ class Lang
         'ENGLISH' => [__DIR__],
         'FRENCH'  => [__DIR__],
         'JAPANESE'=> [__DIR__],
-        'RUSSIAN' => [__DIR__]
+        'RUSSIAN' => [__DIR__],
+        'PIRATE'  => [__DIR––],
     ];
 
     protected $active_language;
