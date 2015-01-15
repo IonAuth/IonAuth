@@ -5,6 +5,14 @@
         {
             "name": "Ben Edmunds",
             "homepage": "http://benedmunds.com/"
+        },
+        {
+          "name": "Kayla Daniels",
+          "homepage": "https://twitter.com/kayladnls"
+        },
+        {
+          "name": "Tim Joosten",
+          "homepage": "https://www.github.com/Tjoosten"
         }
     ],
     "require": {
