@@ -11,7 +11,7 @@
    * ----------------------------------------------------
    */
 
-   $language = [
+   return array(
 
      'accountCreationSuccesful'           => 'Account is aangemaakt',
      'accountCreationUnsuccesful'         => 'Account aanmaken is mislukt',
@@ -72,4 +72,4 @@
      'emailNewPasswordHeading'            => 'Nieuw wachtwoord',
      'emailNewPasswordSubheading'         => 'Account activering'
 
-   ];
+   );

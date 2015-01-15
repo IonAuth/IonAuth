@@ -11,7 +11,7 @@
    * ----------------------------------------------------
    */
 
-   $language = [
+   return array(
 
      // Account creation
      'accountCreationSuccesful'           => 'Account successfully created.',
@@ -73,4 +73,4 @@
      'emailNewPasswordHeading'            => 'New password for %s',
      'emailNewPasswordSubheading'         => 'Your password has been reset to, %s',
 
-   ];
+   );

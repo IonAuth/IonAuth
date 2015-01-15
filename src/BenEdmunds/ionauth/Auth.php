@@ -99,6 +99,8 @@ class Auth
      *
      * Acts as a simple way to call model methods without loads of stupid alias'
      *
+     * @param
+     * @param
      **/
     public function __call($method, $arguments)
     {
