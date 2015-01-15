@@ -7,7 +7,7 @@
    * @author Tim Joosten
    * @package Ion Auth 3
    *
-   * Description, The english language file for Ion Auth 3
+   * Description, The pirate language file for Ion Auth 3
    * ----------------------------------------------------
    */
 
