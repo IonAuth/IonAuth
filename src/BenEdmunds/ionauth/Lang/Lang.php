@@ -5,10 +5,10 @@ namespace BenEdmunds\IonAuth\Lang;
 class Lang
 {
     protected $available_languages = [
-        'DUTCH' => [__DIR__],
+        'DUTCH'   => [__DIR__],
         'CROATIAN'=> [__DIR__],
-        'ENGLISH'=> [__DIR__],
-        'FRENCH'=> [__DIR__],
+        'ENGLISH' => [__DIR__],
+        'FRENCH'  => [__DIR__],
         'JAPANESE'=> [__DIR__],
         'RUSSIAN' => [__DIR__]
     ];
@@ -22,6 +22,9 @@ class Lang
         $this->read();
     }
 
+    /**
+     *
+     */
     private function read()
     {
         $language = strtoupper($this->active_language);
@@ -39,6 +42,9 @@ class Lang
         return true;
     }
 
+    /**
+     *
+     */
     public function getSupportedLanguages()
     {
         $languages = array_keys($this->available_languages);
@@ -54,17 +60,32 @@ class Lang
         return $languages;
     }
 
+    /**
+     *
+     */
     public function getRegisteredLangFiles()
     {
         return $this->available_languages;
     }
 
+    /**
+     * Register language
+     *
+     * @param $language
+     * @param $file_path
+     */
     public function registerLanguage($language, $file_path)
     {
         $this->available_languages[strtoupper($language)][] = $file_path;
         $this->read();
     }
 
+    /**
+     * get
+     *
+     * @param $value
+     * @return
+     */
     public function get($value)
     {
         if (!isset($this->data[$value]))
@@ -73,6 +94,11 @@ class Lang
         return $this->data[$value];
     }
 
+    /**
+     * get active language
+     *
+     * @return
+     */
     public function getActiveLanguage()
     {
         return $this->active_language;
