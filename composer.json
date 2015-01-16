@@ -20,7 +20,7 @@
     },
     "require-dev": {
         "slim/slim": "2.*",
-        "phpspec/phpspec": "~2.0"
+        "phpspec/phpspec": "~2.1"
     },
     "config": {
         "bin-dir": "bin"
