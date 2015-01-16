@@ -31,3 +31,4 @@ Here are the uncomplete language files are listed:
 - Polish
 - Bulgarian
 - Czech
+- Lithuanian
