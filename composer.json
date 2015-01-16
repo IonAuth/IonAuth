@@ -16,7 +16,6 @@
         }
     ],
     "require": {
-        "illuminate/database": "4.*@dev",
         "ircmaxell/password-compat": "dev-master"
     },
     "require-dev": {
