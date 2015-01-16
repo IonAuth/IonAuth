@@ -24,3 +24,5 @@ Here are the uncomplete language files are listed:
 - Indonesian
 - Slovanian
 - Romanian
+- Catalan
+- Portugese
