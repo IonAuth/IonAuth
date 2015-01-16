@@ -26,3 +26,4 @@ Here are the uncomplete language files are listed:
 - Romanian
 - Catalan
 - Portugese
+- Finnish
