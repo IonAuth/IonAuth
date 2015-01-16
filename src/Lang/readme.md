@@ -30,3 +30,4 @@ Here are the uncomplete language files are listed:
 - Estonian
 - Polish
 - Bulgarian
+- Czech
