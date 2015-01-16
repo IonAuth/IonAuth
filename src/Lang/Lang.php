@@ -43,7 +43,8 @@ class Lang
         'ARABIC'     => [__DIR__],
         'SLOVAK'     => [__DIR__],
         'THAI'       => [__DIR__],
-        'INDONESIAN' => [__DIR__]
+        'INDONESIAN' => [__DIR__],
+        'SLOVANIAN'  => [__DIR__]
     ];
 
     protected $active_language;
