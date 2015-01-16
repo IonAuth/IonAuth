@@ -16,12 +16,11 @@
         }
     ],
     "require": {
-        "illuminate/database": "4.*@dev",
         "ircmaxell/password-compat": "dev-master"
     },
     "require-dev": {
         "slim/slim": "2.*",
-        "phpspec/phpspec": "~2.0"
+        "phpspec/phpspec": "~2.1"
     },
     "config": {
         "bin-dir": "bin"
@@ -31,7 +30,7 @@
             "": "src"
         },
         "psr-4":{
-            "BenEdmunds\\IonAuth\\": "BenEdmunds/ionauth"
+            "BenEdmunds\\IonAuth\\": "src/"
         }
     }
 }

@@ -23,6 +23,7 @@ namespace BenEdmunds\IonAuth\Lang;
 class Lang
 {
     protected $available_languages = [
+<<<<<<< HEAD:src/BenEdmunds/ionauth/Lang/Lang.php
         'DUTCH'      => [__DIR__],
         'CROATIAN'   => [__DIR__],
         'ENGLISH'    => [__DIR__],
@@ -44,6 +45,28 @@ class Lang
         'SLOVAK'     => [__DIR__],
         'THAI'       => [__DIR__],
         'INDONESIAN' => [__DIR__]
+=======
+        'DUTCH'     => [__DIR__],
+        'CROATIAN'  => [__DIR__],
+        'ENGLISH'   => [__DIR__],
+        'FRENCH'    => [__DIR__],
+        'JAPANESE'  => [__DIR__],
+        'RUSSIAN'   => [__DIR__],
+        'PIRATE'    => [__DIR__],
+        'TURKISH'   => [__DIR__],
+        'GREEK'     => [__DIR__],
+        'ITALIAN'   => [__DIR__],
+        'KOREAN'    => [__DIR__],
+        'PERSIAN'   => [__DIR__],
+        'UKRAINIAN' => [__DIR__],
+        'SWEDISH'   => [__DIR__],
+        'SPANISH'   => [__DIR__],
+        'GERMAN'    => [__DIR__],
+        'NORWEGIAN' => [__DIR__],
+        'ARABIC'    => [__DIR__],
+        'SLOVAK'    => [__DIR__],
+        'THAI'      => [__DIR__]
+>>>>>>> FETCH_HEAD:src/Lang/Lang.php
     ];
 
     protected $active_language;
