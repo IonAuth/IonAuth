@@ -30,7 +30,7 @@
             "": "src"
         },
         "psr-4":{
-            "BenEdmunds\\IonAuth\\": "BenEdmunds/ionauth"
+            "BenEdmunds\\IonAuth\\": "src/"
         }
     }
 }
