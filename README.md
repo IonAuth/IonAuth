@@ -1,5 +1,8 @@
 #Ion Auth 3
 ###The next future of authentication
+
+[![Build Status](https://travis-ci.org/benedmunds/PHP-Ion-Auth.svg)](https://travis-ci.org/benedmunds/PHP-Ion-Auth)
+
 by [Ben Edmunds](http://benedmunds.com)
 
 Introducing the new, framework agnostic, PSR compliant Ion Auth.
