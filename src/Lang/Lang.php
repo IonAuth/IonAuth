@@ -7,7 +7,6 @@
  * - Add Bulgarian language file.
  * - Add Czech language file.
  * - Add Lithuanian language file.
- * - Add Polish language file.
  * - Add Zh_cn language file.
  * - Add Zh_tw language file.
  */
@@ -44,7 +43,8 @@ class Lang
         'PORTUGESE'  => [__DIR__],
         'FINNISH'    => [__DIR__],
         'ESTINIAN'   => [__DIR__],
-        'POLISH'     => [__DIR__]
+        'POLISH'     => [__DIR__],
+        'BULGARIAN'  => [__DIR__]
     ];
 
     protected $active_language;
