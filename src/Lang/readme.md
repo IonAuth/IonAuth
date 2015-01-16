@@ -23,3 +23,4 @@ Here are the uncomplete language files are listed:
 - Slovak
 - Indonesian
 - Slovanian
+- Romanian
