@@ -10,3 +10,14 @@ Here are the uncomplete language files are listed:
 - Japanese
 - Russian
 - Turkish
+- Greek
+- Italian
+- Korean
+- Persian
+- Ukrainian
+- Swedish
+- Spanish
+- German
+- Norwegian
+- Arabic
+- Slovak
