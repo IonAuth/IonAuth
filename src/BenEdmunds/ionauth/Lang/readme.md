@@ -21,3 +21,4 @@ Here are the uncomplete language files are listed:
 - Norwegian
 - Arabic
 - Slovak
+- Indonesian

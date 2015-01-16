@@ -9,7 +9,6 @@
  * - Add Czech language file.
  * - Add Estonian language file.
  * - Add Finnish language file.
- * - Add Indonesion language file.
  * - Add Lithuanian language file.
  * - Add Polish language file.
  * - Add Portugese language file.
@@ -24,26 +23,27 @@ namespace BenEdmunds\IonAuth\Lang;
 class Lang
 {
     protected $available_languages = [
-        'DUTCH'     => [__DIR__],
-        'CROATIAN'  => [__DIR__],
-        'ENGLISH'   => [__DIR__],
-        'FRENCH'    => [__DIR__],
-        'JAPANESE'  => [__DIR__],
-        'RUSSIAN'   => [__DIR__],
-        'PIRATE'    => [__DIR––],
-        'TURKISH'   => [__DIR__],
-        'GREEK'     => [__DIR__],
-        'ITALIAN'   => [__DIR__],
-        'KOREAN'    => [__DIR__],
-        'PERSIAN'   => [__DIR__],
-        'UKRAINIAN' => [__DIR__],
-        'SWEDISH'   => [__DIR__],
-        'SPANISH'   => [__DIR__],
-        'GERMAN'    => [__DIR__],
-        'NORWEGIAN' => [__DIR__],
-        'ARABIC'    => [__DIR__],
-        'SLOVAK'    => [__DIR__],
-        'THAI'      => [__DIR__]
+        'DUTCH'      => [__DIR__],
+        'CROATIAN'   => [__DIR__],
+        'ENGLISH'    => [__DIR__],
+        'FRENCH'     => [__DIR__],
+        'JAPANESE'   => [__DIR__],
+        'RUSSIAN'    => [__DIR__],
+        'PIRATE'     => [__DIR––],
+        'TURKISH'    => [__DIR__],
+        'GREEK'      => [__DIR__],
+        'ITALIAN'    => [__DIR__],
+        'KOREAN'     => [__DIR__],
+        'PERSIAN'    => [__DIR__],
+        'UKRAINIAN'  => [__DIR__],
+        'SWEDISH'    => [__DIR__],
+        'SPANISH'    => [__DIR__],
+        'GERMAN'     => [__DIR__],
+        'NORWEGIAN'  => [__DIR__],
+        'ARABIC'     => [__DIR__],
+        'SLOVAK'     => [__DIR__],
+        'THAI'       => [__DIR__],
+        'INDONESIAN' => [__DIR__]
     ];
 
     protected $active_language;
