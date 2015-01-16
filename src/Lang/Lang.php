@@ -43,7 +43,8 @@ class Lang
         'CATALAN'    => [__DIR__],
         'PORTUGESE'  => [__DIR__],
         'FINNISH'    => [__DIR__],
-        'ESTINIAN'   => [__DIR__]
+        'ESTINIAN'   => [__DIR__],
+        'POLISH'     => [__DIR__]
     ];
 
     protected $active_language;

@@ -28,3 +28,4 @@ Here are the uncomplete language files are listed:
 - Portugese
 - Finnish
 - Estonian
+- Polish
