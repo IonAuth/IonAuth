@@ -3,7 +3,6 @@
 /**
  * TODO:
  * -------------
- * - Add Danish language file.
  * - Add Zh_cn language file.
  * - Add Zh_tw language file.
  */
@@ -43,7 +42,8 @@ class Lang
         'POLISH'     => [__DIR__],
         'BULGARIAN'  => [__DIR__],
         'CZECH'      => [__DIR__],
-        'LITHUANIAN' => [__DIR__]
+        'LITHUANIAN' => [__DIR__],
+        'DANISH'     => [__DIR__]
     ];
 
     protected $active_language;
