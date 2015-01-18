@@ -7,7 +7,7 @@
  * - Add Zh_tw language file.
  */
 
-namespace BenEdmunds\IonAuth\Lang;
+namespace IonAuth\IonAuth\Lang;
 
 class Lang
 {
@@ -18,7 +18,7 @@ class Lang
         'FRENCH'     => [__DIR__],
         'JAPANESE'   => [__DIR__],
         'RUSSIAN'    => [__DIR__],
-        'PIRATE'     => [__DIR––],
+        'PIRATE'     => [__DIR__],
         'TURKISH'    => [__DIR__],
         'GREEK'      => [__DIR__],
         'ITALIAN'    => [__DIR__],

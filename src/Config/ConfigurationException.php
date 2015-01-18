@@ -6,7 +6,7 @@
  * Time: 7:12 PM
  */
 
-namespace BenEdmunds\IonAuth\Config;
+namespace IonAuth\IonAuth\Config;
 
 
 class ConfigurationException extends \Exception

@@ -6,7 +6,7 @@
  * Time: 5:23 PM
  */
 
-namespace BenEdmunds\IonAuth\Config;
+namespace IonAuth\IonAuth\Config;
 
 class Config
 {

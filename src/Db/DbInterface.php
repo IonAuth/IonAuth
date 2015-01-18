@@ -1,5 +1,5 @@
 <?php
-namespace BenEdmunds\IonAuth\Db;
+namespace IonAuth\IonAuth\Db;
 
 interface DbInterface
 {
