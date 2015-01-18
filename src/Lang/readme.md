@@ -6,20 +6,21 @@ But some packages are incomplete, if you like to comple them feel free to open a
 
 Here are the uncomplete language files are listed:
 
-- Croatian
-- Japanese
-- Russian
-- Turkish
-- Greek
-- Italian
-- Korean
-- Persian
-- Ukrainian
-- Swedish
-- Spanish
-- German
-- Norwegian
-- Arabic
-- Slovak
-- Indonesian
-- Slovanian
+- [Croatian](Croatian.php)
+- [Japanese](Japanese.php)
+- [Russian](Russian.php)
+- [Turkish](Turkish.php)
+- [Greek](Greek.php)
+- [Italian](Italian.php)
+- [Korean](Korean.php)
+- [Persian](Persian.php)
+- [Ukrainian](Urkrainian.php)
+- [Swedish](Swedisch.php)
+- [Spanish](Spanish.php)
+- [German](Germa.php)
+- [Norwegian](Norwegian.php)
+- [Arabic](Arabic.php)
+- [Slovak](Slovak.php)
+- [Indonesian](Indonesian.php)
+- [Slovanian](Slovenian.php)
+- [Vietnamese](Vietnamese.php)
