@@ -1,6 +1,6 @@
 suites:
     ion:
-        namespace: BenEdmunds\IonAuth
-        psr4_prefix: BenEdmunds\IonAuth
+        namespace: IonAuth\IonAuth
+        psr4_prefix: IonAuth\IonAuth
 
 formatter.name: pretty

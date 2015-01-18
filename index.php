@@ -1,9 +1,9 @@
 <?php
 require 'vendor/autoload.php';
 
-use BenEdmunds\IonAuth\Auth;
-use BenEdmunds\IonAuth\Config\Config;
-use BenEdmunds\IonAuth\Db\Db;
+use IonAuth\IonAuth\Auth;
+use IonAuth\IonAuth\Config\Config;
+use IonAuth\IonAuth\Db\Db;
 
 //$app = new \Slim\Slim();
 

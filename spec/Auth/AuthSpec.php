@@ -1,5 +1,5 @@
 <?php
-namespace spec\BenEdmunds\IonAuth\Auth;
+namespace spec\IonAuth\IonAuth\Auth;
 
 use Auth;
 use PhpSpec\ObjectBehavior;
@@ -9,7 +9,7 @@ class DbSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('BenEdmunds\IonAuth\Auth');
+        $this->shouldHaveType('IonAuth\IonAuth\Auth');
     }
 
     function it_throws_exception_on_bad_has_method()

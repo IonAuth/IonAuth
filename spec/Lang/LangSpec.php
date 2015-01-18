@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\BenEdmunds\IonAuth\Lang;
+namespace spec\IonAuth\IonAuth\Lang;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -14,7 +14,7 @@ class LangSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('BenEdmunds\IonAuth\Lang\Lang');
+        $this->shouldHaveType('IonAuth\IonAuth\Lang\Lang');
     }
 
     function it_cannot_read_an_unsupported_language()
