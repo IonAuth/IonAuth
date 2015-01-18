@@ -4,16 +4,6 @@
  * TODO:
  * -------------
  * - Add Danish language file.
- * - Add Bulgarian language file.
- * - Add Catalan language file
- * - Add Czech language file.
- * - Add Estonian language file.
- * - Add Finnish language file.
- * - Add Lithuanian language file.
- * - Add Polish language file.
- * - Add Portugese language file.
- * - Add Romanian language file.
- * - Add Slovenian language file.
  * - Add Zh_cn language file.
  * - Add Zh_tw language file.
  */
@@ -44,7 +34,8 @@ class Lang
         'SLOVAK'     => [__DIR__],
         'THAI'       => [__DIR__],
         'INDONESIAN' => [__DIR__],
-        'SLOVANIAN'  => [__DIR__]
+        'SLOVANIAN'  => [__DIR__],
+        'VIETNAMESE' => [__DIR__],
     ];
 
     protected $active_language;
