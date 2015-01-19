@@ -20,7 +20,8 @@
     },
     "require-dev": {
         "slim/slim": "2.*",
-        "phpspec/phpspec": "~2.1"
+        "phpspec/phpspec": "~2.1",
+        "phpspec/nyan-formatters": "~1.0"
     },
     "config": {
         "bin-dir": "bin"
