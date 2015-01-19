@@ -28,6 +28,7 @@
     "autoload": {
         "psr-4":{
             "IonAuth\\IonAuth\\": "src/"
-        }
+        },
+        "files": ["src/Helper.php"]
     }
 }

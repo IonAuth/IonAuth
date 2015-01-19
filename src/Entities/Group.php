@@ -2,8 +2,11 @@
 
 namespace IonAuth\IonAuth\Entities;
 
-class Group
+use IonAuth\IonAuth\Utilities\Collection\CollectionItem;
+
+class Group implements CollectionItem
 {
+    private $id;
 
 
     /**
@@ -305,5 +308,10 @@ class Group
         $this->triggerEvents(array('postDeleteGroup', 'postDeleteGroupSuccessful'));
         $this->setMessage('groupDeleteSuccessful');
         return true;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 }
