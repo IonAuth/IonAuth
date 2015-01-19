@@ -2,8 +2,17 @@
 
 namespace IonAuth\IonAuth\Entities;
 
-class LoginAttempt
+use IonAuth\IonAuth\Utilities\Collection\CollectionItem;
+
+class LoginAttempt implements CollectionItem
 {
+
+    private $id;
+
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Function: increaseLoginAttempts()
@@ -44,5 +53,58 @@ class LoginAttempt
             return $this->db->delete($this->tables['loginAttempts']);
         }
         return false;
+    }
+
+    /**
+     * Function: getNumberOfAttempts()
+     * ------------------------------------------------------------------------------------
+     * Get number of attempts to login occured from given IP-address or identity
+     * Based on code from Tank Auth, by Ilya Konyukhov (https://github.com/ilkon/Tank-Auth)
+     *
+     * @param    string $identity
+     * @return    int
+     */
+    function getNumberOfAttempts(User $user)
+    {
+        if ($this->config->get('trackLoginAttempts')) {
+            $ipAddress = $this->_prepareIp($_SERVER['REMOTE_ADDR']);
+
+            $this->db->select('1', false);
+            $this->db->where('ip_address', $ipAddress);
+            if (strlen($identity) > 0) {
+                $this->db->or_where('login', $identity);
+            }
+
+            $qres = $this->db->get($this->tables['loginAttempts']);
+            return count($qres);
+        }
+        return 0;
+    }
+
+    public function getLastAttemptTime(User $user)
+    {
+        if ($this->config->get('trackLoginAttempts'))
+        {
+            $ipAddress = $this->_prepareIp($_SERVER['REMOTE_ADDR']);
+
+            $this->db->select_max('time');
+            $this->db->where('ip_address', $ipAddress);
+            if (strlen($identity) > 0)
+            {
+                $this->db->or_where('login', $identity);
+            }
+            $qres = $this->db->get($this->tables['loginAttempts'], 1);
+
+            if (count($qres) > 0)
+            {
+                return $qres->first()->time;
+            }
+        }
+        return 0;
+    }
+
+    public function getIpAddress()
+    {
+        // TODO: write logic here
     }
 }

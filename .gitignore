@@ -2,3 +2,5 @@
 composer.lock
 composer.phar
 .floo*
+/bin
+.idea/*

@@ -6,8 +6,25 @@
  * Time: 11:01 PM
  */
 
-class Password {
+class Password
+{
+    private $password;
+    private $salt;
 
+    private $hash_method;
+
+    private $hash;
+
+    function __construct($password, $hash_method ='sha1')
+    {
+        $this->password = $password;
+        $this->hash_method = $hash_method;
+    }
+
+    public function getHash()
+    {
+        return $this->hash;
+    }
 
     /**
      * Hashes the password to be stored in the database.
@@ -15,22 +32,22 @@ class Password {
      * @return void
      * @author Matthew
      **/
-    public function hashPassword($password, $salt = false, $useSha1Override = false)
+    public function hashPassword()
     {
-
-        if (empty($password)) {
-            return false;
-        }
-
-        //bcrypt
-        if ($this->config->get('hashMethod') == 'sha1') {
-            if ($this->config->get('storeSalt') && $salt) {
-                return sha1($password . $salt);
-            } else {
+        if ($this->config->get('hashMethod') == 'sha1')
+        {
+            if ($this->config->get('storeSalt') && $salt)
+            {
+                return sha1($this->password . $salt);
+            }
+            else
+            {
                 $salt = $this->salt();
                 return $salt . substr(sha1($salt . $password), 0, -$this->config->get('saltLength'));
             }
-        } else {
+        }
+        else
+        {
             return password_hash($password, PASSWORD_BCRYPT, array("cost" => $this->_bcryptCost));
         }
     }
@@ -102,7 +119,6 @@ class Password {
      **/
     public function salt()
     {
-
         $raw_salt_len = 16;
 
         $buffer = '';

@@ -11,4 +11,5 @@ class LoginAttemptSpec extends ObjectBehavior
     {
         $this->shouldHaveType('IonAuth\IonAuth\Entities\LoginAttempt');
     }
+
 }
