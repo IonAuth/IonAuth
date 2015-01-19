@@ -3,4 +3,7 @@ suites:
         namespace: IonAuth\IonAuth
         psr4_prefix: IonAuth\IonAuth
 
-formatter.name: pretty
+extensions:
+    - PhpSpec\NyanFormattersExtension\Extension
+
+formatter.name: nyan.cat
