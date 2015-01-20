@@ -9,56 +9,11 @@ class Group implements CollectionItem
     private $id;
 
     /**
-     * remove_from_group
-     *
-     * @return bool
-     * @author Ben Edmunds
-     **/
-    public function remove_from_group($group_ids = false, $user_id = false)
-    {
-        $this->events->trigger('removeFromGroup');
-        // user id is required
-        if (empty($userId)) {
-            return false;
-        }
-
-        // if group id(s) are passed remove user from the group(s)
-        if (!empty($groupIds)) {
-            if (!is_array($groupIds)) {
-                $groupIds = array($groupIds);
-            }
-
-            foreach ($groupIds as $groupId) {
-                $this->db->delete(
-                    $this->tables['usersGroups'],
-                    array($this->join['groups'] => (int)$groupId, $this->join['users'] => (int)$user_id)
-                );
-                if (isset($this->_cacheUserInGroup[$userId]) && isset($this->_cacheUserInGroup[$userId][$groupId])) {
-                    unset($this->_cacheUserInGroup[$userId][$groupId]);
-                }
-            }
-
-            $return = true;
-        } // otherwise remove user from all groups
-        else {
-            if ($return = $this->db->delete(
-                $this->tables['usersGroups'],
-                array($this->join['users'] => (int)$userId)
-            )
-            ) {
-                $this->_cacheUserInGroup[$userId] = array();
-            }
-        }
-
-        return $return;
-    }
-
-    /**
      * groups
      *
      * @return object
      **/
-    public function groups()
+    public function all()
     {
         $this->events->trigger('groups');
 
@@ -98,7 +53,7 @@ class Group implements CollectionItem
      *
      * @return object
      **/
-    public function group($id = null)
+    public function find($id = null)
     {
         $this->events->trigger('group');
 
@@ -121,10 +76,10 @@ class Group implements CollectionItem
      * @param $additionalData
      * @return bool
      */
-    public function createGroup($groupName = false, $groupDescription = '', $additionalData = array())
+    public function save()
     {
         // bail if the group name was not passed
-        if (!$groupName) {
+        if (!$this->groupName()) {
             $this->setError('groupNameRequired');
             return false;
         }
@@ -245,11 +200,6 @@ class Group implements CollectionItem
         return true;
     }
 
-    /**
-     * getId
-     *
-     * @return $this->id
-     */
     public function getId()
     {
         return $this->id;

@@ -32,7 +32,7 @@ class Config
    * $database['fetch']       = The fetch driver of the database.
    */
 
-    protected $database = array(
+    private $database = array(
         'driver' => 'mysql',
         'host' => 'localhost',
         'database' => 'ion_auth',
@@ -71,11 +71,11 @@ class Config
 	 * to encrypt with x rounds.
 	 */
 
-    protected $hashMethod = 'bcrypt'; // IMPORTANT: Make sure this is set to either sha1 or bcrypt (preferably bcrypt)
-    protected $defaultRounds = 8; // This does not apply if random_rounds is set to true
-    protected $randomRounds = false;
-    protected $minRounds = 5;
-    protected $maxRounds = 9;
+    private $hashMethod = 'bcrypt'; // IMPORTANT: Make sure this is set to either sha1 or bcrypt (preferably bcrypt)
+    private $defaultRounds = 8; // This does not apply if random_rounds is set to true
+    private $randomRounds = false;
+    private $minRounds = 5;
+    private $maxRounds = 9;
 
   /*
 	 * -------------------------------------------------------------------------
@@ -98,14 +98,14 @@ class Config
    *
 	 */
 
-    protected $tables = array(
+    private $tables = array(
         'users' => 'users',
         'groups' => 'groups',
         'users_groups' => 'users_groups',
         'login_attempts' => 'login_attempts',
     );
 
-    protected $join = array(
+    private $join = array(
         'users' => 'user_id',
         'groups' => 'group_id',
     );
@@ -142,22 +142,22 @@ class Config
     * $forgotPasswordExpiration:       The number of miliseconds after which a forgot password request will expire. If set to 0, forgot password requests will not expire.
     */
 
-    protected $siteTitle = "Example.com";
-    protected $adminEmail = "admin@example.com";
-    protected $defaultGroup = 'members';
-    protected $adminGroup = 'admin';
-    protected $identity = 'email';
-    protected $minPasswordLength = 8;
-    protected $maxPasswordLength = 20;
-    protected $emailActivation = false;
-    protected $manualActivation = false;
-    protected $rememberUsers = true;
-    protected $userExpire = 86500;
-    protected $userExtendOnLogin = false;
-    protected $trackLoginAttempts = false;
-    protected $maximumLoginAttempts = 3;
-    protected $lockoutTime = 600;
-    protected $forgotPasswordExpiration = 0;
+    private $siteTitle = "Example.com";
+    private $adminEmail = "admin@example.com";
+    private $defaultGroup = 'members';
+    private $adminGroup = 'admin';
+    private $identity = 'email';
+    private $minPasswordLength = 8;
+    private $maxPasswordLength = 20;
+    private $emailActivation = false;
+    private $manualActivation = false;
+    private $rememberUsers = true;
+    private $userExpire = 86500;
+    private $userExtendOnLogin = false;
+    private $trackLoginAttempts = false;
+    private $maximumLoginAttempts = 3;
+    private $lockoutTime = 600;
+    private $forgotPasswordExpiration = 0;
 
     /*
      * -------------------------------------------------------------------------
@@ -167,8 +167,8 @@ class Config
      * 	  'file' = Use the default CI config or use from a config file
      * 	  array  = Manually set your email config settings
      */
-    protected $useDefaultEmail = false; // Send Email using the builtin email functionality, if false it will return the code and the identity
-    protected $emailConfig = array('mailtype' => 'html');
+    private $useDefaultEmail = false; // Send Email using the builtin email functionality, if false it will return the code and the identity
+    private $emailConfig = array('mailtype' => 'html');
 
     /*
      * -------------------------------------------------------------------------
@@ -178,7 +178,7 @@ class Config
      * Default: auth/
      */
 
-    protected $emailTemplates = 'auth/email/';
+    private $emailTemplates = 'auth/email/';
 
    /*
 	  * -------------------------------------------------------------------------
@@ -187,7 +187,7 @@ class Config
 	  * Default: activate.tpl.php
 	  */
 
-    protected $emailActivate = 'activate.tpl.php';
+    private $emailActivate = 'activate.tpl.php';
 
    /*
     * -------------------------------------------------------------------------
@@ -196,7 +196,7 @@ class Config
     * Default: forgotPassword.tpl.php
     */
 
-    protected $emailForgotPassword = 'forgotPassword.tpl.php';
+    private $emailForgotPassword = 'forgotPassword.tpl.php';
 
     /*
      * -------------------------------------------------------------------------
@@ -205,7 +205,7 @@ class Config
      * Default: newPassword.tpl.php
      */
 
-    protected $emailForgotPasswordComplete = 'newPassword.tpl.php';
+    private $emailForgotPasswordComplete = 'newPassword.tpl.php';
 
    /*
 	  * -------------------------------------------------------------------------
@@ -219,8 +219,8 @@ class Config
 	  * fbaa5e216d163a02ae630ab1a43372635dd374c0 with default salt.
 	  */
 
-    protected $saltLength = 10;
-    protected $storeSalt = false;
+    private $saltLength = 10;
+    private $storeSalt = false;
 
     /*
      * -------------------------------------------------------------------------
@@ -237,17 +237,30 @@ class Config
      * $errorEndDelimitter     = Error message end delimiter
      *
      */
-    protected $messageStartDelimiter = '<p>';
-    protected $messageEndDelimiter = '</p>';
-    protected $errorStartDelimiter = '<p>';
-    protected $errorEndDelimiter = '</p>';
+    private $messageStartDelimiter = '<p>';
+    private $messageEndDelimiter = '</p>';
+    private $errorStartDelimiter = '<p>';
+    private $errorEndDelimiter = '</p>';
 
+    public function __set($method, $var)
+    {
+        throw new ConfigurationException('You cannot change Config variables once set');
+    }
+
+    /**
+     * get
+     *
+     * @param $key
+     * @return
+     **/
     public function get($key)
     {
         return $this->$key;
     }
 
     /**
+     * set admin email
+     *
      * @param string $adminEmail
      */
     public function setAdminEmail($adminEmail)
@@ -256,6 +269,8 @@ class Config
     }
 
     /**
+     * set admin group
+     *
      * @param string $adminGroup
      */
     public function setAdminGroup($adminGroup)
@@ -264,6 +279,8 @@ class Config
     }
 
     /**
+     * set default group
+     *
      * @param string $defaultGroup
      */
     public function setDefaultGroup($defaultGroup)
@@ -272,6 +289,8 @@ class Config
     }
 
     /**
+     * set default rounds
+     *
      * @param int $defaultRounds
      */
     public function setDefaultRounds($defaultRounds)
@@ -280,6 +299,8 @@ class Config
     }
 
     /**
+     * set email active
+     *
      * @param string $emailActivate
      */
     public function setEmailActivate($emailActivate)
@@ -288,6 +309,8 @@ class Config
     }
 
     /**
+     * set email activatioon
+     *
      * @param boolean $emailActivation
      */
     public function setEmailActivation($emailActivation)
@@ -296,6 +319,8 @@ class Config
     }
 
     /**
+     * set email config
+     *
      * @param array $emailConfig
      */
     public function setEmailConfig($emailConfig)
@@ -304,6 +329,8 @@ class Config
     }
 
     /**
+     * set email forgot password
+     *
      * @param string $emailForgotPassword
      */
     public function setEmailForgotPassword($emailForgotPassword)
@@ -312,6 +339,8 @@ class Config
     }
 
     /**
+     * set email forgot password complete
+     *
      * @param string $emailForgotPasswordComplete
      */
     public function setEmailForgotPasswordComplete($emailForgotPasswordComplete)
@@ -320,6 +349,8 @@ class Config
     }
 
     /**
+     * set email templates
+     *
      * @param string $emailTemplates
      */
     public function setEmailTemplates($emailTemplates)
@@ -328,6 +359,8 @@ class Config
     }
 
     /**
+     * set error end delimiter
+     *
      * @param string $errorEndDelimiter
      */
     public function setErrorEndDelimiter($errorEndDelimiter)
@@ -336,6 +369,8 @@ class Config
     }
 
     /**
+     * set error start delimiter
+     *
      * @param string $errorStartDelimiter
      */
     public function setErrorStartDelimiter($errorStartDelimiter)
@@ -344,6 +379,8 @@ class Config
     }
 
     /**
+     * set forgot password expriration
+     *
      * @param int $forgotPasswordExpiration
      */
     public function setForgotPasswordExpiration($forgotPasswordExpiration)
@@ -508,6 +545,8 @@ class Config
     }
 
     /**
+     * Set use default email
+     *
      * @param boolean $useDefaultEmail
      */
     public function setUseDefaultEmail($useDefaultEmail)
@@ -516,6 +555,8 @@ class Config
     }
 
     /**
+     * Set user expire
+     *
      * @param int $userExpire
      */
     public function setUserExpire($userExpire)
@@ -524,6 +565,8 @@ class Config
     }
 
     /**
+     * Set user e xtend on login
+     *
      * @param boolean $userExtendOnLogin
      */
     public function setUserExtendOnLogin($userExtendOnLogin)

@@ -6,7 +6,7 @@
  * Time: 11:17 PM
  */
 
-namespace IonAuth\IonAuth\Commands;
+namespace IonAuth\IonAuth\Commands\Checks;
 
 
 class ChangePassword

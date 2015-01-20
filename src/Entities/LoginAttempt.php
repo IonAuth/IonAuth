@@ -134,6 +134,9 @@ class LoginAttempt implements CollectionItem
     }
 
     /**
+     *
+     */
+    /**
      * getIpAddress
      *
      * get the ip address of the user.
