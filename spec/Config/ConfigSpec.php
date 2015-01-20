@@ -2,7 +2,6 @@
 
 namespace spec\IonAuth\IonAuth\Config;
 
-use IonAuth\IonAuth\Config\ConfigurationException;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -13,8 +12,11 @@ class ConfigSpec extends ObjectBehavior
         $this->shouldHaveType('IonAuth\IonAuth\Config\Config');
     }
 
-    function it_throws_exception_on_bad_has_method()
+    function it_is_immutable()
     {
-        $this->shouldThrow(new ConfigurationException())->duringSetHashMethod('foobar');
+        $this->shouldThrow('IonAuth\IonAuth\Config\ConfigurationException')
+            ->during('__set', ["siteTitle", "hello"]);
     }
+
+
 }

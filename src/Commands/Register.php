@@ -16,7 +16,7 @@ class Register
 {
     public function register(User $user)
     {
-        $this->ionAuthModel->triggerEvents('preAccountCreation');
+//        $this->ionAuthModel->triggerEvents('preAccountCreation');
 
         $emailActivation = $this->config->get('emailActivation');
 

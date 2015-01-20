@@ -9,6 +9,9 @@ class LoginAttempt implements CollectionItem
 
     private $id;
 
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;
@@ -81,6 +84,10 @@ class LoginAttempt implements CollectionItem
         return 0;
     }
 
+    /**
+     * @param User $user
+     * @return int
+     */
     public function getLastAttemptTime(User $user)
     {
         if ($this->config->get('trackLoginAttempts'))
@@ -124,6 +131,9 @@ class LoginAttempt implements CollectionItem
         return false;
     }
 
+    /**
+     *
+     */
     public function getIpAddress()
     {
         // TODO: write logic here

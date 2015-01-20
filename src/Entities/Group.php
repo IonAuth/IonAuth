@@ -9,58 +9,12 @@ class Group implements CollectionItem
     private $id;
 
     /**
-     * remove_from_group
-     *
-     * @return bool
-     * @author Ben Edmunds
-     **/
-    public function remove_from_group($group_ids = false, $user_id = false)
-    {
-        $this->triggerEvents('removeFromGroup');
-
-        // user id is required
-        if (empty($userId)) {
-            return false;
-        }
-
-        // if group id(s) are passed remove user from the group(s)
-        if (!empty($groupIds)) {
-            if (!is_array($groupIds)) {
-                $groupIds = array($groupIds);
-            }
-
-            foreach ($groupIds as $groupId) {
-                $this->db->delete(
-                    $this->tables['usersGroups'],
-                    array($this->join['groups'] => (int)$groupId, $this->join['users'] => (int)$user_id)
-                );
-                if (isset($this->_cacheUserInGroup[$userId]) && isset($this->_cacheUserInGroup[$userId][$groupId])) {
-                    unset($this->_cacheUserInGroup[$userId][$groupId]);
-                }
-            }
-
-            $return = true;
-        } // otherwise remove user from all groups
-        else {
-            if ($return = $this->db->delete(
-                $this->tables['usersGroups'],
-                array($this->join['users'] => (int)$userId)
-            )
-            ) {
-                $this->_cacheUserInGroup[$userId] = array();
-            }
-        }
-
-        return $return;
-    }
-
-    /**
      * groups
      *
      * @return object
      * @author Ben Edmunds
      **/
-    public function groups()
+    public function all()
     {
         $this->triggerEvents('groups');
 
@@ -101,7 +55,7 @@ class Group implements CollectionItem
      * @return object
      * @author Ben Edmunds
      **/
-    public function group($id = null)
+    public function find($id = null)
     {
         $this->triggerEvents('group');
 
@@ -121,10 +75,10 @@ class Group implements CollectionItem
      *
      * @author aditya menon
      */
-    public function createGroup($groupName = false, $groupDescription = '', $additionalData = array())
+    public function save()
     {
         // bail if the group name was not passed
-        if (!$groupName) {
+        if (!$this->groupName()) {
             $this->setError('groupNameRequired');
             return false;
         }

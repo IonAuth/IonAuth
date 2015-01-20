@@ -360,11 +360,6 @@ class User implements CollectionItem
         $this->groups->add($group);
     }
 
-    public function removeGroup(Group $group)
-    {
-        $this->groups->remove($group);
-    }
-
     public function setFirstName($first_name)
     {
         $this->first_name = $first_name;
@@ -375,21 +370,70 @@ class User implements CollectionItem
         return $this->first_name;
     }
 
+    /**
+     * Set last name
+     *
+     * @param $last_name , string
+     */
     public function setLastName($last_name)
     {
         $this->last_name = $last_name;
     }
 
+    /**
+     * Get last name
+     *
+     * @return
+     */
     public function getLastName()
     {
         return $this->last_name;
     }
 
+    /**
+     * Get full name
+     *
+     * @return
+     */
     public function getFullName()
     {
         return $this->first_name . " " . $this->last_name;
     }
 
+    /**
+     * remove_from_group
+     *
+     * @return bool
+     * @author Ben Edmunds
+     **/
+    public function removeGroup(Group $group)
+    {
+        $this->groups->remove($group);
+
+//?        $this->triggerEvents('removeFromGroup');
+
+//        // if group id(s) are passed remove user from the group(s)
+//        if (!empty($groupIds) && !is_array($groupIds)) $groupIds = array($groupIds);
+//
+//        foreach ($groupIds as $groupId)
+//        {
+//            $this->db->delete(
+//                $this->tables['usersGroups'],
+//                array($this->join['groups'] => (int)$groupId, $this->join['users'] => (int)$user_id)
+//            );
+//            if (isset($this->_cacheUserInGroup[$userId]) && isset($this->_cacheUserInGroup[$userId][$groupId])) {
+//                unset($this->_cacheUserInGroup[$userId][$groupId]);
+//            }
+//        }
+
+            return true;
+    }
+
+    /**
+     * Get last login
+     *
+     * @return $this->last_login, string
+     */
     public function getLastLogin()
     {
         return $this->last_login;

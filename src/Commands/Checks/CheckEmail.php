@@ -6,7 +6,7 @@
  * Time: 11:46 PM
  */
 
-namespace IonAuth\IonAuth\Commands;
+namespace IonAuth\IonAuth\Commands\Checks;
 
 
 class CheckEmail
