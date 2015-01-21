@@ -11,6 +11,12 @@ namespace IonAuth\IonAuth\Commands;
 
 class ClearForgottenPassword
 {
+    /**
+     * clearForgottenPasswordCode
+     *
+     * @param $code
+     * @return TRUE of FALSE
+     */
     public function clearForgottenPasswordCode($code)
     {
 

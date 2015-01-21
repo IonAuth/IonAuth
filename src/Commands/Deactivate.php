@@ -14,6 +14,7 @@ class Deactivate
     /**
      * Deactivate
      *
+     * @param $id 
      * @return void
      **/
     public function deactivate($id = null)

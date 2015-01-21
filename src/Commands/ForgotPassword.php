@@ -15,6 +15,7 @@ class ForgotPassword
     /**
      * Insert a forgotten password key.
      *
+     * @param $identity
      * @return bool
      **/
     public function _forgottenPassword($identity)

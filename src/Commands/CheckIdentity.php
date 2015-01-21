@@ -14,6 +14,7 @@ class CheckIdentity
     /**
      * Identity check
      *
+     * @param $identity, string
      * @return bool
      **/
     public function identityCheck($identity)

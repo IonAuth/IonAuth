@@ -14,6 +14,9 @@ class Login
     /**
      * login
      *
+     * @param $identity
+     * @param $password
+     * @param $remember
      * @return bool
      **/
     public function login($identity, $password, $remember = false)

@@ -14,6 +14,8 @@ class CompleteForgottenPassword
     /**
      * Forgotten Password Complete
      *
+     * @param $code
+     * @param salt
      * @return string
      **/
     public function _forgottenPasswordComplete($code, $salt = false)

@@ -14,6 +14,8 @@ class ResetPassword
     /**
      * reset password
      *
+     * @param $identity
+     * @param $new
      * @return bool
      **/
     public function resetPassword($identity, $new)

@@ -14,6 +14,12 @@ use IonAuth\IonAuth\Entities\User;
 
 class Register
 {
+    /**
+     * register
+     *
+     * @param $user
+     * @return FALSE
+     */
     public function register(User $user)
     {
 //        $this->ionAuthModel->triggerEvents('preAccountCreation');
@@ -101,6 +107,9 @@ class Register
 
     }
 
+    /**
+     * postAccountCreationSuccessful
+     */
     Private function postAccountCreationUnsuccessful()
     {
         $this->setError('accountCreationUnsuccessful');

@@ -8,12 +8,12 @@
 
 namespace IonAuth\IonAuth\Commands\Checks;
 
-
 class CheckEmail
 {
     /**
      * Checks email
      *
+     * @param $email, string
      * @return bool
      **/
     public function emailCheck($email)

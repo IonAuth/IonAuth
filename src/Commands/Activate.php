@@ -22,6 +22,8 @@ class Activate
     /**
      * activate
      *
+     * @param $id, integer
+     * @param $code, string
      * @return void
      **/
     public function activate($id, $code = false)

@@ -14,6 +14,9 @@ class ChangePassword
     /**
      * change password
      *
+     * @param $identity, string
+     * @param $old, string
+     * @param $new, string
      * @return bool
      **/
     public function changePassword($identity, $old, $new)
