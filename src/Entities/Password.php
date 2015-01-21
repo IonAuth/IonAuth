@@ -21,6 +21,9 @@ class Password
         $this->hash_method = $hash_method;
     }
 
+    /**
+     * getHash
+     */
     public function getHash()
     {
         return $this->hash;
@@ -30,7 +33,6 @@ class Password
      * Hashes the password to be stored in the database.
      *
      * @return void
-     * @author Matthew
      **/
     public function hashPassword()
     {
@@ -58,8 +60,9 @@ class Password
      * This function takes a password and validates it
      * against an entry in the users table.
      *
+     * @param $id
+     * @param $password
      * @return void
-     * @author Mathew
      **/
     public function hashPasswordDb($id, $password)
     {

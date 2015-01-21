@@ -336,22 +336,39 @@ class User implements CollectionItem
         $this->last_login = time();
     }
 
+    /**
+     * setEmail
+     *
+     * @param $email
+     * @return
+     */
     public function setEmail($email)
     {
         if (\IonAuth\IonAuth\Helper\validateEmail($email)) $this->email = $email;
         else throw new \Exception('InvalidEmail');
     }
 
+    /**
+     * getEmail
+     *
+     * @return
+     */
     public function getEmail()
     {
         return $this->email;
     }
 
+    /**
+     *
+     */
     public function getGroups()
     {
         return $this->groups;
     }
 
+    /**
+     *
+     */
     public function addGroup(Group $group)
     {
         $this->groups->add($group);
