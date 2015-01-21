@@ -230,13 +230,11 @@ class User implements CollectionItem
      * update
      *
      * @return bool
-     * @author Phil Sturgeon
      **/
     public function update()
     {
-//        $this->triggerEvents('preUpdateUser');
-
-//        $this->db->trans_begin();
+        // $this->triggerEvents('preUpdateUser');
+        // $this->db->trans_begin();
 
         if (array_key_exists($this->identityColumn, $data) && $this->identityCheck(
                 $data[$this->identityColumn]
@@ -298,7 +296,6 @@ class User implements CollectionItem
      * delete_user
      *
      * @return bool
-     * @author Phil Sturgeon
      **/
     public function delete()
     {
@@ -321,8 +318,8 @@ class User implements CollectionItem
             return false;
         }
 
-//        $this->triggerEvents(array('postDeleteUser', 'postDeleteUserSuccessful'));
-//        $this->setMessage('deleteSuccessful');
+        // $this->triggerEvents(array('postDeleteUser', 'postDeleteUserSuccessful'));
+        // $this->setMessage('deleteSuccessful');
         return true;
     }
 
@@ -333,8 +330,8 @@ class User implements CollectionItem
      **/
     public function updateLastLogin()
     {
-//        $this->triggerEvents('updateLastLogin');
-//        $this->triggerEvents('extraWhere');
+        // $this->triggerEvents('updateLastLogin');
+        // $this->triggerEvents('extraWhere');
 
         $this->last_login = time();
     }
@@ -360,11 +357,22 @@ class User implements CollectionItem
         $this->groups->add($group);
     }
 
+    /**
+     * setFirstName
+     *
+     * @param $firstname
+     * @return string
+     */
     public function setFirstName($first_name)
     {
         $this->first_name = $first_name;
     }
 
+    /**
+     * getFirstName
+     *
+     * @return string
+     */
     public function getFirstName()
     {
         return $this->first_name;
@@ -404,27 +412,26 @@ class User implements CollectionItem
      * remove_from_group
      *
      * @return bool
-     * @author Ben Edmunds
      **/
     public function removeGroup(Group $group)
     {
         $this->groups->remove($group);
 
-//?        $this->triggerEvents('removeFromGroup');
+        // $this->triggerEvents('removeFromGroup');
 
-//        // if group id(s) are passed remove user from the group(s)
-//        if (!empty($groupIds) && !is_array($groupIds)) $groupIds = array($groupIds);
-//
-//        foreach ($groupIds as $groupId)
-//        {
-//            $this->db->delete(
-//                $this->tables['usersGroups'],
-//                array($this->join['groups'] => (int)$groupId, $this->join['users'] => (int)$user_id)
-//            );
-//            if (isset($this->_cacheUserInGroup[$userId]) && isset($this->_cacheUserInGroup[$userId][$groupId])) {
-//                unset($this->_cacheUserInGroup[$userId][$groupId]);
-//            }
-//        }
+        // // if group id(s) are passed remove user from the group(s)
+        // if (!empty($groupIds) && !is_array($groupIds)) $groupIds = array($groupIds);
+        //
+        // foreach ($groupIds as $groupId)
+        // {
+        // $this->db->delete(
+        // $this->tables['usersGroups'],
+        // array($this->join['groups'] => (int)$groupId, $this->join['users'] => (int)$user_id)
+        // );
+        // if (isset($this->_cacheUserInGroup[$userId]) && isset($this->_cacheUserInGroup[$userId][$groupId])) {
+        //    unset($this->_cacheUserInGroup[$userId][$groupId]);
+        //    }
+        // }
 
             return true;
     }

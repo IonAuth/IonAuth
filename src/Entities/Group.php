@@ -12,7 +12,6 @@ class Group implements CollectionItem
      * groups
      *
      * @return object
-     * @author Ben Edmunds
      **/
     public function all()
     {
@@ -167,7 +166,6 @@ class Group implements CollectionItem
      * delete group
      *
      * @return bool
-     * @author aditya menon
      **/
     public function deleteGroup($groupId = false)
     {
