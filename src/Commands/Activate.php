@@ -17,15 +17,12 @@ class Activate
      *
      * Activate : Validates and removes activation code.
      * Deactivae : Updates a users row with an activation code.
-     *
-     * @author Mathew
      */
 
     /**
      * activate
      *
      * @return void
-     * @author Mathew
      **/
     public function activate($id, $code = false)
     {

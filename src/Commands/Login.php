@@ -15,7 +15,6 @@ class Login
      * login
      *
      * @return bool
-     * @author Mathew
      **/
     public function login($identity, $password, $remember = false)
     {

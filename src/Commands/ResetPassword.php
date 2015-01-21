@@ -15,7 +15,6 @@ class ResetPassword
      * reset password
      *
      * @return bool
-     * @author Mathew
      **/
     public function resetPassword($identity, $new)
     {

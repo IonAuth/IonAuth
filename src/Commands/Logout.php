@@ -16,7 +16,6 @@ class Logout
      * logout()
      * --------------------
      * @return void
-     * @author Mathew
      **/
     public function logout()
     {

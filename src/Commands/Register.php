@@ -113,7 +113,6 @@ class Register
      * register
      *
      * @return bool
-     * @author Mathew
      **/
     public function _register($username, $password, $email, $additionalData = array(), $groups = array())
     {

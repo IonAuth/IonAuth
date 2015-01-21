@@ -15,7 +15,6 @@ class Deactivate
      * Deactivate
      *
      * @return void
-     * @author Mathew
      **/
     public function deactivate($id = null)
     {

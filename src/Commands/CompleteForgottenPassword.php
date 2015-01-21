@@ -15,7 +15,6 @@ class CompleteForgottenPassword
      * Forgotten Password Complete
      *
      * @return string
-     * @author Mathew
      **/
     public function _forgottenPasswordComplete($code, $salt = false)
     {
@@ -70,7 +69,6 @@ class CompleteForgottenPassword
      * ------------------------------
      * @param $code
      * @return void
-     * @author Mathew
      */
     public function forgottenPasswordComplete($code)
     {

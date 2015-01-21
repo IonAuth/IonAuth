@@ -16,9 +16,6 @@ class ForgotPassword
      * Insert a forgotten password key.
      *
      * @return bool
-     * @author Mathew
-     * @updated Ryan
-     * @updated 52aa456eef8b60ad6754b31fbdcc77bb
      **/
     public function _forgottenPassword($identity)
     {
@@ -72,7 +69,6 @@ class ForgotPassword
      *
      * @param $identity
      * @return mixed  boolean / array
-     * @author Mathew
      */
     public function forgottenPassword($identity)
     {

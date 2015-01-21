@@ -15,7 +15,6 @@ class CheckIdentity
      * Identity check
      *
      * @return bool
-     * @author Mathew
      **/
     public function identityCheck($identity)
     {

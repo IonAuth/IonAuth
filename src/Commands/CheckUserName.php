@@ -15,7 +15,6 @@ class CheckUserName
      * Checks username
      *
      * @return bool
-     * @author Mathew
      **/
     public function usernameCheck($username)
     {

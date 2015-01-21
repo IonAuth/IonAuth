@@ -15,7 +15,6 @@ class ChangePassword
      * change password
      *
      * @return bool
-     * @author Mathew
      **/
     public function changePassword($identity, $old, $new)
     {

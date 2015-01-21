@@ -15,7 +15,6 @@ class CheckEmail
      * Checks email
      *
      * @return bool
-     * @author Mathew
      **/
     public function emailCheck($email)
     {
