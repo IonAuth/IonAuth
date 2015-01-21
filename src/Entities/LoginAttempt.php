@@ -24,14 +24,15 @@ class LoginAttempt implements CollectionItem
      **/
     public function increaseLoginAttempts($identity)
     {
-        if ($this->config->get('trackLoginAttempts')) {
-            $ipAddress = $this->_prepareIp($_SERVER['REMOTE_ADDR']);
-            return $this->db->insert(
-                $this->tables['loginAttempts'],
-                array('ip_address' => $ipAddress, 'login' => $identity, 'time' => time())
-            );
-        }
-        return false;
+      if ($this->config->get('trackLoginAttempts')) {
+        $ipAddress = $this->_prepareIp($_SERVER['REMOTE_ADDR']);
+
+        return $this->db->insert(
+          $this->tables['loginAttempts'],
+          array('ip_address' => $ipAddress, 'login' => $identity, 'time' => time())
+        );
+      }
+      return false;
     }
 
     /**
@@ -81,6 +82,12 @@ class LoginAttempt implements CollectionItem
         return 0;
     }
 
+    /**
+     * getLastAttemptTime
+     *
+     * Get the last login attempt from a user.
+     * @param    string $user
+     */
     public function getLastAttemptTime(User $user)
     {
         if ($this->config->get('trackLoginAttempts'))
@@ -103,6 +110,11 @@ class LoginAttempt implements CollectionItem
         return 0;
     }
 
+    /**
+     * getIpAddress
+     *
+     * get the ip address of the user.
+     */
     public function getIpAddress()
     {
         // TODO: write logic here
