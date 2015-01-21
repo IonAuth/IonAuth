@@ -11,7 +11,7 @@
    * ----------------------------------------------------
   */
 
-  $return array(
+  return array(
 
     // Account creation
     'accountCreationSuccesful'           => '',
