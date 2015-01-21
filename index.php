@@ -219,8 +219,8 @@ $app->get('/forgot_password', function() use ($auth) {
 	{
 		//TODO
 
-		//if there were no errors
-		//$this->session->set_flashdata('message', $auth->messages());
+		// if there were no errors
+		// $this->session->set_flashdata('message', $auth->messages());
 		//redirect("auth/login", 'refresh'); //we should display a confirmation page here instead of the login page
 	}
 	else

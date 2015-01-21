@@ -199,8 +199,8 @@ class User implements CollectionItem
     /**
      * user
      *
+     * @param $id, integer
      * @return IonAuth\IonAuth\Entities\User
-     * @author Ben Edmunds
      **/
     public function find($id)
     {

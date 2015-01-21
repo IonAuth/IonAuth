@@ -1,10 +1,6 @@
-<?php namespace IonAuth\IonAuth\Entities;
-/**
- * Created by PhpStorm.
- * User: kayladnls
- * Date: 1/17/15
- * Time: 11:01 PM
- */
+<?php
+
+namespace IonAuth\IonAuth\Entities;
 
 class Password
 {
