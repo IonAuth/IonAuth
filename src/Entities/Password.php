@@ -52,7 +52,7 @@ class Password
 
     /**
      * Function: hashPasswordDb()
-     * -----------------------------
+     * 
      * This function takes a password and validates it
      * against an entry in the users table.
      *
