@@ -1,6 +1,12 @@
 <?php
   namespace IonAuth\IonAuth\Helper;
 
+  /**
+   * prepareIp
+   *
+   * @param $ipAddress
+   * @return
+   */
   function prepareIp($ipAddress)
   {
     $driver = $this->config->get('database')['driver'];
@@ -9,7 +15,10 @@
   }
 
   /**
+   * validate email
    *
+   * @param $email, string
+   * @return
    */
   function validateEmail($email)
   {

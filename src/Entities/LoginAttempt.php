@@ -132,7 +132,7 @@ class LoginAttempt implements CollectionItem
     }
 
     /**
-     *
+     * getIpAddress
      */
     public function getIpAddress()
     {

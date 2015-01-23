@@ -225,10 +225,10 @@ $app->get('/forgot_password', function() use ($auth) {
 	}
 	else
 	{
-		//TODO
+		// @todo
 
-		//$this->session->set_flashdata('message', $auth->errors());
-		//redirect("auth/forgot_password", 'refresh');
+		// $this->session->set_flashdata('message', $auth->errors());
+		// redirect("auth/forgot_password", 'refresh');
 	}
 
 });

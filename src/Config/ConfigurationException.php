@@ -8,7 +8,6 @@
 
 namespace IonAuth\IonAuth\Config;
 
-
 class ConfigurationException extends \Exception
 {
 

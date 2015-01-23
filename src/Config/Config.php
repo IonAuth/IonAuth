@@ -380,7 +380,7 @@ class Config
 
     /**
      * set forgot password expriration
-     *
+     * 
      * @param int $forgotPasswordExpiration
      */
     public function setForgotPasswordExpiration($forgotPasswordExpiration)

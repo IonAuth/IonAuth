@@ -71,8 +71,6 @@ class Group implements CollectionItem
 
     /**
      * create_group
-     *
-     * @author aditya menon
      */
     public function save()
     {
@@ -94,8 +92,8 @@ class Group implements CollectionItem
             'description' => $groupDescription
         );
 
-        //filter out any data passed that doesnt have a matching column in the groups table
-        //and merge the set group data and the additional data
+        // filter out any data passed that doesnt have a matching column in the groups table
+        // and merge the set group data and the additional data
         if (!empty($additionalData)) {
             $data = array_merge($this->_filterData($this->tables['groups'], $additionalData), $data);
         }

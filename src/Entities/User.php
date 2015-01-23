@@ -35,7 +35,6 @@ class User implements CollectionItem
      * logged_in
      * -----------------
      * @return bool
-     * @author Mathew
      **/
     public function loggedIn()
     {
@@ -48,7 +47,6 @@ class User implements CollectionItem
      * ---------------------
      * @param bool $id
      * @return bool
-     * @author Ben Edmunds
      */
     public function isAdmin($id = false)
     {
@@ -66,7 +64,6 @@ class User implements CollectionItem
      * @param mixed group(s) to check
      *
      * @return bool
-     * @author Phil Sturgeon
      **/
     public function inGroup(Group $group)
     {
@@ -92,7 +89,6 @@ class User implements CollectionItem
      * users
      *
      * @return object Users
-     * @author Ben Edmunds
      **/
     public function all($groups = null)
     {
@@ -119,16 +115,16 @@ class User implements CollectionItem
             );
         }
 
-        //filter by group id(s) if passed
+        // filter by group id(s) if passed
         if (isset($groups))
         {
-            //build an array if only one group was passed
+            // build an array if only one group was passed
             if (is_numeric($groups))
             {
                 $groups = Array($groups);
             }
 
-            //join and then run a where_in against the group ids
+            // join and then run a where_in against the group ids
             if (isset($groups) && !empty($groups))
             {
                 $this->db->distinct();

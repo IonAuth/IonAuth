@@ -52,7 +52,7 @@ class Password
 
     /**
      * Function: hashPasswordDb()
-     * 
+     *
      * This function takes a password and validates it
      * against an entry in the users table.
      *
@@ -114,7 +114,6 @@ class Password
      * Salt generation code taken from https://github.com/ircmaxell/password_compat/blob/master/lib/password.php
      *
      * @return void
-     * @author Anthony Ferrera
      **/
     public function salt()
     {
