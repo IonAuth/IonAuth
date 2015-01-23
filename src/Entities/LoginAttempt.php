@@ -55,6 +55,7 @@ class LoginAttempt implements CollectionItem
 
             return $this->db->delete($this->tables['loginAttempts']);
         }
+        
         return false;
     }
 
@@ -90,23 +91,23 @@ class LoginAttempt implements CollectionItem
      */
     public function getLastAttemptTime(User $user)
     {
-        if ($this->config->get('trackLoginAttempts'))
-        {
+        if ($this->config->get('trackLoginAttempts')) {
             $ipAddress = $this->_prepareIp($_SERVER['REMOTE_ADDR']);
 
             $this->db->select_max('time');
             $this->db->where('ip_address', $ipAddress);
-            if (strlen($identity) > 0)
-            {
+
+            if (strlen($identity) > 0) {
                 $this->db->or_where('login', $identity);
             }
+
             $qres = $this->db->get($this->tables['loginAttempts'], 1);
 
-            if (count($qres) > 0)
-            {
+            if (count($qres) > 0) {
                 return $qres->first()->time;
             }
         }
+
         return 0;
     }
 
@@ -119,15 +120,15 @@ class LoginAttempt implements CollectionItem
      **/
     public function isMaxLoginAttemptsExceeded()
     {
-        if ($this->config->get('trackLoginAttempts'))
-        {
+        if ($this->config->get('trackLoginAttempts')) {
             $maxAttempts = $this->config->get('maximumLoginAttempts');
-            if ($maxAttempts > 0)
-            {
+
+            if ($maxAttempts > 0) {
                 $attempts = $this->getAttemptsNum();
                 return $attempts >= $maxAttempts;
             }
         }
+
         return false;
     }
 
