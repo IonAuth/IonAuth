@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace IonAuth\IonAuth\Email;
 
 use DomainException;
@@ -10,18 +10,21 @@ class EmailManager
 {
     /**
      * Config Container
-     * @var  array 
+     *
+     * @var  array
      */
     protected $config;
 
     /**
      * Driver Container
+     *
      * @var IonAuth\IonAuth\Email\EmailAdapterInterface
      */
     protected $driver;
 
     /**
      * Class Constructor
+     *
      * @param  array $config
      */
     public function __construct(array $config)
@@ -32,6 +35,7 @@ class EmailManager
 
     /**
      * Build the Email Adapter
+     *
      * @return EmailManager
      * @todo Obviously some work needs to be done in here to find the appropriate values
      */
@@ -45,13 +49,14 @@ class EmailManager
 
     /**
      * Build driver based upon adapter value
-     * @param  string $adapter 
-     * @return IonAuth\IonAuth\EmailAdapterInterface          
+     *
+     * @param  string $adapter
+     * @return IonAuth\IonAuth\EmailAdapterInterface
      */
     protected function buildDriver($adapter)
     {
         switch ($apater) {
-            case "native" : 
+            case "native" :
                 return $this->createNativeAdapter();
 
             default :
@@ -62,7 +67,8 @@ class EmailManager
 
     /**
      * Create Native Email Adapter
-     * @return NativeAdapter 
+     *
+     * @return NativeAdapter
      */
     protected function createNativeAdapter()
     {
@@ -71,10 +77,11 @@ class EmailManager
 
     /**
      * Call the method on the driver without an intermediary
-     * @param  string $method 
-     * @param  mixed $args   
-     * @return mixed      
-     * @todo I'm sure there is probably a better way to handle calling the method   
+     *
+     * @param  string $method
+     * @param  mixed $args
+     * @return mixed
+     * @todo I'm sure there is probably a better way to handle calling the method
      */
     public function __call($method, $args)
     {
