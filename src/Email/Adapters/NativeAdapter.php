@@ -1,17 +1,19 @@
-<?php 
+<?php
 namespace IonAuth\IonAuth\Email\Adapters;
 
 class NativeAdapter implements EmailAdapterInterface
 {
     /**
      * Container for Config values
+     *
      * @var array
      */
     protected $config;
 
     /**
      * Class Constructor
-     * @param array $config 
+     *
+     * @param array $config
      * @todo  Passing another array config may not be the best way
      */
     public function __construct(array $config)
@@ -21,12 +23,13 @@ class NativeAdapter implements EmailAdapterInterface
 
     /**
      * Send Email
-     * @param  string $to      
-     * @param  string $subject 
-     * @param  string $body    
+     *
+     * @param  string $to
+     * @param  string $subject
+     * @param  string $body
      * @param  array  $headers Optional headers
-     * @return bool         
-     * @todo Lots to consider and complete in here, but this is just a stub 
+     * @return bool
+     * @todo Lots to consider and complete in here, but this is just a stub
      */
     public function send($to, $subject, $body, $headers = array())
     {
