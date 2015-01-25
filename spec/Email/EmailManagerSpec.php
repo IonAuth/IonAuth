@@ -10,12 +10,13 @@ class EmailManagerSpec extends ObjectBehavior
     {
         $this->beConstructedWith('native', ['test' => 1]);
     }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('IonAuth\IonAuth\Email\EmailManager');
     }
 
-    function it_creates_a_native_mail_driver()
+    function it_creates_a_mail_driver()
     {
         $this->getDriver()->shouldImplement('IonAuth\IonAuth\Email\EmailAdapterInterface');
         $this->getDriver()->shouldHaveType('IonAuth\IonAuth\Email\Adapters\NativeAdapter');

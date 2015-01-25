@@ -39,6 +39,6 @@ class NativeAdapter implements EmailAdapterInterface
      */
     public function send($fields)
     {
-        print_r($fields[0]);
+        return true;
     }
 }
