@@ -44,7 +44,7 @@ class EmailManager
         $adapter = 'native';
         $this->driver = $this->buildDriver($adapter);
 
-        return $this
+        return $this->driver; // Don't know if this is correct. David needs to look at it. 
     }
 
     /**
