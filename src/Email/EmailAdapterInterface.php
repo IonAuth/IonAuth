@@ -6,11 +6,8 @@ interface EmailAdapterInterface
     /**
      * Send Email
      *
-     * @param  string $to
-     * @param  string $subject
-     * @param  string $body
-     * @param  array  $headers Optional headers
+     * @param  array  $fields
      * @return bool
      */
-    public function send($to, $subject, $body, $headers = array());
+    public function send($fields);
 }

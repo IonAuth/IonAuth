@@ -25,26 +25,14 @@ class EmailManager
     /**
      * Class Constructor
      *
-     * @param  array $config
+     * @param  string $driver The name of the mail driver
+     * @param  array $config  The array of config values
      */
-    public function __construct(array $config)
+    public function __construct($driver, array $config)
     {
         $this->config = $config;
-        $this->buildAdapter();
-    }
 
-    /**
-     * Build the Email Adapter
-     *
-     * @return EmailManager
-     * @todo Obviously some work needs to be done in here to find the appropriate values
-     */
-    protected function buildAdapter()
-    {
-        $adapter = 'native';
-        $this->driver = $this->buildDriver($adapter);
-
-        return $this->driver; // Don't know if this is correct. David needs to look at it. 
+        $this->driver = $this->buildDriver($driver);
     }
 
     /**
@@ -55,7 +43,7 @@ class EmailManager
      */
     protected function buildDriver($adapter)
     {
-        switch ($apater) {
+        switch ($adapter) {
             case "native" :
                 return $this->createNativeAdapter();
 
@@ -72,7 +60,7 @@ class EmailManager
      */
     protected function createNativeAdapter()
     {
-        return new NativeAdapter();
+        return new NativeAdapter($this->config);
     }
 
     /**

@@ -1,6 +1,8 @@
 <?php
 namespace IonAuth\IonAuth\Email\Adapters;
 
+use IonAuth\IonAuth\Email\EmailAdapterInterface;
+
 class NativeAdapter implements EmailAdapterInterface
 {
     /**
@@ -24,15 +26,12 @@ class NativeAdapter implements EmailAdapterInterface
     /**
      * Send Email
      *
-     * @param  string $to
-     * @param  string $subject
-     * @param  string $body
-     * @param  array  $headers Optional headers
+     * @param  array  $fields
      * @return bool
      * @todo Lots to consider and complete in here, but this is just a stub
      */
-    public function send($to, $subject, $body, $headers = array())
+    public function send($fields)
     {
-        return mail($to, $subject, $body, $headers);
+        print_r($fields[0]);
     }
 }
