@@ -27,12 +27,23 @@ class EmailManager
      *
      * @param  string $driver The name of the mail driver
      * @param  array $config  The array of config values
+     * @return void 
      */
     public function __construct($driver, array $config)
     {
         $this->config = $config;
 
         $this->driver = $this->buildDriver($driver);
+    }
+
+    /**
+     * Get instantiated mail driver
+     * 
+     * @return IonAuth\IonAuth\Email\EmailAdapterInterface 
+     */
+    public function getDriver()
+    {
+        return $this->driver;
     }
 
     /**
@@ -64,29 +75,23 @@ class EmailManager
     }
 
     /**
-     * Get instantiated mail driver
-     * @return IonAuth\IonAuth\Email\EmailAdapterInterface 
-     */
-    public function getDriver()
-    {
-        return $this->driver;
-    }
-
-    /**
      * Call the method on the driver without an intermediary
      *
      * @param  string $method
      * @param  mixed $args
      * @return mixed
-     * @todo I'm sure there is probably a better way to handle calling the method
      */
     public function __call($method, $args)
     {
         if (! method_exists($this->driver, $method)) {
-            $message = sprintf("%s does not exist in %s", $method, get_class($this->driver));
+            $message = sprintf(
+                "%s does not exist in %s", 
+                $method, 
+                get_class($this->driver)
+            );
             throw new BadMethodCallException($message);
         }
 
-        return $this->driver->$method($args);
+        return call_user_func([$this->driver, $method], $args);
     }
 }
