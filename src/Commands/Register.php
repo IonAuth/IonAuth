@@ -9,24 +9,25 @@ use IonAuth\IonAuth\Entities\User;
  * Time: 7:26 PM
  */
 
-
-
-
 class Register
 {
-    public function register(User $user)
+    protected $events;
+
+    public function register(\IonAuth\IonAuth\Config\Config $config, IonAuth\IonAuth\Event $events, User $user)
     {
-        $this->ionAuthModel->triggerEvents('preAccountCreation');
 
-        $emailActivation = $this->config->get('emailActivation');
+        //TODO - implement triggers
+        $events->trigger('preAccountCreation');
 
-        $id = $this->ionAuthModel->register($username, $password, $email, $additionalData, $groupIds);
+        $emailActivation = $config->get('emailActivation');
+
+        $id = $this->_register($user->username, $user->password, $user->email, $user->additionalData, $user->groupIds);
         if (!$emailActivation)
         {
             if ($id !== false)
             {
                 $this->setMessage('accountCreationSuccessful');
-                $this->ionAuthModel->triggerEvents(array('postAccountCreation', 'postAccountCreationSuccessful'));
+                $events->trigger(array('postAccountCreation', 'postAccountCreationSuccessful'));
                 return $id;
             }
             else
@@ -43,12 +44,12 @@ class Register
             if (!$deactivate)
             {
                 $this->setError('deactivateUnsuccessful');
-                $this->ionAuthModel->triggerEvents(array('postAccountCreation', 'postAccountCreationUnsuccessful'));
+                $events->trigger(array('postAccountCreation', 'postAccountCreationUnsuccessful'));
                 return false;
             }
 
             $activationCode = $this->ionAuthModel->activation_code;
-            $identity = $this->config->get('identity');
+            $identity = $config->get('identity');
             $user = $this->ionAuthModel->user($id)->row();
 
             $data = array(
@@ -58,9 +59,9 @@ class Register
                 'activation' => $activationCode,
             );
 
-            if (!$this->config->get('useDefaultEmail'))
+            if (!$config->get('useDefaultEmail'))
             {
-                $this->ionAuthModel->triggerEvents(
+                $events->trigger(
                     array('postAccountCreation', 'postAccountCreationSuccessful', 'activationEmailSuccessful')
                 );
                 $this->setMessage('activationEmailSuccessful');
@@ -69,22 +70,22 @@ class Register
             else
             {
                 $message = $this->load->view(
-                    $this->config->get('emailTemplates') . $this->config->get('emailActivate'),
+                    $config->get('emailTemplates') . $config->get('emailActivate'),
                     $data,
                     true
                 );
 
                 $this->email->clear();
-                $this->email->from($this->config->get('adminEmail'), $this->config->get('siteTitle'));
+                $this->email->from($config->get('adminEmail'), $config->get('siteTitle'));
                 $this->email->to($email);
                 $this->email->subject(
-                    $this->config->get('siteTitle') . ' - ' . $this->lang->line('emailActivationSubject')
+                    $config->get('siteTitle') . ' - ' . $this->lang->line('emailActivationSubject')
                 );
                 $this->email->message($message);
 
                 if ($this->email->send() == true)
                 {
-                    $this->ionAuthModel->triggerEvents(
+                    $events->trigger(
                         array('postAccountCreation', 'postAccountCreationSuccessful', 'activationEmailSuccessful')
                     );
                     $this->setMessage('activationEmailSuccessful');
@@ -92,7 +93,7 @@ class Register
                 }
             }
 
-            $this->ionAuthModel->triggerEvents(
+            $events->trigger(
                 array('postAccountCreation', 'postAccountCreationUnsuccessful', 'activationEmailUnsuccessful')
             );
             $this->setError('activationEmailUnsuccessful');
@@ -104,7 +105,7 @@ class Register
     Private function postAccountCreationUnsuccessful()
     {
         $this->setError('accountCreationUnsuccessful');
-        $this->ionAuthModel->triggerEvents(array('postAccountCreation', 'postAccountCreationUnsuccessful'));
+        $events->trigger(array('postAccountCreation', 'postAccountCreationUnsuccessful'));
         return false;
     }
 
@@ -119,7 +120,7 @@ class Register
     {
         $this->triggerEvents('preRegister');
 
-        $manualActivation = $this->config->get('manual_activation');
+        $manualActivation = $config->get('manual_activation');
 
         if ($this->identityColumn == 'email' && $this->emailCheck($email))
         {
@@ -186,7 +187,7 @@ class Register
         }
 
         //add to default group if not already set
-        $defaultGroup = $this->where('name', $this->config->get('defaultGroup'))->group()->first();
+        $defaultGroup = $this->where('name', $config->get('defaultGroup'))->group()->first();
         if ((isset($defaultGroup->id) && !isset($groups)) || (empty($groups) && !in_array(
                     $defaultGroup->id,
                     $groups
