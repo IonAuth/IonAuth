@@ -14,7 +14,6 @@ class Group implements CollectionItem
      * ------------------------------
      * @param bool $id
      * @return array
-     * @author Ben Edmunds
      */
     public function getUsersGroups($id = false)
     {
@@ -37,7 +36,6 @@ class Group implements CollectionItem
      * @param $groupId
      * @param bool $userId
      * @return bool
-     * @author Ben Edmunds
      */
     public function addToGroup($groupId, $userId = false)
     {
@@ -77,7 +75,6 @@ class Group implements CollectionItem
      * remove_from_group
      *
      * @return bool
-     * @author Ben Edmunds
      **/
     public function remove_from_group($group_ids = false, $user_id = false)
     {
@@ -123,7 +120,6 @@ class Group implements CollectionItem
      * groups
      *
      * @return object
-     * @author Ben Edmunds
      **/
     public function groups()
     {
@@ -164,7 +160,6 @@ class Group implements CollectionItem
      * group
      *
      * @return object
-     * @author Ben Edmunds
      **/
     public function group($id = null)
     {
@@ -183,8 +178,6 @@ class Group implements CollectionItem
 
     /**
      * create_group
-     *
-     * @author aditya menon
      */
     public function createGroup($groupName = false, $groupDescription = '', $additionalData = array())
     {
@@ -228,8 +221,9 @@ class Group implements CollectionItem
     /**
      * update_group
      *
+     * @param $groupId
+     * @param
      * @return bool
-     * @author aditya menon
      **/
     public function updateGroup($groupId = false, $groupName = false, $additionalData = array())
     {
@@ -277,8 +271,8 @@ class Group implements CollectionItem
     /**
      * delete group
      *
+     * @param $groupid, integer
      * @return bool
-     * @author aditya menon
      **/
     public function deleteGroup($groupId = false)
     {
@@ -310,6 +304,11 @@ class Group implements CollectionItem
         return true;
     }
 
+    /**
+     * getId
+     *
+     * @return $this->id
+     */
     public function getId()
     {
         return $this->id;

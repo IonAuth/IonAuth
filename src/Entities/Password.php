@@ -10,9 +10,7 @@ class Password
 {
     private $password;
     private $salt;
-
     private $hash_method;
-
     private $hash;
 
     function __construct($password, $hash_method ='sha1')
@@ -30,7 +28,6 @@ class Password
      * Hashes the password to be stored in the database.
      *
      * @return void
-     * @author Matthew
      **/
     public function hashPassword()
     {
@@ -59,7 +56,6 @@ class Password
      * against an entry in the users table.
      *
      * @return void
-     * @author Mathew
      **/
     public function hashPasswordDb($id, $password)
     {
@@ -115,7 +111,6 @@ class Password
      * Salt generation code taken from https://github.com/ircmaxell/password_compat/blob/master/lib/password.php
      *
      * @return void
-     * @author Anthony Ferrera
      **/
     public function salt()
     {

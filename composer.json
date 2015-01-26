@@ -13,6 +13,10 @@
         {
           "name": "Tim Joosten",
           "homepage": "https://www.github.com/Tjoosten"
+        },
+        {
+          "name": "David Standley",
+          "homepage": "http://davidstanley.org"
         }
     ],
     "require": {

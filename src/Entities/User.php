@@ -37,7 +37,6 @@ class User implements CollectionItem
      *
      * @param $identity
      * @return mixed  boolean / array
-     * @author Mathew
      */
     public function forgottenPassword($identity)
     {
@@ -104,7 +103,6 @@ class User implements CollectionItem
      * ------------------------------
      * @param $code
      * @return void
-     * @author Mathew
      */
     public function forgottenPasswordComplete($code)
     {
@@ -177,7 +175,6 @@ class User implements CollectionItem
      * --------------------------
      * @param $code
      * @return void
-     * @author Michael
      */
     public function forgottenPasswordCheck($code)
     {
@@ -212,7 +209,6 @@ class User implements CollectionItem
      * logout()
      * --------------------
      * @return void
-     * @author Mathew
      **/
     public function logout()
     {
@@ -250,7 +246,6 @@ class User implements CollectionItem
      * logged_in
      * -----------------
      * @return bool
-     * @author Mathew
      **/
     public function loggedIn()
     {
@@ -262,7 +257,6 @@ class User implements CollectionItem
      * logged in
      * --------------------
      * @return integer
-     * @author jrmadsen67
      **/
     public function getUserId()
     {
@@ -282,7 +276,6 @@ class User implements CollectionItem
      * ---------------------
      * @param bool $id
      * @return bool
-     * @author Ben Edmunds
      */
     public function isAdmin($id = false)
     {
@@ -300,7 +293,6 @@ class User implements CollectionItem
      * @param mixed group(s) to check
      *
      * @return bool
-     * @author Phil Sturgeon
      **/
     public function inGroup(Group $group)
     {
@@ -314,14 +306,12 @@ class User implements CollectionItem
      * Activate : Validates and removes activation code.
      * Deactivae : Updates a users row with an activation code.
      *
-     * @author Mathew
      */
 
     /**
      * activate
      *
      * @return void
-     * @author Mathew
      **/
     public function activate($id, $code = false)
     {
@@ -386,7 +376,6 @@ class User implements CollectionItem
      * Deactivate
      *
      * @return void
-     * @author Mathew
      **/
     public function deactivate($id = null)
     {
@@ -452,7 +441,6 @@ class User implements CollectionItem
      * reset password
      *
      * @return bool
-     * @author Mathew
      **/
     public function resetPassword($identity, $new)
     {
@@ -516,7 +504,6 @@ class User implements CollectionItem
      * change password
      *
      * @return bool
-     * @author Mathew
      **/
     public function changePassword($identity, $old, $new)
     {
@@ -578,7 +565,6 @@ class User implements CollectionItem
      * Checks username
      *
      * @return bool
-     * @author Mathew
      **/
     public function usernameCheck($username = '')
     {
@@ -599,7 +585,6 @@ class User implements CollectionItem
      * Checks email
      *
      * @return bool
-     * @author Mathew
      **/
     public function emailCheck($email = '')
     {
@@ -620,7 +605,6 @@ class User implements CollectionItem
      * Identity check
      *
      * @return bool
-     * @author Mathew
      **/
     public function identityCheck($identity = '')
     {
@@ -639,9 +623,6 @@ class User implements CollectionItem
      * Insert a forgotten password key.
      *
      * @return bool
-     * @author Mathew
-     * @updated Ryan
-     * @updated 52aa456eef8b60ad6754b31fbdcc77bb
      **/
     public function _forgottenPassword($identity)
     {
@@ -694,7 +675,6 @@ class User implements CollectionItem
      * Forgotten Password Complete
      *
      * @return string
-     * @author Mathew
      **/
     public function _forgottenPasswordComplete($code, $salt = false)
     {
@@ -891,7 +871,6 @@ class User implements CollectionItem
      * users
      *
      * @return object Users
-     * @author Ben Edmunds
      **/
     public function all($groups = null)
     {
@@ -999,7 +978,6 @@ class User implements CollectionItem
      * user
      *
      * @return IonAuth\IonAuth\Entities\User
-     * @author Ben Edmunds
      **/
     public function find($id)
     {
@@ -1085,7 +1063,6 @@ class User implements CollectionItem
      * delete_user
      *
      * @return bool
-     * @author Phil Sturgeon
      **/
     public function delete()
     {
@@ -1116,7 +1093,6 @@ class User implements CollectionItem
     /**
      * update_last_login
      *
-     * @author Ben Edmunds
      **/
     public function updateLastLogin()
     {

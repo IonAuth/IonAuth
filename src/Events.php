@@ -8,6 +8,15 @@ class Events
 		$this->hooks = new stdClass;
 	}
 
+	/**
+	 * register
+	 *
+	 * @param $event
+	 * @param $name
+	 * @param $class
+	 * @param $method
+	 * @param $arguments
+	 */
 	public function register($event, $name, $class, $method, $arguments)
 	{
 		$this->hooks->{$event}[$name] = new stdClass;
@@ -16,6 +25,12 @@ class Events
 		$this->hooks->{$event}[$name]->arguments = $arguments;
 	}
 
+	/**
+	 * remove
+	 *
+	 * @param $event
+	 * @param $name
+	 */
 	public function remove($event, $name=NULL)
 	{
 
@@ -31,6 +46,11 @@ class Events
 
 	}
 
+	/**
+	 * trigger
+	 *
+	 * @param $events
+	 */
 	public function trigger($events) {
 
 		//if it's an array trigger each event
@@ -49,7 +69,13 @@ class Events
 
 	}
 
-
+	/**
+	 * _call
+	 *
+	 * @param $name
+	 * @param $event
+	 * @return FALSE
+	 */
 	protected function _call($event, $name)
 	{
 		if (isset($this->hooks->{$event}[$name]) && method_exists($this->hooks->{$event}[$name]->class, $this->hooks->{$event}[$name]->method)) {
