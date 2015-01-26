@@ -63,7 +63,7 @@ class Password
             return false;
         }
 
-        $events->trigger('extraWhere');
+        $this->events->trigger('extraWhere');
 
         $query = $this->db->table($this->config->get('tables')['users'])
             ->select(array('password', 'salt'))

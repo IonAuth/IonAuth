@@ -17,7 +17,7 @@ class Register
     {
 
         //TODO - implement triggers
-        $events->trigger('preAccountCreation');
+        $this->events->trigger('preAccountCreation');
 
         $emailActivation = $config->get('emailActivation');
 
@@ -27,7 +27,7 @@ class Register
             if ($id !== false)
             {
                 $this->setMessage('accountCreationSuccessful');
-                $events->trigger(array('postAccountCreation', 'postAccountCreationSuccessful'));
+                $this->events->trigger(array('postAccountCreation', 'postAccountCreationSuccessful'));
                 return $id;
             }
             else
@@ -44,7 +44,7 @@ class Register
             if (!$deactivate)
             {
                 $this->setError('deactivateUnsuccessful');
-                $events->trigger(array('postAccountCreation', 'postAccountCreationUnsuccessful'));
+                $this->events->trigger(array('postAccountCreation', 'postAccountCreationUnsuccessful'));
                 return false;
             }
 
@@ -61,7 +61,7 @@ class Register
 
             if (!$config->get('useDefaultEmail'))
             {
-                $events->trigger(
+                $this->events->trigger(
                     array('postAccountCreation', 'postAccountCreationSuccessful', 'activationEmailSuccessful')
                 );
                 $this->setMessage('activationEmailSuccessful');
@@ -85,7 +85,7 @@ class Register
 
                 if ($this->email->send() == true)
                 {
-                    $events->trigger(
+                    $this->events->trigger(
                         array('postAccountCreation', 'postAccountCreationSuccessful', 'activationEmailSuccessful')
                     );
                     $this->setMessage('activationEmailSuccessful');
@@ -93,7 +93,7 @@ class Register
                 }
             }
 
-            $events->trigger(
+            $this->events->trigger(
                 array('postAccountCreation', 'postAccountCreationUnsuccessful', 'activationEmailUnsuccessful')
             );
             $this->setError('activationEmailUnsuccessful');
@@ -105,7 +105,7 @@ class Register
     Private function postAccountCreationUnsuccessful()
     {
         $this->setError('accountCreationUnsuccessful');
-        $events->trigger(array('postAccountCreation', 'postAccountCreationUnsuccessful'));
+        $this->events->trigger(array('postAccountCreation', 'postAccountCreationUnsuccessful'));
         return false;
     }
 
@@ -118,7 +118,7 @@ class Register
      **/
     public function _register($username, $password, $email, $additionalData = array(), $groups = array())
     {
-        $events->trigger('preRegister');
+        $this->events->trigger('preRegister');
 
         $manualActivation = $config->get('manual_activation');
 
@@ -171,7 +171,7 @@ class Register
         //and merge the set user data and the additional data
         $userData = array_merge($this->_filterData($this->tables['users'], $additionalData), $data);
 
-        $events->trigger('extraSet');
+        $this->events->trigger('extraSet');
 
         $this->db->insert($this->tables['users'], $userData);
 
@@ -197,7 +197,7 @@ class Register
             $this->addToGroup($defaultGroup->id, $id);
         }
 
-        $events->trigger('postRegister');
+        $this->events->trigger('postRegister');
 
         return (isset($id)) ? $id : false;
     }
