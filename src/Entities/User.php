@@ -315,7 +315,7 @@ class User implements CollectionItem
      **/
     public function activate($id, $code = false)
     {
-        $this->triggerEvents('pre_activate');
+        $events->trigger('pre_activate');
 
         if ($code !== false)
         {
@@ -328,7 +328,7 @@ class User implements CollectionItem
 
             if (count($query) !== 1)
             {
-                $this->triggerEvents(array('postActivate', 'postActivateUnsuccessful'));
+                $events->trigger(array('postActivate', 'postActivateUnsuccessful'));
                 $this->setError('activateUnsuccessful');
                 return false;
             }
@@ -340,7 +340,7 @@ class User implements CollectionItem
                 'active' => 1
             );
 
-            $this->triggerEvents('extraWhere');
+            $events->trigger('extraWhere');
             $this->db->update($this->tables['users'], $data, array($this->identityColumn => $identity));
         }
         else
@@ -350,20 +350,19 @@ class User implements CollectionItem
                 'active' => 1
             );
 
-
-            $this->triggerEvents('extraWhere');
+            $events->trigger('extraWhere');
             $this->db->update($this->tables['users'], $data, array('id' => $id));
         }
 
 
         if ($this->db->affected_rows() == 1)
         {
-            $this->triggerEvents(array('postActivate', 'postActivateSuccessful'));
+            $events->trigger(array('postActivate', 'postActivateSucessful'));
             $this->setMessage('activateSuccessful');
         }
         else
         {
-            $this->triggerEvents(array('postActivate', 'postActivateUnsuccessful'));
+            $events-trigger(array('postActivate', 'postActivateUnsuccessful'));
             $this->setError('activateUnsuccessful');
         }
 
@@ -379,7 +378,7 @@ class User implements CollectionItem
      **/
     public function deactivate($id = null)
     {
-        $this->triggerEvents('deactivate');
+        $events->trigger('deactivate');
 
         if (!isset($id))
         {
@@ -395,7 +394,7 @@ class User implements CollectionItem
             'active' => 0
         );
 
-        $this->triggerEvents('extraWhere');
+        $events->trigger('extraWhere');
         $this->db->update($this->tables['users'], $data, array('id' => $id));
 
         $return = $this->db->affected_rows() == 1;
@@ -445,15 +444,15 @@ class User implements CollectionItem
     public function resetPassword($identity, $new)
     {
 
-        $this->triggerEvents('preChangePassword');
+        $events->trigger('preChangePassword');
 
         if (!$this->identityCheck($identity))
         {
-            $this->triggerEvents(array('postChangePassword', 'postChangePasswordUnsuccessful'));
+            $events->trigger(array('postChangePassword', 'postChangePasswordUnsuccessful'));
             return false;
         }
 
-        $this->triggerEvents('extraWhere');
+        $events->trigger('extraWhere');
 
         $query = $this->db->select('id, password, salt')
             ->where($this->identityColumn, $identity)
@@ -462,7 +461,7 @@ class User implements CollectionItem
 
         if (count($query) !== 1)
         {
-            $this->triggerEvents(array('postChangePassword', 'postChangePasswordUnsuccessful'));
+            $events->trigger(array('postChangePassword', 'postChangePasswordUnsuccessful'));
             $this->setError('passwordChangeUnsuccessful');
             return false;
         }
@@ -480,18 +479,18 @@ class User implements CollectionItem
             'forgotten_password_time' => null,
         );
 
-        $this->triggerEvents('extraWhere');
+        $events->trigger('extraWhere');
         $this->db->update($this->tables['users'], $data, array($this->identityColumn => $identity));
 
         $return = $this->db->affected_rows() == 1;
         if ($return)
         {
-            $this->triggerEvents(array('postChangePassword', 'postChangePasswordSuccessful'));
+            $events->trigger(array('postChangePassword', 'postChangePasswordSuccessful'));
             $this->setMessage('passwordChangeSuccessful');
         }
         else
         {
-            $this->triggerEvents(array('postChangePassword', 'postChangePasswordUnsuccessful'));
+            $events->trigger(array('postChangePassword', 'postChangePasswordUnsuccessful'));
             $this->setError('passwordChangeUnsuccessful');
         }
 
@@ -507,9 +506,9 @@ class User implements CollectionItem
      **/
     public function changePassword($identity, $old, $new)
     {
-        $this->triggerEvents('preChangePassword');
+        $events->trigger('preChangePassword');
 
-        $this->triggerEvents('extraWhere');
+        $events->trigger('extraWhere');
 
         $query = $this->db->select('id, password, salt')
             ->where($this->identityColumn, $identity)
@@ -518,7 +517,7 @@ class User implements CollectionItem
 
         if (count($query) !== 1)
         {
-            $this->triggerEvents(array('postChangePassword', 'postChangePasswordUnsuccessful'));
+            $events->trigger(array('postChangePassword', 'postChangePasswordUnsuccessful'));
             $this->setError('passwordChangeUnsuccessful');
             return false;
         }
@@ -536,7 +535,7 @@ class User implements CollectionItem
                 'remember_code' => null,
             );
 
-            $this->triggerEvents('extra_where');
+            $events->trigger('extra_where');
 
             $successfullyChangedPasswordInDb = $this->db->update(
                 $this->tables['users'],
@@ -545,12 +544,12 @@ class User implements CollectionItem
             );
             if ($successfullyChangedPasswordInDb)
             {
-                $this->triggerEvents(array('postChangePassword', 'postChangePassword_Successful'));
+                $events->trigger(array('postChangePassword', 'postChangePassword_Successful'));
                 $this->setMessage('passwordChangeSuccessful');
             }
             else
             {
-                $this->triggerEvents(array('postChangePassword', 'postChangePasswordUnsuccessful'));
+                $events>trigger(array('postChangePassword', 'postChangePasswordUnsuccessful'));
                 $this->setError('passwordChangeUnsuccessful');
             }
 
@@ -568,14 +567,14 @@ class User implements CollectionItem
      **/
     public function usernameCheck($username = '')
     {
-        $this->triggerEvents('usernameCheck');
+        $events->trigger('usernameCheck');
 
         if (empty($username))
         {
             return false;
         }
 
-        $this->triggerEvents('extra_where');
+        $events->trigger('extra_where');
 
         return $this->db->where('username', $username)
             ->count_all_results($this->tables['users']) > 0;
@@ -588,14 +587,14 @@ class User implements CollectionItem
      **/
     public function emailCheck($email = '')
     {
-        $this->triggerEvents('email_check');
+        $events->trigger('email_check');
 
         if (empty($email))
         {
             return false;
         }
 
-        $this->triggerEvents('extra_where');
+        $events->trigger('extra_where');
 
         return $this->db->where('email', $email)
             ->count_all_results($this->tables['users']) > 0;
@@ -608,7 +607,7 @@ class User implements CollectionItem
      **/
     public function identityCheck($identity = '')
     {
-        $this->triggerEvents('identity_check');
+        $events->trigger('identity_check');
 
         if (empty($identity))
         {
@@ -628,7 +627,7 @@ class User implements CollectionItem
     {
         if (empty($identity))
         {
-            $this->triggerEvents(array('postForgottenPassword', 'postForgottenPasswordUnsuccessful'));
+            $events->trigger(array('postForgottenPassword', 'postForgottenPasswordUnsuccessful'));
             return false;
         }
 
@@ -648,7 +647,7 @@ class User implements CollectionItem
 
         $this->forgottenPasswordCode = $key;
 
-        $this->triggerEvents('extraWhere');
+        $events->trigger('extraWhere');
 
         $update = array(
             'forgotten_password_code' => $key,
@@ -661,11 +660,11 @@ class User implements CollectionItem
 
         if ($return)
         {
-            $this->triggerEvents(array('postForgottenPassword', 'postForgottenPasswordSuccessful'));
+            $events->trigger(array('postForgottenPassword', 'postForgottenPasswordSuccessful'));
         }
         else
         {
-            $this->triggerEvents(array('postForgottenPassword', 'postForgottenPasswordUnsuccessful'));
+            $events->trigger(array('postForgottenPassword', 'postForgottenPasswordUnsuccessful'));
         }
 
         return $return;
@@ -678,11 +677,11 @@ class User implements CollectionItem
      **/
     public function _forgottenPasswordComplete($code, $salt = false)
     {
-        $this->triggerEvents('preForgottenPasswordComplete');
+        $events->trigger('preForgottenPasswordComplete');
 
         if (empty($code))
         {
-            $this->triggerEvents(array('postForgottenPasswordComplete', 'postForgottenPasswordCompleteUnsuccessful'));
+            $events->trigger(array('postForgottenPasswordComplete', 'postForgottenPasswordCompleteUnsuccessful'));
             return false;
         }
 
@@ -699,7 +698,7 @@ class User implements CollectionItem
                 {
                     //it has expired
                     $this->setError('forgotPasswordExpired');
-                    $this->triggerEvents(
+                    $events->trigger(
                         array('postForgottenPasswordComplete', 'postForgottenPasswordCompleteUnsuccessful')
                     );
                     return false;
@@ -716,11 +715,11 @@ class User implements CollectionItem
 
             $this->db->update($this->tables['users'], $data, array('forgotten_password_code' => $code));
 
-            $this->triggerEvents(array('postForgottenPasswordComplete', 'postForgottenPasswordCompleteSuccessful'));
+            $events->trigger(array('postForgottenPasswordComplete', 'postForgottenPasswordCompleteSuccessful'));
             return $password;
         }
 
-        $this->triggerEvents(array('postForgottenPasswordComplete', 'postForgottenPasswordCompleteUnsuccessful'));
+        $events->trigger(array('postForgottenPasswordComplete', 'postForgottenPasswordCompleteUnsuccessful'));
         return false;
     }
 
@@ -732,7 +731,7 @@ class User implements CollectionItem
      **/
     public function login($identity, $password, $remember = false)
     {
-        $this->triggerEvents('preLogin');
+        $events->trigger('preLogin');
 
         if (empty($identity) || empty($password))
         {
@@ -740,7 +739,7 @@ class User implements CollectionItem
             return false;
         }
 
-        $this->triggerEvents('extraWhere');
+        $events->trigger('extraWhere');
 
         $query = $this->db->table($this->config->get('tables')['users'])
             ->select(
@@ -764,7 +763,7 @@ class User implements CollectionItem
             //Hash something anyway, just to take up time
             $this->hashPassword($password);
 
-            $this->triggerEvents('postLoginUnsuccessful');
+            $events->trigger('postLoginUnsuccessful');
             $this->setError('loginTimeout');
 
             return false;
@@ -785,7 +784,7 @@ class User implements CollectionItem
             {
                 if ($user->active == 0)
                 {
-                    $this->triggerEvents('post_login_unsuccessful');
+                    $events->trigger('post_login_unsuccessful');
                     $this->setError('login_unsuccessful_not_active');
 
                     return false;
@@ -802,7 +801,7 @@ class User implements CollectionItem
                     $this->rememberUser($user->id);
                 }
 
-                $this->triggerEvents(array('postLogin', 'postLoginSuccessful'));
+                $events->trigger(array('postLogin', 'postLoginSuccessful'));
                 $this->setMessage('loginSuccessful');
 
                 return true;
@@ -814,7 +813,7 @@ class User implements CollectionItem
 
         $this->increaseLoginAttempts($identity);
 
-        $this->triggerEvents('postLoginUnsuccessful');
+        $events>trigger('postLoginUnsuccessful');
         $this->setError('loginUnsuccessful');
 
         return false;
@@ -874,7 +873,7 @@ class User implements CollectionItem
      **/
     public function all($groups = null)
     {
-        $this->triggerEvents('users');
+        $events->trigger('users');
 
         if (isset($this->_ionSelect) && !empty($this->_ionSelect))
         {
@@ -920,7 +919,7 @@ class User implements CollectionItem
             }
         }
 
-        $this->triggerEvents('extraWhere');
+        $events->trigger('extraWhere');
 
         //run each where that was passed
         if (isset($this->_ionWhere) && !empty($this->_ionWhere))
@@ -981,7 +980,7 @@ class User implements CollectionItem
      **/
     public function find($id)
     {
-        $this->triggerEvents('user');
+        $events->trigger('user');
 
         $this->take(1);
         $this->where($this->tables['users'] . '.id', $id);
@@ -1011,7 +1010,7 @@ class User implements CollectionItem
             $this->db->trans_rollback();
             $this->setError('accountCreationDuplicate' . ucwords($this->identityColumn));
 
-            $this->triggerEvents(array('postUpdateUser', 'postUpdateUserUnsuccessful'));
+            $events->trigger(array('postUpdateUser', 'postUpdateUserUnsuccessful'));
             $this->setError('updateUnsuccessful');
 
             return false;
@@ -1040,21 +1039,21 @@ class User implements CollectionItem
             }
         }
 
-        $this->triggerEvents('extraWhere');
+        $events->trigger('extraWhere');
         $this->db->update($this->tables['users'], $data, array('id' => $user->id));
 
         if ($this->db->trans_status() === false)
         {
             $this->db->trans_rollback();
 
-            $this->triggerEvents(array('postUpdateUser', 'postUpdateUserUnsuccessful'));
+            $events->trigger(array('postUpdateUser', 'postUpdateUserUnsuccessful'));
             $this->setError('updateUnsuccessful');
             return false;
         }
 
         $this->db->trans_commit();
 
-        $this->triggerEvents(array('postUpdateUser', 'postUpdateUserSuccessful'));
+        $events->trigger(array('postUpdateUser', 'postUpdateUserSuccessful'));
         $this->setMessage('updateSuccessful');
         return true;
     }
@@ -1066,7 +1065,7 @@ class User implements CollectionItem
      **/
     public function delete()
     {
-        $this->triggerEvents('preDeleteUser');
+        $events->trigger('preDeleteUser');
 
         // remove user from groups
         $this->groups->clear();
@@ -1080,7 +1079,7 @@ class User implements CollectionItem
         if ($this->db->trans_status() === false)
         {
             $this->db->trans_rollback();
-            $this->triggerEvents(array('postDeleteUser', 'postDeleteUserUnsuccessful'));
+            $events->trigger(array('postDeleteUser', 'postDeleteUserUnsuccessful'));
             $this->setError('deleteUnsuccessful');
             return false;
         }

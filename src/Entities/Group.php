@@ -39,7 +39,7 @@ class Group implements CollectionItem
      */
     public function addToGroup($groupId, $userId = false)
     {
-        $this->triggerEvents('addToGroup');
+        $events->trigger('addToGroup');
 
         //if no id was passed use the current users id
         $userId || $userId = $this->session->userdata('userId');
@@ -78,8 +78,7 @@ class Group implements CollectionItem
      **/
     public function remove_from_group($group_ids = false, $user_id = false)
     {
-        $this->triggerEvents('removeFromGroup');
-
+        $events->trigger('removeFromGroup');
         // user id is required
         if (empty($userId)) {
             return false;
@@ -123,7 +122,7 @@ class Group implements CollectionItem
      **/
     public function groups()
     {
-        $this->triggerEvents('groups');
+        $events->trigger('groups');
 
         //run each where that was passed
         if (isset($this->_ionWhere) && !empty($this->_ionWhere)) {
@@ -163,7 +162,7 @@ class Group implements CollectionItem
      **/
     public function group($id = null)
     {
-        $this->triggerEvents('group');
+        $events->trigger('group');
 
         if (isset($id)) {
             $this->db->where($this->tables['groups'] . '.id', $id);
@@ -205,7 +204,7 @@ class Group implements CollectionItem
             $data = array_merge($this->_filterData($this->tables['groups'], $additionalData), $data);
         }
 
-        $this->triggerEvents('extraGroupSet');
+        $events->trigger('extraGroupSet');
 
         // insert the new group
         $this->db->insert($this->tables['groups'], $data);
@@ -281,7 +280,7 @@ class Group implements CollectionItem
             return false;
         }
 
-        $this->triggerEvents('preDeleteGroup');
+        $events->trigger('preDeleteGroup');
 
         $this->db->trans_begin();
 
@@ -292,14 +291,13 @@ class Group implements CollectionItem
 
         if ($this->db->trans_status() === false) {
             $this->db->trans_rollback();
-            $this->triggerEvents(array('postDeleteGroup', 'postDeleteGroupUnsuccessful'));
+            $events->trigger(array('postDeleteGroup', 'postDeleteGroupUnsuccessful'));
             $this->setError('groupDeleteUnsuccessful');
             return false;
         }
 
         $this->db->trans_commit();
-
-        $this->triggerEvents(array('postDeleteGroup', 'postDeleteGroupSuccessful'));
+        $events->trigger(array('postDeleteGroup', 'postDeleteGroupUnsuccessful'));
         $this->setMessage('groupDeleteSuccessful');
         return true;
     }

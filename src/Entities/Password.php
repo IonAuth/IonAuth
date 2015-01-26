@@ -32,7 +32,7 @@ class Password
     public function hashPassword()
     {
         if ($this->config->get('hashMethod') == 'sha1')
-        {
+         {
             if ($this->config->get('storeSalt') && $salt)
             {
                 return sha1($this->password . $salt);
@@ -63,7 +63,7 @@ class Password
             return false;
         }
 
-        $this->triggerEvents('extraWhere');
+        $events->trigger('extraWhere');
 
         $query = $this->db->table($this->config->get('tables')['users'])
             ->select(array('password', 'salt'))

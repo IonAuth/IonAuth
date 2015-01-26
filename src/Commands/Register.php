@@ -118,7 +118,7 @@ class Register
      **/
     public function _register($username, $password, $email, $additionalData = array(), $groups = array())
     {
-        $this->triggerEvents('preRegister');
+        $events->trigger('preRegister');
 
         $manualActivation = $config->get('manual_activation');
 
@@ -171,7 +171,7 @@ class Register
         //and merge the set user data and the additional data
         $userData = array_merge($this->_filterData($this->tables['users'], $additionalData), $data);
 
-        $this->triggerEvents('extraSet');
+        $events->trigger('extraSet');
 
         $this->db->insert($this->tables['users'], $userData);
 
@@ -197,7 +197,7 @@ class Register
             $this->addToGroup($defaultGroup->id, $id);
         }
 
-        $this->triggerEvents('postRegister');
+        $events->trigger('postRegister');
 
         return (isset($id)) ? $id : false;
     }
