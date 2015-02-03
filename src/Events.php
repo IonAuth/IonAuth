@@ -72,9 +72,9 @@ class Events
 	/**
 	 * _call
 	 *
-	 * @param $name
-	 * @param $event
-	 * @return FALSE
+	 * @param $name, string
+	 * @param $event, string
+	 * @return bool
 	 */
 	protected function _call($event, $name)
 	{

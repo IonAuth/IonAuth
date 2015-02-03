@@ -21,11 +21,17 @@ class User implements CollectionItem
     private $last_name;
     private $last_login;
 
+    /**
+     * Constructor
+     */
     function __construct()
     {
         $this->groups = GroupCollection::create([]);
     }
 
+    /**
+     * getId
+     */
     public function getId()
     {
         return $this->id;
