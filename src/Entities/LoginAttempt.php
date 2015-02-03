@@ -37,10 +37,12 @@ class LoginAttempt implements CollectionItem
 
     /**
      * clear_login_attempts
-     * -------------------------------------------------
+     *
      * Based on code from Tank Auth, by Ilya Konyukhov (https://github.com/ilkon/Tank-Auth)
      *
      * @param string $identity
+     * @param $expire_period
+     * @return bool
      **/
     public function clearLoginAttempts($identity, $expire_period = 86400)
     {

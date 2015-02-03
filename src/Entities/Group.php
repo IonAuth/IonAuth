@@ -16,7 +16,7 @@ class Group implements CollectionItem
      * @return array
      */
 
-     
+
     public function getUsersGroups($id = false)
     {
         $this->events->trigger('getUsersGroup');
@@ -179,6 +179,11 @@ class Group implements CollectionItem
 
     /**
      * create_group
+     *
+     * @param $groupName
+     * @param $groupDescription
+     * @param $additionalData
+     * @return bool
      */
     public function createGroup($groupName = false, $groupDescription = '', $additionalData = array())
     {
