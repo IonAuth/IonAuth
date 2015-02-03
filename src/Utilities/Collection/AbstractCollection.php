@@ -1,12 +1,7 @@
-<?php namespace IonAuth\IonAuth\Utilities\Collection;
+<?php
 
+ namespace IonAuth\IonAuth\Utilities\Collection;
 
-/**
- * Created by PhpStorm.
- * User: kayladnls
- * Date: 1/19/15
- * Time: 12:03 AM
- */
 
 
 class AbstractCollection implements \Countable, \ArrayAccess
