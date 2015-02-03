@@ -15,6 +15,8 @@ class Group implements CollectionItem
      * @param bool $id
      * @return array
      */
+
+     
     public function getUsersGroups($id = false)
     {
         $this->events->trigger('getUsersGroup');
