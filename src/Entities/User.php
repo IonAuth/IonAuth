@@ -5,6 +5,7 @@ namespace IonAuth\IonAuth\Entities;
 use IonAuth\IonAuth\Helper;
 use IonAuth\IonAuth\Utilities\Collection\CollectionItem;
 use IonAuth\IonAuth\Utilities\Collection\GroupCollection;
+use IonAuth\IonAuth\Repositories\UserRepository;
 
 class User implements CollectionItem
 {
@@ -24,8 +25,9 @@ class User implements CollectionItem
     /**
      * Constructor
      */
-    function __construct()
+    function __construct($config, $db)
     {
+        $this->userRepository = new UserRepository($config, $db);
         $this->groups = GroupCollection::create([]);
     }
 
@@ -49,17 +51,16 @@ class User implements CollectionItem
         if ($this->ionAuthModel->forgottenPassword($identity)) // changed
         {
             // Get user information
-            $user = $this->where($this->config->get('identity'), $identity)->users()->row(
-            ); //changed to get_user_by_identity from email
+            $user = $this->userRepository->get($this->config->['identity']), $identity)->row();
 
             if ($user)
             {
                 $data = array(
-                    'identity' => $user->{$this->config->get('identity')},
-                    'forgotten_password_code' => $user->forgottenPasswordCode
+                    'identity'                => $user->{$this->config['identity']},
+                    'forgotten_password_code' => $user->forgottenPasswordCode,
                 );
 
-                if (!$this->config->get('useDefaultEmail'))
+                if (!$this->config['useDefaultEmail'])
                 {
                     $this->setMessage('forgotPasswordSuccessful');
                     return $data;
@@ -67,15 +68,15 @@ class User implements CollectionItem
                 else
                 {
                     $message = $this->load->view(
-                        $this->config->get('emailTemplates') . $this->config->get('emailForgotPassword'),
+                        $this->config['emailTemplates'] . $this->config['emailForgotPassword'],
                         $data,
                         true
                     );
                     $this->email->clear();
-                    $this->email->from($this->config->get('adminEmail'), $this->config->get('siteTitle'));
+                    $this->email->from($this->config['adminEmail'], $this->config['siteTitle']);
                     $this->email->to($user->email);
                     $this->email->subject(
-                        $this->config->get('siteTitle') . ' - ' . $this->lang->line('emailForgottenPasswordSubject')
+                        $this->config['siteTitle'] . ' - ' . $this->lang->line('emailForgottenPasswordSubject')
                     );
                     $this->email->message($message);
 
@@ -114,7 +115,7 @@ class User implements CollectionItem
     {
         $this->ionAuthModel->triggerEvents('prePasswordChange');
 
-        $identity = $this->config->get('identity');
+        $identity = $this->config['identity'];
         $profile = $this->where('forgotten_password_code', $code)->users()->row(); //pass the code to profile
 
         if (!$profile)
@@ -133,7 +134,7 @@ class User implements CollectionItem
                 'new_password' => $newPassword
             );
 
-            if (!$this->config->get('useDefaultEmail'))
+            if (!$this->config['useDefaultEmail'])
             {
                 $this->setMessage('passwordChangeSuccessful');
                 $this->ionAuthModel->triggerEvents(array('postPasswordChange', 'passwordChangeSuccessful'));
@@ -142,16 +143,16 @@ class User implements CollectionItem
             else
             {
                 $message = $this->load->view(
-                    $this->config->get('emailTemplates') . $this->config->get('emailForgotPasswordComplete'),
+                    $this->config['emailTemplates'] . $this->config['emailForgotPasswordComplete'],
                     $data,
                     true
                 );
 
                 $this->email->clear();
-                $this->email->from($this->config->get('adminEmail'), $this->config->get('siteTitle'));
+                $this->email->from($this->config['adminEmail'], $this->config['siteTitle']);
                 $this->email->to($profile->email);
                 $this->email->subject(
-                    $this->config->get('siteTitle') . ' - ' . $this->lang->line('emailNewPasswordSubject')
+                    $this->config['siteTitle'] . ' - ' . $this->lang->line('emailNewPasswordSubject')
                 );
                 $this->email->message($message);
 
@@ -193,10 +194,10 @@ class User implements CollectionItem
         }
         else
         {
-            if ($this->config->get('forgotPasswordExpiration') > 0)
+            if ($this->config['forgotPasswordExpiration'] > 0)
             {
                 //Make sure it isn't expired
-                $expiration = $this->config->get('forgotPasswordExpiration');
+                $expiration = $this->config['forgotPasswordExpiration'];
                 if (time() - $profile->forgotten_password_time > $expiration)
                 {
                     //it has expired
@@ -220,7 +221,7 @@ class User implements CollectionItem
     {
         $this->ionAuthModel->triggerEvents('logout');
 
-        $identity = $this->config->get('identity');
+        $identity = $this->config['identity'];
         $this->session->unset_userdata(
             array(
                 $identity => '',
@@ -287,7 +288,7 @@ class User implements CollectionItem
     {
         $this->ionAuthModel->triggerEvents('isAdmin');
 
-        $adminGroup = $this->config->get('adminGroup');
+        $adminGroup = $this->config['adminGroup'];
 
         return $this->inGroup($adminGroup, $id);
     }
@@ -696,10 +697,10 @@ class User implements CollectionItem
         if ($profile)
         {
 
-            if ($this->config->get('forgotPasswordExpiration') > 0)
+            if ($this->config['forgotPasswordExpiration'] > 0)
             {
                 //Make sure it isn't expired
-                $expiration = $this->config->get('forgotPasswordExpiration');
+                $expiration = $this->config['forgotPasswordExpiration'];
                 if (time() - $profile->forgotten_password_time > $expiration)
                 {
                     //it has expired
@@ -747,11 +748,11 @@ class User implements CollectionItem
 
         $this->events->trigger('extraWhere');
 
-        $query = $this->db->table($this->config->get('tables')['users'])
+        $query = $this->db->table($this->config['tables']['users'])
             ->select(
                 array(
                     'id',
-                    $this->config->get('identity'),
+                    $this->config['identity'],
                     'username',
                     'email',
                     'id',
@@ -760,7 +761,7 @@ class User implements CollectionItem
                     'last_login'
                 )
             )
-            ->where($this->config->get('identity'), $identity)
+            ->where($this->config['identity'], $identity)
             ->take(1);
 
 
@@ -802,7 +803,7 @@ class User implements CollectionItem
 
                 $this->clearLoginAttempts($identity);
 
-                if ($remember && $this->config->get('remember_users'))
+                if ($remember && $this->config['remember_users'])
                 {
                     $this->rememberUser($user->id);
                 }
@@ -834,9 +835,9 @@ class User implements CollectionItem
      **/
     public function isMaxLoginAttemptsExceeded($identity)
     {
-        if ($this->config->get('trackLoginAttempts'))
+        if ($this->config['trackLoginAttempts'])
         {
-            $maxAttempts = $this->config->get('maximumLoginAttempts');
+            $maxAttempts = $this->config['maximumLoginAttempts'];
             if ($maxAttempts > 0)
             {
                 $attempts = $this->getAttemptsNum($identity);
@@ -859,7 +860,7 @@ class User implements CollectionItem
     {
 
         return $this->isMaxLoginAttemptsExceeded($identity) && $this->getLastAttemptTime($identity) > time(
-        ) - $this->config->get('lockout_time');
+        ) - $this->config['lockout_time'];
     }
 
     /**
