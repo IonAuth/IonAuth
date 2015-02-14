@@ -1,7 +1,5 @@
 #Ion Auth 3
 
-[![Build Status](https://travis-ci.org/benedmunds/PHP-Ion-Auth.svg)](https://travis-ci.org/benedmunds/PHP-Ion-Auth)
-
 ###The next future of authentication
 by [Ben Edmunds](http://benedmunds.com)
 
