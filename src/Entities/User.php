@@ -24,7 +24,7 @@ class User implements CollectionItem
 
     function __construct()
     {
-        $this->userRepository = new UserRepository($config, $db);
+//        $this->userRepository = new UserRepository($config, $db);
         $this->groups = GroupCollection::create([]);
     }
 
