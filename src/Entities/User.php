@@ -3,11 +3,9 @@
 namespace IonAuth\IonAuth\Entities;
 
 use IonAuth\IonAuth\Helper;
-use IonAuth\IonAuth\Utilities\Collection\CollectionItem;
-use IonAuth\IonAuth\Utilities\Collection\GroupCollection;
 use IonAuth\IonAuth\Repositories\UserRepository;
 
-class User implements CollectionItem
+class User
 {
     /**
      * account status ('not_activated', etc ...)
@@ -25,7 +23,6 @@ class User implements CollectionItem
     function __construct()
     {
 //        $this->userRepository = new UserRepository($config, $db);
-        $this->groups = GroupCollection::create([]);
     }
 
     public function getId()
@@ -383,7 +380,7 @@ class User implements CollectionItem
 
     public function addGroup(Group $group)
     {
-        $this->groups->add($group);
+//        $this->groups->add($group);
     }
 
     public function setFirstName($first_name)
@@ -434,7 +431,7 @@ class User implements CollectionItem
      **/
     public function removeGroup(Group $group)
     {
-        $this->groups->remove($group);
+//        $this->groups->remove($group);
 
 //?        $this->triggerEvents('removeFromGroup');
 

@@ -3,7 +3,7 @@ namespace IonAuth\IonAuth\Db;
 
 interface DbInterface
 {
-    //public function __construct($params, $username=null, $password=null, $driverOptions = array());
+    public function __construct($params, $username=null, $password=null, $driverOptions = array());
     public function beginTransaction();
     public function commit();
     public function errorCode();

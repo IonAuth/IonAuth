@@ -17,7 +17,6 @@ class Password
     {
         $this->password = $password;
         $this->hash_method = $hash_method;
-        $this->events = $events;
     }
 
     public function getHash()

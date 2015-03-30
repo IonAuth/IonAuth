@@ -1,64 +1,64 @@
 <?php
 /**
-* ----------------------------------------------------
-* Info:
-* ----------------------------------------------------
-* @author Tim Joosten
-* @package Ion Auth 3
-*
-* Description, The indonesian language file for Ion Auth 3
-* ----------------------------------------------------
-*/
+ * ----------------------------------------------------
+ * Info:
+ * ----------------------------------------------------
+ * @author Tim Joosten
+ * @package Ion Auth 3
+ *
+ * Description, The indonesian language file for Ion Auth 3
+ * ----------------------------------------------------
+ */
 return array(
-  // Account creation
-  'accountCreationSuccesful'           => 'Akun Berhasil Dibuat.',
-  'accountCreationUnsuccesful'         => 'Tidak Dapat Membuat Akun',
-  'accountCreationDuplicateEmail'      => 'Email Sudah Digunakan atau Tidak Valid',
-  'accountCreationDuplicateUsername'   => 'Username Sudah Digunakan atau Tidak Valid',
-  'accountCreationMissingDefaultGroup' => 'Default group is not set',
-  'accountCreationInvalidDefaultGroup' => 'Invalid default group name set',
-  // Password
-  'passwordChangeSuccessful'           => 'Kata Sandi Berhasil Diubah',
-  'passwordChangeUnsuccessful'         => 'Tidak Dapat Mengganti Kata Sandi',
-  'forgotPasswordSuccessful'           => 'Email untuk Set Ulang Kata Sandi Telah Dikirim',
-  'forgotPasswordUnsuccessful'         => 'Tidak Dapat Set Ulang Kata Sandi',
-  // Activation
-  'activateSuccessful'                 => 'Akun Telah Diaktifkan',
-  'activateUnsuccessful'               => 'Tidak Dapat Mengaktifkan Akun',
-  'deactivateSuccessful'               => 'Akun Telah Dinonaktifkan',
-  'deactivateUnsuccessful'             => 'Tidak Dapat Menonaktifkan Akun',
-  'activationEmailSuccessful'          => 'Email untuk Aktivasi Telah Dikirim',
-  'activationEmailUnsuccessful'        => 'Tidak Dapat Mengirimkan Email Aktivasi',
-  // Login / Logout
-  'loginSuccessful'                    => 'Log In Berhasil',
-  'loginUnsuccessful'                  => 'Log In Gagal',
-  'loginUnsuccessfulNotActive'         => 'Account is inactive',
-  'loginTimeout'                       => 'Temporarily locked out. Try again later',
-  'logoutSuccessful'                   => 'Log Out Berhasil',
-  // Account changes
-  'updateSuccessful'                   => 'Informasi Akun Berhasil Diperbaharui',
-  'updateUnsuccessful'                 => 'Tidak Dapat Memperbaharui Informasi Akun',
-  'deleteSuccessful'                   => 'Pengguna Telah Dihapus',
-  'deleteUnsuccessful'                 => 'Tidak Dapat Menghapus Pengguna',
-  // Groups
-  'groupCreationSuccessful'            => 'Group created successfully',
-  'groupAlreadyExists'                 => 'Group name already taken',
-  'groupUpdateSuccessful'              => 'Group details updated',
-  'groupDeleteSuccessful'              => 'Group deleted',
-  'groupDeleteUnsccessful'             => 'Unable to delete group',
-  'groupNameRequired'                  => 'Group name is a required field',
-  // Activation Email
-  'emailActivationSubject'             => 'Aktivasi Akun',
-  'emailActivateHeading'               => 'Activate account for %s',
-  'emailActivateSubheading'            => 'Please click this link to %s.',
-  'emailActivateLink'                  => 'Activate your account',
-  // Forgot Password Email
-  'emailForgottenPasswordSubject'      => 'Lupa Verifikasi Password',
-  'emailForgotPasswordHeading'         => 'Reset password for, %s',
-  'emailForgotPasswordSubheading'      => 'Please click this link to %s',
-  'emailForgotPasswordLink'            => 'Reset tour password',
-  // New Password Email
-  'emailNewPasswordSubject'            => 'New Password',
-  'emailNewPasswordHeading'            => 'New password for %s',
-  'emailNewPasswordSubheading'         => 'Your password has been reset to, %s',
-  );
+    // Account creation
+    'accountCreationSuccesful'           => 'Akun berhasil dibuat',
+    'accountCreationUnsuccesful'         => 'Tidak dapat membuat akun',
+    'accountCreationDuplicateEmail'      => 'Email sudah digunakan atau tidak valid',
+    'accountCreationDuplicateUsername'   => 'Username sudah digunakan atau tidak valid',
+    'accountCreationMissingDefaultGroup' => 'Grup bawaan tidak diatur',
+    'accountCreationInvalidDefaultGroup' => 'Pengaturan nama grup bawaan tidak valid',
+    // Password
+    'passwordChangeSuccessful'           => 'Kata sandi berhasil diubah',
+    'passwordChangeUnsuccessful'         => 'Tidak dapat mengganti kata sandi',
+    'forgotPasswordSuccessful'           => 'Email untuk mengatur ulang kata sandi telah dikirim',
+    'forgotPasswordUnsuccessful'         => 'Tidak dapat mengatur ulang kata sandi',
+    // Activation
+    'activateSuccessful'                 => 'Akun telah diaktifkan',
+    'activateUnsuccessful'               => 'Tidak dapat mengaktifkan akun',
+    'deactivateSuccessful'               => 'Akun telah dinonaktifkan',
+    'deactivateUnsuccessful'             => 'Tidak dapat menonaktifkan akun',
+    'activationEmailSuccessful'          => 'Email untuk aktivasi telah dikirim',
+    'activationEmailUnsuccessful'        => 'Tidak dapat mengirimkan email aktivasi',
+    // Login / Logout
+    'loginSuccessful'                    => 'Login berhasil',
+    'loginUnsuccessful'                  => 'Login gagal',
+    'loginUnsuccessfulNotActive'         => 'Akun tidak aktif',
+    'loginTimeout'                       => 'Sementara terkunci. coba lagi nanti',
+    'logoutSuccessful'                   => 'Logout berhasil',
+    // Account changes
+    'updateSuccessful'                   => 'Informasi akun berhasil diperbaharui',
+    'updateUnsuccessful'                 => 'Tidak dapat memperbaharui informasi akun',
+    'deleteSuccessful'                   => 'Pengguna telah dihapus',
+    'deleteUnsuccessful'                 => 'Tidak dapat menghapus pengguna',
+    // Groups
+    'groupCreationSuccessful'            => 'Grup berhasil dibuat',
+    'groupAlreadyExists'                 => 'Nama grup sudah digunakan',
+    'groupUpdateSuccessful'              => 'Detil grup berhasil diubah',
+    'groupDeleteSuccessful'              => 'Grup berhasil dihapus',
+    'groupDeleteUnsccessful'             => 'Tidak dapat menghapus grup',
+    'groupNameRequired'                  => 'Nama grup is a required field',
+    // Activation Email
+    'emailActivationSubject'             => 'Aktivasi akun',
+    'emailActivateHeading'               => 'Activate account for %s',
+    'emailActivateSubheading'            => 'Silahkan klik tautan berikut %s.',
+    'emailActivateLink'                  => 'Aktifkan akun',
+    // Forgot Password Email
+    'emailForgottenPasswordSubject'      => 'Lupa verifikasi password',
+    'emailForgotPasswordHeading'         => 'Setel ulang kata sandi untuk, %s',
+    'emailForgotPasswordSubheading'      => 'Silahkan klik tautan ke %s',
+    'emailForgotPasswordLink'            => 'Lupa kata sandi',
+    // New Password Email
+    'emailNewPasswordSubject'            => 'Kata sandi baru',
+    'emailNewPasswordHeading'            => 'Kata sandi baru Untuk %s',
+    'emailNewPasswordSubheading'         => 'Kata sandi telah diubah, %s',
+);

@@ -2,9 +2,7 @@
 
 namespace IonAuth\IonAuth\Entities;
 
-use IonAuth\IonAuth\Utilities\Collection\CollectionItem;
-
-class LoginAttempt implements CollectionItem
+class LoginAttempt
 {
 
     private $id;

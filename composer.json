@@ -20,7 +20,8 @@
         }
     ],
     "require": {
-        "ircmaxell/password-compat": "dev-master"
+        "ircmaxell/password-compat": "dev-master",
+        "league/container": "~1.3"
     },
     "require-dev": {
         "slim/slim": "2.*",

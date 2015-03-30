@@ -2,9 +2,7 @@
 
 namespace IonAuth\IonAuth\Entities;
 
-use IonAuth\IonAuth\Utilities\Collection\CollectionItem;
-
-class Group implements CollectionItem
+class Group
 {
     private $id;
 
