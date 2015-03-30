@@ -2,7 +2,7 @@
 
 use League\Container\Container;
 
-class IonAuth
+class Auth
 {
     private $container = null;
 

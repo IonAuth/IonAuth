@@ -75,15 +75,6 @@ class EmailManager
     }
 
     /**
-     * Get instantiated mail driver
-     * @return IonAuth\IonAuth\Email\EmailAdapterInterface 
-     */
-    public function getDriver()
-    {
-        return $this->driver;
-    }
-
-    /**
      * Call the method on the driver without an intermediary
      *
      * @param  string $method
