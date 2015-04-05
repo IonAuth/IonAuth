@@ -14,8 +14,11 @@ class ChangePassword
     /**
      * change password
      *
+     * @param $identity
+     * @param $old
+     * @param $new
+     *
      * @return bool
-     * @author Mathew
      **/
     public function changePassword($identity, $old, $new)
     {

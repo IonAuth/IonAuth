@@ -32,8 +32,8 @@ class User
 
 
     /**
-     * logged_in
-     * -----------------
+     * loggedIn
+     *
      * @return bool
      **/
     public function loggedIn()
@@ -43,8 +43,8 @@ class User
     }
 
     /**
-     * logged in
-     * --------------------
+     * get user id
+     *
      * @return integer
      **/
     public function getUserId()
@@ -62,7 +62,7 @@ class User
 
     /**
      * is admin
-     * ---------------------
+     *
      * @param bool $id
      * @return bool
      */
@@ -78,7 +78,7 @@ class User
 
     /**
      * in group
-     * --------------------------
+     *
      * @param mixed group(s) to check
      *
      * @return bool
@@ -90,7 +90,7 @@ class User
 
     /**
      * Function is TimeLockedOut()
-     * ---------------------------------------------------------------------
+     *
      * Get a boolean to determine if an account should be locked out due to
      * exceeded login attempts within a given period
      *
@@ -362,32 +362,56 @@ class User
         return $this->last_login;
     }
 
+    /**
+     * set email
+     *
+     * @param $email
+     */
     public function setEmail($email)
     {
         if (\IonAuth\IonAuth\Helper\validateEmail($email)) $this->email = $email;
         else throw new \Exception('InvalidEmail');
     }
 
+    /**
+     * getEmail
+     */
     public function getEmail()
     {
         return $this->email;
     }
 
+    /**
+     * getgroups
+     */
     public function getGroups()
     {
         return $this->groups;
     }
 
+    /**
+     * add group
+     *
+     * @param $group
+     */
     public function addGroup(Group $group)
     {
 //        $this->groups->add($group);
     }
 
+    /**
+     * set first name
+     *
+     * @param $first_name
+     */
     public function setFirstName($first_name)
     {
         $this->first_name = $first_name;
     }
 
+    /**
+     * get fistname
+     */
     public function getFirstName()
     {
         return $this->first_name;

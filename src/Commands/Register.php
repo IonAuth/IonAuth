@@ -13,11 +13,19 @@ class Register
 {
     protected $events;
 
+    /**
+     * Function: register
+     *
+     * @param $config
+     * @param $events
+     * @param $user
+     *
+     * @todo implement triggers
+     */
     public function register(\IonAuth\IonAuth\Config\Config $config, IonAuth\IonAuth\Event $events, User $user)
     {
 //        $this->ionAuthModel->triggerEvents('preAccountCreation');
 
-        //TODO - implement triggers
         $this->events->trigger('preAccountCreation');
 
         $emailActivation = $config->get('emailActivation');
@@ -103,6 +111,9 @@ class Register
 
     }
 
+    /**
+     * Function: postAccountCreationUnseccussfull
+     */
     Private function postAccountCreationUnsuccessful()
     {
         $this->setError('accountCreationUnsuccessful');

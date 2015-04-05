@@ -14,7 +14,7 @@ class LoginAttempt
 
     /**
      * Function: increaseLoginAttempts()
-     * ------------------------------------------------
+     *
      * increase_login_attempts
      * Based on code from Tank Auth, by Ilya Konyukhov (https://github.com/ilkon/Tank-Auth)
      *
@@ -40,6 +40,7 @@ class LoginAttempt
      *
      * @param string $identity
      * @param $expire_period
+     *
      * @return bool
      **/
     public function clearLoginAttempts($identity, $expire_period = 86400)
@@ -58,12 +59,12 @@ class LoginAttempt
 
     /**
      * Function: getNumberOfAttempts()
-     * ------------------------------------------------------------------------------------
+     *
      * Get number of attempts to login occured from given IP-address or identity
      * Based on code from Tank Auth, by Ilya Konyukhov (https://github.com/ilkon/Tank-Auth)
      *
-     * @param    string $identity
-     * @return    int
+     * @param    string, $user
+     * @return   int
      */
     function getNumberOfAttempts(User $user)
     {

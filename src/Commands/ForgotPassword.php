@@ -17,8 +17,6 @@ class ForgotPassword
      *
      * @return bool
      * @author Mathew
-     * @updated Ryan
-     * @updated 52aa456eef8b60ad6754b31fbdcc77bb
      **/
     public function _forgottenPassword($identity)
     {

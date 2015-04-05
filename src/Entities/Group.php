@@ -198,6 +198,9 @@ class Group
         return true;
     }
 
+    /**
+     * Function: getId
+     */
     public function getId()
     {
         return $this->id;

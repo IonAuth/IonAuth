@@ -67,7 +67,7 @@ class CompleteForgottenPassword
 
     /**
      * forgotten_password_complete()
-     * ------------------------------
+     *
      * @param $code
      * @return void
      * @author Mathew

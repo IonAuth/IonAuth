@@ -13,10 +13,9 @@ class CheckForgottenPassword
 {
     /**
      * forgotten_password_check()
-     * --------------------------
+     * 
      * @param $code
      * @return void
-     * @author Michael
      */
     public function forgottenPasswordCheck($code)
     {
