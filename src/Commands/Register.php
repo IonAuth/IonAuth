@@ -16,9 +16,10 @@ class Register
     /**
      * Function: register
      *
-     * @param $config
-     * @param $events
-     * @param $user
+     * @access public
+     * @param  $config
+     * @param  $events
+     * @param  $user
      *
      * @todo implement triggers
      */

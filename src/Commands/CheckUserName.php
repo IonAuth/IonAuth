@@ -14,7 +14,8 @@ class CheckUserName
     /**
      * Checks username
      *
-     * @param $username
+     * @access public
+     * @param  $username
      *
      * @return bool
      **/

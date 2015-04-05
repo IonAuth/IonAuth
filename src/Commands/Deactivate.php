@@ -14,8 +14,9 @@ class Deactivate
     /**
      * Deactivate
      *
-     * @param $id, bool
-     * 
+     * @access public
+     * @param  $id, bool
+     *
      * @return void
      * @author Mathew
      **/

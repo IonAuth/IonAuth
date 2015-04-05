@@ -10,11 +10,23 @@ namespace IonAuth\IonAuth\Config;
 
 class Config
 {
+    /**
+     * Class constructor
+     *
+     * @param $array, array
+     */
     function __construct(array $array)
     {
         $this->data = $array;
     }
 
+    /**
+     * get
+     *
+     * @access public
+     * @param  $var
+     * @return
+     */
     public function get($var)
     {
         if (isset($this->data[$var]))

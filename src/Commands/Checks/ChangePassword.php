@@ -14,9 +14,10 @@ class ChangePassword
     /**
      * change password
      *
-     * @param $identity
-     * @param $old
-     * @param $new
+     * @access public
+     * @param  $identity
+     * @param  $old
+     * @param  $new
      *
      * @return bool
      **/

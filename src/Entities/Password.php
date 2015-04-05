@@ -21,6 +21,8 @@ class Password
 
     /**
      * get hash
+     *
+     * @access public
      */
     public function getHash()
     {
@@ -30,6 +32,7 @@ class Password
     /**
      * Hashes the password to be stored in the database.
      *
+     * @access public
      * @return void
      **/
     public function hashPassword()
@@ -54,10 +57,11 @@ class Password
 
     /**
      * Function: hashPasswordDb()
-     * 
+     *
      * This function takes a password and validates it
      * against an entry in the users table.
      *
+     * @access public
      * @return void
      **/
     public function hashPasswordDb($id, $password)
@@ -113,6 +117,7 @@ class Password
      *
      * Salt generation code taken from https://github.com/ircmaxell/password_compat/blob/master/lib/password.php
      *
+     * @access public
      * @return void
      **/
     public function salt()

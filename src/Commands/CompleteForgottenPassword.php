@@ -14,6 +14,10 @@ class CompleteForgottenPassword
     /**
      * Forgotten Password Complete
      *
+     * @access public
+     * @param  $code
+     * @param  $salt
+     *
      * @return string
      * @author Mathew
      **/
@@ -68,7 +72,9 @@ class CompleteForgottenPassword
     /**
      * forgotten_password_complete()
      *
-     * @param $code
+     * @access public
+     * @param  $code
+     *
      * @return void
      * @author Mathew
      */

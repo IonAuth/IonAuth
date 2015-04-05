@@ -9,6 +9,7 @@ class Group
     /**
      * groups
      *
+     * @access public
      * @return object
      **/
     public function all()
@@ -49,6 +50,7 @@ class Group
     /**
      * group
      *
+     * @access public
      * @return object
      **/
     public function find($id = null)
@@ -69,9 +71,10 @@ class Group
     /**
      * create_group
      *
-     * @param $groupName
-     * @param $groupDescription
-     * @param $additionalData
+     * @access public
+     * @param  $groupName
+     * @param  $groupDescription
+     * @param  $additionalData
      * @return bool
      */
     public function save()
@@ -116,8 +119,10 @@ class Group
     /**
      * update_group
      *
-     * @param $groupId
-     * @param
+     * @access public
+     * @param  $groupId
+     * @param  $groupname
+     * @param  $additionalData, array
      * @return bool
      **/
     public function updateGroup($groupId = false, $groupName = false, $additionalData = array())
@@ -166,7 +171,8 @@ class Group
     /**
      * delete group
      *
-     * @param $groupid, integer
+     * @access public
+     * @param  $groupid, integer
      * @return bool
      **/
     public function deleteGroup($groupId = false)
@@ -200,6 +206,9 @@ class Group
 
     /**
      * Function: getId
+     *
+     * @access public
+     * @return
      */
     public function getId()
     {

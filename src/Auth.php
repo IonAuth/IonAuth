@@ -6,6 +6,11 @@ class Auth
 {
     private $container = null;
 
+    /**
+     * container
+     *
+     * @access public
+     */
     public static function container()
     {
         if (self::$container == null)

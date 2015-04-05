@@ -14,6 +14,9 @@ class ResetPassword
     /**
      * reset password
      *
+     * @access public
+     * @param  $identity
+     * @param  $new
      * @return bool
      * @author Mathew
      **/

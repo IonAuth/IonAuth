@@ -22,8 +22,9 @@ class Activate
     /**
      * activate
      *
-     * @param $id
-     * @param $code
+     * @access public
+     * @param  $id
+     * @param  $code
      *
      * @return void
      **/

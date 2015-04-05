@@ -14,7 +14,8 @@ class Logout
 
     /**
      * logout()
-     * --------------------
+     *
+     * @access public
      * @return void
      * @author Mathew
      **/

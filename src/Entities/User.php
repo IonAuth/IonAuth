@@ -25,6 +25,11 @@ class User
 //        $this->userRepository = new UserRepository($config, $db);
     }
 
+    /**
+     * get id
+     *
+     * @access public
+     */
     public function getId()
     {
         return $this->id;
@@ -34,6 +39,7 @@ class User
     /**
      * loggedIn
      *
+     * @access public
      * @return bool
      **/
     public function loggedIn()
@@ -45,6 +51,7 @@ class User
     /**
      * get user id
      *
+     * @access public
      * @return integer
      **/
     public function getUserId()
@@ -63,7 +70,8 @@ class User
     /**
      * is admin
      *
-     * @param bool $id
+     * @access public
+     * @param  bool $id
      * @return bool
      */
     public function isAdmin($id = false)
@@ -79,8 +87,8 @@ class User
     /**
      * in group
      *
-     * @param mixed group(s) to check
-     *
+     * @access public
+     * @param  mixed group(s) to check
      * @return bool
      **/
     public function inGroup(Group $group)
@@ -94,6 +102,7 @@ class User
      * Get a boolean to determine if an account should be locked out due to
      * exceeded login attempts within a given period
      *
+     * @access    public
      * @param     string , $identity
      * @return    boolean
      */
@@ -116,6 +125,7 @@ class User
     /**
      * users
      *
+     * @access public
      * @return object Users
      **/
     public function all($groups = null)
@@ -223,6 +233,7 @@ class User
     /**
      * user
      *
+     * @access public
      * @return IonAuth\IonAuth\Entities\User
      **/
     public function find($id)
@@ -252,6 +263,7 @@ class User
     /**
      * update
      *
+     * @access public
      * @return bool
      * @author Phil Sturgeon
      **/
@@ -320,6 +332,7 @@ class User
     /**
      * delete_user
      *
+     * @access public
      * @return bool
      **/
     public function delete()
@@ -351,6 +364,7 @@ class User
     /**
      * update_last_login
      *
+     * @access public
      **/
     public function updateLastLogin()
     {
@@ -365,7 +379,8 @@ class User
     /**
      * set email
      *
-     * @param $email
+     * @access public
+     * @param  $email
      */
     public function setEmail($email)
     {
@@ -375,6 +390,8 @@ class User
 
     /**
      * getEmail
+     *
+     * @access public
      */
     public function getEmail()
     {
@@ -383,6 +400,8 @@ class User
 
     /**
      * getgroups
+     *
+     * @access public
      */
     public function getGroups()
     {
@@ -392,7 +411,8 @@ class User
     /**
      * add group
      *
-     * @param $group
+     * @access public
+     * @param  $group
      */
     public function addGroup(Group $group)
     {
@@ -402,7 +422,8 @@ class User
     /**
      * set first name
      *
-     * @param $first_name
+     * @access public
+     * @param  $first_name
      */
     public function setFirstName($first_name)
     {
@@ -411,6 +432,8 @@ class User
 
     /**
      * get fistname
+     *
+     * @access public
      */
     public function getFirstName()
     {
@@ -420,7 +443,8 @@ class User
     /**
      * Set last name
      *
-     * @param $last_name , string
+     * @access public
+     * @param  $last_name , string
      */
     public function setLastName($last_name)
     {
@@ -430,6 +454,7 @@ class User
     /**
      * Get last name
      *
+     * @access public
      * @return
      */
     public function getLastName()
@@ -440,6 +465,7 @@ class User
     /**
      * Get full name
      *
+     * @access public
      * @return
      */
     public function getFullName()
@@ -450,6 +476,7 @@ class User
     /**
      * remove_from_group
      *
+     * @access public
      * @return bool
      * @author Ben Edmunds
      **/
@@ -479,6 +506,7 @@ class User
     /**
      * Get last login
      *
+     * @access public
      * @return $this->last_login, string
      */
     public function getLastLogin()

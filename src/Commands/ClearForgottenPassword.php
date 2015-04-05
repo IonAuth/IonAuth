@@ -14,7 +14,9 @@ class ClearForgottenPassword
     /**
      * Function: clearForgottenPasswordCode()
      *
-     * @param $code
+     * @access public
+     * @param  $code
+     * @return
      */
     public function clearForgottenPasswordCode($code)
     {

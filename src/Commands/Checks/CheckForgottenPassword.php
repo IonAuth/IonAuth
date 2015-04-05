@@ -13,8 +13,9 @@ class CheckForgottenPassword
 {
     /**
      * forgotten_password_check()
-     * 
-     * @param $code
+     *
+     * @access public
+     * @param  $code
      * @return void
      */
     public function forgottenPasswordCheck($code)

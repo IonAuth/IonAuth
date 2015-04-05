@@ -7,6 +7,12 @@ class LoginAttempt
 
     private $id;
 
+    /**
+     * get id
+     *
+     * @access public
+     * @return
+     */
     public function getId()
     {
         return $this->id;
@@ -18,7 +24,9 @@ class LoginAttempt
      * increase_login_attempts
      * Based on code from Tank Auth, by Ilya Konyukhov (https://github.com/ilkon/Tank-Auth)
      *
-     * @param string $identity
+     * @access public
+     * @param  string $identity
+     * @return bool
      **/
     public function increaseLoginAttempts($identity)
     {
@@ -38,8 +46,9 @@ class LoginAttempt
      *
      * Based on code from Tank Auth, by Ilya Konyukhov (https://github.com/ilkon/Tank-Auth)
      *
-     * @param string $identity
-     * @param $expire_period
+     * @access public
+     * @param  string $identity
+     * @param  $expire_period
      *
      * @return bool
      **/
@@ -87,6 +96,8 @@ class LoginAttempt
      * getLastAttemptTime
      *
      * Get the last login attempt from a user.
+     *
+     * @access   public
      * @param    string $user
      */
     public function getLastAttemptTime(User $user)
@@ -115,7 +126,8 @@ class LoginAttempt
      * is_max_login_attempts_exceeded
      * Based on code from Tank Auth, by Ilya Konyukhov (https://github.com/ilkon/Tank-Auth)
      *
-     * @param string $identity
+     * @access public
+     * @param  string $identity
      * @return boolean
      **/
     public function isMaxLoginAttemptsExceeded()
@@ -139,9 +151,12 @@ class LoginAttempt
      * getIpAddress
      *
      * get the ip address of the user.
+     *
+     * @access public
+     * @todo   write the logic
      */
     public function getIpAddress()
     {
-        // TODO: write logic here
+  
     }
 }

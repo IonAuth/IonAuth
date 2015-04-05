@@ -11,23 +11,26 @@ class EmailManager
     /**
      * Config Container
      *
-     * @var  array
+     * @access protected
+     * @var    array
      */
     protected $config;
 
     /**
      * Driver Container
      *
-     * @var IonAuth\IonAuth\Email\EmailAdapterInterface
+     * @access protected
+     * @var    IonAuth\IonAuth\Email\EmailAdapterInterface
      */
     protected $driver;
 
     /**
      * Class Constructor
      *
+     * @access public
      * @param  string $driver The name of the mail driver
      * @param  array $config  The array of config values
-     * @return void 
+     * @return void
      */
     public function __construct($driver, array $config)
     {
@@ -38,8 +41,9 @@ class EmailManager
 
     /**
      * Get instantiated mail driver
-     * 
-     * @return IonAuth\IonAuth\Email\EmailAdapterInterface 
+     *
+     * @access public
+     * @return IonAuth\IonAuth\Email\EmailAdapterInterface
      */
     public function getDriver()
     {
@@ -49,6 +53,7 @@ class EmailManager
     /**
      * Build driver based upon adapter value
      *
+     * @access protected
      * @param  string $adapter
      * @return IonAuth\IonAuth\EmailAdapterInterface
      */
@@ -67,6 +72,7 @@ class EmailManager
     /**
      * Create Native Email Adapter
      *
+     * @access protected
      * @return NativeAdapter
      */
     protected function createNativeAdapter()
@@ -77,6 +83,7 @@ class EmailManager
     /**
      * Call the method on the driver without an intermediary
      *
+     * @access public
      * @param  string $method
      * @param  mixed $args
      * @return mixed
@@ -85,8 +92,8 @@ class EmailManager
     {
         if (! method_exists($this->driver, $method)) {
             $message = sprintf(
-                "%s does not exist in %s", 
-                $method, 
+                "%s does not exist in %s",
+                $method,
                 get_class($this->driver)
             );
             throw new BadMethodCallException($message);

@@ -15,6 +15,8 @@ class ForgotPassword
     /**
      * Insert a forgotten password key.
      *
+     * @access public
+     * @param  $identity
      * @return bool
      * @author Mathew
      **/
@@ -68,6 +70,7 @@ class ForgotPassword
     /**
      * forgotten password feature
      *
+     * @access public
      * @param $identity
      * @return mixed  boolean / array
      * @author Mathew

@@ -14,6 +14,10 @@ class Login
     /**
      * login
      *
+     * @access public
+     * @param  $identity
+     * @param $password
+     * @param $remember
      * @return bool
      * @author Mathew
      **/

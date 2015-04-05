@@ -14,7 +14,8 @@ class CheckEmail
     /**
      * Checks email
      *
-     * @param $code
+     * @access public
+     * @param  $code
      *
      * @return bool
      **/

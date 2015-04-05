@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace IonAuth\IonAuth\Email;
 
 interface EmailAdapterInterface
@@ -6,6 +6,7 @@ interface EmailAdapterInterface
     /**
      * Send Email
      *
+     * @access public
      * @param  array  $fields
      * @return bool
      */

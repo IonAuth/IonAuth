@@ -11,11 +11,12 @@ class Events
 	/**
 	 * register
 	 *
-	 * @param $event
-	 * @param $name
-	 * @param $class
-	 * @param $method
-	 * @param $arguments
+	 * @access public
+	 * @param  $event
+	 * @param  $name
+	 * @param  $class
+	 * @param  $method
+	 * @param  $arguments
 	 */
 	public function register($event, $name, $class, $method, $arguments)
 	{
@@ -28,8 +29,9 @@ class Events
 	/**
 	 * remove
 	 *
-	 * @param $event
-	 * @param $name
+	 * @access public
+	 * @param  $event
+	 * @param  $name
 	 */
 	public function remove($event, $name=NULL)
 	{
@@ -49,7 +51,8 @@ class Events
 	/**
 	 * trigger
 	 *
-	 * @param $events
+	 * @access public
+	 * @param  $events
 	 */
 	public function trigger($events) {
 
@@ -72,8 +75,9 @@ class Events
 	/**
 	 * _call
 	 *
-	 * @param $name, string
-	 * @param $event, string
+	 * @access protected
+	 * @param  $name, string
+	 * @param  $event, string
 	 * @return bool
 	 */
 	protected function _call($event, $name)

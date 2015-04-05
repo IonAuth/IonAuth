@@ -14,7 +14,8 @@ class CheckIdentity
     /**
      * Identity check
      *
-     * @param $identity
+     * @access public
+     * @param  $identity
      *
      * @return bool
      **/
