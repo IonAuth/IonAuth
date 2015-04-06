@@ -85,7 +85,7 @@ class Events
 		if (isset($this->hooks->{$event}[$name]) && method_exists($this->hooks->{$event}[$name]->class, $this->hooks->{$event}[$name]->method)) {
 			$hook = $this->hooks->{$event}[$name];
 
-			return call_user_func_array(array($hook->class, $hook->method), $hook->arguments);
+			return call_user_func_array([$hook->class, $hook->method], $hook->arguments);
 		}
 
 		return FALSE;

@@ -21,7 +21,7 @@ class Group
             foreach ($this->_ionWhere as $where) {
                 $this->db->where($where);
             }
-            $this->_ionWhere = array();
+            $this->_ionWhere = [ ];
         }
 
         if (isset($this->_ionLimit) && isset($this->_ionOffset)) {
@@ -86,16 +86,16 @@ class Group
         }
 
         // bail if the group name already exists
-        $existing_group = count($this->db->get_where($this->tables['groups'], array('name' => $groupName)));
+        $existing_group = count($this->db->get_where($this->tables['groups'], ['name' => $groupName]));
         if ($existing_group !== 0) {
             $this->setError('groupAlreadyExists');
             return false;
         }
 
-        $data = array(
+        $data = [
             'name' => $groupName,
             'description' => $groupDescription
-        );
+        ];
 
         //filter out any data passed that doesnt have a matching column in the groups table
         //and merge the set group data and the additional data
@@ -125,19 +125,19 @@ class Group
      * @param  $additionalData, array
      * @return bool
      **/
-    public function updateGroup($groupId = false, $groupName = false, $additionalData = array())
+    public function updateGroup($groupId = false, $groupName = false, $additionalData = [ ])
     {
         if (empty($groupId)) {
             return false;
         }
 
-        $data = array();
+        $data = [ ];
 
         if (!empty($groupName)) {
             // we are changing the name, so do some checks
 
             // bail if the group name already exists
-            $existingGroup = $this->db->get_where($this->tables['groups'], array('name' => $groupName))->first();
+            $existingGroup = $this->db->get_where($this->tables['groups'], ['name' => $groupName])->first();
             if (isset($existingGroup->id) && $existingGroup->id != $groupId) {
                 $this->setError('groupAlreadyExists');
                 return false;
@@ -150,7 +150,7 @@ class Group
         // IMPORTANT!! Third parameter was string type $description; this following code is to maintain backward compatibility
         // New projects should work with 3rd param as array
         if (is_string($additionalData)) {
-            $additionalData = array('description' => $additionalData);
+            $additionalData = ['description' => $additionalData];
         }
 
 
@@ -161,7 +161,7 @@ class Group
         }
 
 
-        $this->db->update($this->tables['groups'], $data, array('id' => $groupId));
+        $this->db->update($this->tables['groups'], $data, ['id' => $groupId]);
 
         $this->setMessage('groupUpdateSuccessful');
 
@@ -187,19 +187,19 @@ class Group
         $this->db->trans_begin();
 
         // remove all users from this group
-        $this->db->delete($this->tables['usersGroups'], array($this->join['groups'] => $groupId));
+        $this->db->delete($this->tables['usersGroups'], [$this->join['groups'] => $groupId]);
         // remove the group itself
-        $this->db->delete($this->tables['groups'], array('id' => $groupId));
+        $this->db->delete($this->tables['groups'], ['id' => $groupId]);
 
         if ($this->db->trans_status() === false) {
             $this->db->trans_rollback();
-            $this->events->trigger(array('postDeleteGroup', 'postDeleteGroupUnsuccessful'));
+            $this->events->trigger(['postDeleteGroup', 'postDeleteGroupUnsuccessful']);
             $this->setError('groupDeleteUnsuccessful');
             return false;
         }
 
         $this->db->trans_commit();
-        $this->events->trigger(array('postDeleteGroup', 'postDeleteGroupUnsuccessful'));
+        $this->events->trigger(['postDeleteGroup', 'postDeleteGroupUnsuccessful']);
         $this->setMessage('groupDeleteSuccessful');
         return true;
     }

@@ -35,7 +35,7 @@ class LoginAttempt
 
         return $this->db->insert(
           $this->tables['loginAttempts'],
-          array('ip_address' => $ipAddress, 'login' => $identity, 'time' => time())
+          ['ip_address' => $ipAddress, 'login' => $identity, 'time' => time()]
         );
       }
       return false;
@@ -57,7 +57,7 @@ class LoginAttempt
         if ($this->config->get('trackLoginAttempts')) {
             $ipAddress = $this->_prepareIp($_SERVER['REMOTE_ADDR']);
 
-            $this->db->where(array('ip_address' => $ipAddress, 'login' => $identity));
+            $this->db->where(['ip_address' => $ipAddress, 'login' => $identity]);
             // Purge obsolete login attempts
             $this->db->or_where('time <', time() - $expire_period, false);
 
@@ -157,6 +157,6 @@ class LoginAttempt
      */
     public function getIpAddress()
     {
-  
+
     }
 }

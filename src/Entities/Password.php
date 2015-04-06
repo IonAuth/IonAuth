@@ -51,7 +51,7 @@ class Password
         }
         else
         {
-            return password_hash($password, PASSWORD_BCRYPT, array("cost" => $this->_bcryptCost));
+            return password_hash($password, PASSWORD_BCRYPT, ["cost" => $this->_bcryptCost]);
         }
     }
 
@@ -73,7 +73,7 @@ class Password
         $this->events->trigger('extraWhere');
 
         $query = $this->db->table($this->config->get('tables')['users'])
-            ->select(array('password', 'salt'))
+            ->select(['password', 'salt'])
             ->where('id', '=', $id)
             ->take(1);
 

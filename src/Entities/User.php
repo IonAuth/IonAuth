@@ -139,17 +139,17 @@ class User
                 $this->db->select($select);
             }
 
-            $this->_ionSelect = array();
+            $this->_ionSelect = [ ];
         }
         else
         {
             //default selects
             $this->db->select(
-                array(
-                    $this->tables['users'] . '.*',
-                    $this->tables['users'] . '.id as id',
-                    $this->tables['users'] . '.id as user_id'
-                )
+                [
+                  $this->tables['users'] . '.*',
+                  $this->tables['users'] . '.id as id',
+                  $this->tables['users'] . '.id as user_id'
+                ]
             );
         }
 
@@ -186,7 +186,7 @@ class User
                 $this->db->where($where);
             }
 
-            $this->_ionWhere = array();
+            $this->_ionWhere = [ ];
         }
 
         if (isset($this->_ionLike) && !empty($this->_ionLike))
@@ -196,7 +196,7 @@ class User
                 $this->db->orLike($like);
             }
 
-            $this->_ionLike = array();
+            $this->_ionLike = [ ];
         }
 
         if (isset($this->_ionLimit) && isset($this->_ionOffset))
@@ -281,7 +281,7 @@ class User
             $this->db->trans_rollback();
             $this->setError('accountCreationDuplicate' . ucwords($this->identityColumn));
 
-            $this->events->trigger(array('postUpdateUser', 'postUpdateUserUnsuccessful'));
+            $this->events->trigger(['postUpdateUser', 'postUpdateUserUnsuccessful']);
             $this->setError('updateUnsuccessful');
 
             return false;
@@ -311,20 +311,20 @@ class User
         }
 
         $this->events->trigger('extraWhere');
-        $this->db->update($this->tables['users'], $data, array('id' => $user->id));
+        $this->db->update($this->tables['users'], $data, ['id' => $user->id]);
 
         if ($this->db->trans_status() === false)
         {
             $this->db->trans_rollback();
 
-            $this->events->trigger(array('postUpdateUser', 'postUpdateUserUnsuccessful'));
+            $this->events->trigger(['postUpdateUser', 'postUpdateUserUnsuccessful']);
             $this->setError('updateUnsuccessful');
             return false;
         }
 
         $this->db->trans_commit();
 
-        $this->events->trigger(array('postUpdateUser', 'postUpdateUserSuccessful'));
+        $this->events->trigger(['postUpdateUser', 'postUpdateUserSuccessful']);
         $this->setMessage('updateSuccessful');
         return true;
     }
@@ -343,7 +343,7 @@ class User
         $this->groups->clear();
 
         // delete user from users table should be placed after remove from group
-        $affectedRows = $this->db->delete($this->tables['users'], array('id' => $id));
+        $affectedRows = $this->db->delete($this->tables['users'], ['id' => $id]);
 
         if ($affectedRows == 0) return false;
 
@@ -351,7 +351,7 @@ class User
         if ($this->db->trans_status() === false)
         {
             $this->db->trans_rollback();
-            $this->events->trigger(array('postDeleteUser', 'postDeleteUserUnsuccessful'));
+            $this->events->trigger(['postDeleteUser', 'postDeleteUserUnsuccessful']);
             $this->setError('deleteUnsuccessful');
             return false;
         }
