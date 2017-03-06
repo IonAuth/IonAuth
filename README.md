@@ -1,5 +1,7 @@
 #Ion Auth 3
 
+#NOTE - this project has been abandoned and development stopped - DO NOT USE
+
 ###The next future of authentication
 by [Ben Edmunds](http://benedmunds.com)
 
